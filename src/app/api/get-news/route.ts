@@ -21,12 +21,11 @@ export async function GET(request: Request) {
     });
   }
 
-  const results = [];
-
   // get articles from NewsAPI
   try {
     for (let topic of topics) {
       const sources = await makeSourceBatches();
+      let results = [];
       for (let batch of sources) {
         const data = await fetchNews(topic.query!, batch);
         // filter out 'removed' results with null source ids returned by API
@@ -43,9 +42,29 @@ export async function GET(request: Request) {
             content: a.content,
             published_at: a.publishedAt,
             source: a.source.id,
-            topic: topic.id,
           }))
         );
+      }
+      // save to Supabase
+      if (results.length) {
+        try {
+          const { data: articles, error: articlesError } = await supabase.from('articles')
+            .insert(results)
+            .select('id');
+          
+          if (articlesError) throw new Error();
+
+          if (articles?.length) {
+            const { error } = await supabase.from('article_topics')
+              .insert(articles.map((a) => ({ article: a.id, topic: topic.id })));
+            
+            if (error) throw new Error();
+          }
+        } catch (e) {
+          return new Response('Error saving news articles', {
+            status: 500
+          });
+        }
       }
     }
   } catch (e) {
@@ -54,17 +73,7 @@ export async function GET(request: Request) {
     });
   }
 
-  // save to Supabase
-  if (results.length) {
-    try {
-      const { error } = await supabase.from('articles').insert(results);
-      if (error) throw new Error();
-    } catch (e) {
-      return new Response('Error saving news articles', {
-        status: 500
-      });
-    }
-  }
+  
   
   return new Response('Success!', {
     status: 200

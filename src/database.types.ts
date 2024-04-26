@@ -9,6 +9,39 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      article_topics: {
+        Row: {
+          article: string
+          created_at: string
+          topic: string
+        }
+        Insert: {
+          article?: string
+          created_at?: string
+          topic?: string
+        }
+        Update: {
+          article?: string
+          created_at?: string
+          topic?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "article_topics_article_fkey"
+            columns: ["article"]
+            isOneToOne: false
+            referencedRelation: "articles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "article_topics_topic_fkey"
+            columns: ["topic"]
+            isOneToOne: false
+            referencedRelation: "topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       articles: {
         Row: {
           author: string | null
@@ -19,6 +52,7 @@ export type Database = {
           published_at: string | null
           source: string | null
           title: string | null
+          topic: string | null
           url: string | null
           url_to_image: string | null
         }
@@ -31,6 +65,7 @@ export type Database = {
           published_at?: string | null
           source?: string | null
           title?: string | null
+          topic?: string | null
           url?: string | null
           url_to_image?: string | null
         }
@@ -43,6 +78,7 @@ export type Database = {
           published_at?: string | null
           source?: string | null
           title?: string | null
+          topic?: string | null
           url?: string | null
           url_to_image?: string | null
         }
@@ -59,59 +95,23 @@ export type Database = {
       sources: {
         Row: {
           created_at: string
-          domain: string | null
           id: string
           name: string | null
+          URL: string | null
         }
         Insert: {
           created_at?: string
-          domain?: string | null
-          id?: string
+          id: string
           name?: string | null
+          URL?: string | null
         }
         Update: {
           created_at?: string
-          domain?: string | null
           id?: string
           name?: string | null
+          URL?: string | null
         }
         Relationships: []
-      }
-      topic_articles: {
-        Row: {
-          article: string
-          created_at: string
-          id: number
-          topic: string
-        }
-        Insert: {
-          article?: string
-          created_at?: string
-          id?: number
-          topic?: string
-        }
-        Update: {
-          article?: string
-          created_at?: string
-          id?: number
-          topic?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "topic_articles_article_fkey"
-            columns: ["article"]
-            isOneToOne: false
-            referencedRelation: "articles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "topic_articles_topic_fkey"
-            columns: ["topic"]
-            isOneToOne: false
-            referencedRelation: "topics"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       topics: {
         Row: {
