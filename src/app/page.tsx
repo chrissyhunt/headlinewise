@@ -1,4 +1,5 @@
 import { createServiceClient } from "@/utils/supabase/server";
+import Link from "next/link";
 
 export default async function Home() {
   const supabase = createServiceClient();
@@ -13,7 +14,7 @@ export default async function Home() {
       <ul>
         {topics?.map((t) => (
           <li key={t.id}>
-            {t.query}
+            <Link href={`/topics/${t.id}`}>{t.query}</Link>
           </li>
         ))}
       </ul>
