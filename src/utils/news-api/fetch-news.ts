@@ -1,4 +1,4 @@
-const getYesterdayISOString = (daysAgo: number) => {
+const getDaysAgoISOString = (daysAgo: number) => {
   const today = new Date();
   const yesterday = new Date(today);
   yesterday.setDate(yesterday.getDate() - daysAgo);
@@ -6,8 +6,8 @@ const getYesterdayISOString = (daysAgo: number) => {
 }
 
 export async function fetchNews(query: string, sources: string[]) {
-  const twoDaysAgo = getYesterdayISOString(2);
-  const yesterday = getYesterdayISOString(1);
+  const twoDaysAgo = getDaysAgoISOString(2);
+  const yesterday = getDaysAgoISOString(1);
   const newsApiUrl = new URL('https://newsapi.org/v2/everything');
   newsApiUrl.searchParams.set('pageSize', '100');
   newsApiUrl.searchParams.set('language', 'en');

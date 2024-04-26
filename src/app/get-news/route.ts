@@ -3,6 +3,13 @@ import { fetchNews } from "@/utils/news-api/fetch-news";
 import { makeSourceBatches } from "@/utils/news-api/sources";
 
 export async function GET(request: Request) {
+  const authHeader = request.headers.get('Authorization');
+  if (authHeader !== `Bearer ${process.env.ENDPOINT_TOKEN}`) {
+    return new Response('Unauthorized', {
+      status: 401
+    });
+  }
+
   const supabase = createServiceClient();
 
   // get list of topics
