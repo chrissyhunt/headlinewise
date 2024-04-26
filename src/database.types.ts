@@ -79,22 +79,22 @@ export type Database = {
       }
       topic_articles: {
         Row: {
-          article: string | null
+          article: string
           created_at: string
           id: number
-          topic: string | null
+          topic: string
         }
         Insert: {
-          article?: string | null
+          article?: string
           created_at?: string
           id?: number
-          topic?: string | null
+          topic?: string
         }
         Update: {
-          article?: string | null
+          article?: string
           created_at?: string
           id?: number
-          topic?: string | null
+          topic?: string
         }
         Relationships: [
           {
