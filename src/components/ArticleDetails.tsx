@@ -14,7 +14,6 @@ export default async function ArticleDetails({ id }: { id: string }) {
     description,
     published_at,
     url,
-    author,
     source ( id, name ),
     analysis ( id, language, political_bias, analysis, model )
   `)
@@ -51,7 +50,6 @@ export default async function ArticleDetails({ id }: { id: string }) {
       <Source
         url={article.url!}
         name={article.source?.name}
-        author={article.author!}
       />
       
     </div>

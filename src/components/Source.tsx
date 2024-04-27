@@ -1,29 +1,27 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Button, buttonVariants } from '@/components/ui/button';
 
 interface SourceProps {
   url: string;
   name: string;
-  author?: string;
 }
 
-export default function Source({ url, name, author }: SourceProps) {
+export default function Source({ url, name }: SourceProps) {
   const [showSource, setShowSource] = useState(false);
   
   if (!showSource) {
     return (
-      <button onClick={() => setShowSource(true)}>
+      <Button onClick={() => setShowSource(true)} className="mt-8">
         Reveal Source 👀
-      </button>
+      </Button>
     );
   }
 
-  const showAuthor = !author?.startsWith('http');
-
   return (
-    <Link href={url}>
-      🔗 {showAuthor ? `${author} &middot; ` : ''}{name} &rarr;
+    <Link className={`mt-8 ${buttonVariants({ variant: 'default' })}`} href={url} target="_blank">
+      🔗 {name} &rarr;
     </Link>
   )
 }
