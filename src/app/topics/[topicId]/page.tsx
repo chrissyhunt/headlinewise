@@ -1,14 +1,12 @@
 import HeadlineCard from "@/components/HeadlineCard";
 import { createServiceClient } from "@/utils/supabase/server";
-import Link from "next/link";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import ArticleDetails from "@/components/ArticleDetails";
 
 export default async function TopicPage({ params }: { params: { topicId: string } }) {
   const supabase = createServiceClient();
@@ -40,16 +38,15 @@ export default async function TopicPage({ params }: { params: { topicId: string 
                 <HeadlineCard
                   key={a.id}
                   title={a.title!}
-                  href={`/topics/${params.topicId}/articles/${a.id}`}
                   date={a.published_at!}
                 />
               </SheetTrigger>
-              <SheetContent className="max-w-1/3 sm:max-w-1/3">
-                <SheetTitle>Article</SheetTitle>
-                <SheetDescription>More Content</SheetDescription>
+              <SheetContent className="max-w-1/3 sm:max-w-1/3 bg-fuchsia-50 overflow-y-scroll">
+                <SheetDescription>
+                  <ArticleDetails id={a.id} />
+                </SheetDescription>
               </SheetContent>
             </Sheet>
-
           ))}
         </ul>
       </section>
