@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.7",
     "@supabase/supabase-js": "^2.42.7",
     "lodash.chunk": "^4.2.0",
     "next": "14.2.3",

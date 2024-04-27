@@ -9,6 +9,44 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      analysis: {
+        Row: {
+          analysis: string | null
+          article: string | null
+          created_at: string
+          id: string
+          language: string | null
+          model: string | null
+          political_bias: string | null
+        }
+        Insert: {
+          analysis?: string | null
+          article?: string | null
+          created_at?: string
+          id?: string
+          language?: string | null
+          model?: string | null
+          political_bias?: string | null
+        }
+        Update: {
+          analysis?: string | null
+          article?: string | null
+          created_at?: string
+          id?: string
+          language?: string | null
+          model?: string | null
+          political_bias?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analysis_article_fkey"
+            columns: ["article"]
+            isOneToOne: false
+            referencedRelation: "articles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       article_topics: {
         Row: {
           article: string
@@ -44,6 +82,7 @@ export type Database = {
       }
       articles: {
         Row: {
+          analysis: string | null
           author: string | null
           content: string | null
           created_at: string
@@ -57,6 +96,7 @@ export type Database = {
           url_to_image: string | null
         }
         Insert: {
+          analysis?: string | null
           author?: string | null
           content?: string | null
           created_at?: string
@@ -70,6 +110,7 @@ export type Database = {
           url_to_image?: string | null
         }
         Update: {
+          analysis?: string | null
           author?: string | null
           content?: string | null
           created_at?: string
@@ -94,18 +135,21 @@ export type Database = {
       }
       sources: {
         Row: {
+          active: boolean | null
           created_at: string
           id: string
           name: string | null
           URL: string | null
         }
         Insert: {
+          active?: boolean | null
           created_at?: string
           id: string
           name?: string | null
           URL?: string | null
         }
         Update: {
+          active?: boolean | null
           created_at?: string
           id?: string
           name?: string | null
