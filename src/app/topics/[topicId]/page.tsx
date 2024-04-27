@@ -5,22 +5,27 @@ import {
   SheetContent,
   SheetDescription,
   SheetTrigger,
-} from "@/components/ui/sheet"
+} from "@/components/ui/sheet";
 import ArticleDetails from "@/components/ArticleDetails";
 
-export default async function TopicPage({ params }: { params: { topicId: string } }) {
+export default async function TopicPage({
+  params,
+}: {
+  params: { topicId: string };
+}) {
   const supabase = createServiceClient();
 
   const { data: topic, error } = await supabase
-    .from('topics')
-    .select(`
+    .from("topics")
+    .select(
+      `
       id,
       query,
       articles ( id, title, description, published_at )
-    `)
-    .eq('id', params.topicId)
-    .maybeSingle()
-
+    `
+    )
+    .eq("id", params.topicId)
+    .maybeSingle();
 
   return (
     <>
@@ -32,7 +37,7 @@ export default async function TopicPage({ params }: { params: { topicId: string 
       <section className="py-12">
         <h2 className="text-xl mb-16 mx-8">Recent Headlines</h2>
         <ul className="grid grid-cols-3 gap-0">
-          {topic?.articles?.map(a => (
+          {topic?.articles?.map((a) => (
             <Sheet key={a.id}>
               <SheetTrigger>
                 <HeadlineCard
@@ -51,5 +56,5 @@ export default async function TopicPage({ params }: { params: { topicId: string 
         </ul>
       </section>
     </>
-  )
+  );
 }

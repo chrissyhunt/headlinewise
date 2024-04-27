@@ -7,23 +7,25 @@ export default async function ArticleDetails({ id }: { id: string }) {
   const supabase = createServiceClient();
 
   const { data: article, error } = await supabase
-  .from('articles')
-  .select(`
-    id,
-    title,
-    description,
-    published_at,
-    url,
-    source ( id, name ),
-    analysis ( id, language, political_bias, analysis, model )
-  `)
-  .eq('id', id)
-  .maybeSingle();
+    .from("articles")
+    .select(
+      `
+      id,
+      title,
+      description,
+      published_at,
+      url,
+      source ( id, name ),
+      analysis ( id, language, political_bias, analysis, model )  
+    `
+    )
+    .eq("id", id)
+    .maybeSingle();
 
   if (!article) return null;
 
   const analysis = article.analysis[0];
-  const language = analysis.language?.split(',');
+  const language = analysis.language?.split(",");
 
   return (
     <div className="mx-10 my-14 text-black">
@@ -34,7 +36,11 @@ export default async function ArticleDetails({ id }: { id: string }) {
       <div className="grid grid-cols-2 mt-12">
         <div>
           <DisplayLabel>Language</DisplayLabel>
-          {language?.map((l, i) => <Badge key={l} className="bg-fuchsia-300">{l}</Badge>)}
+          {language?.map((l, i) => (
+            <Badge key={l} className="bg-fuchsia-300">
+              {l}
+            </Badge>
+          ))}
         </div>
         <div>
           <DisplayLabel>Politics</DisplayLabel>
@@ -47,11 +53,7 @@ export default async function ArticleDetails({ id }: { id: string }) {
         <p className="text-xl font-serif max-w-prose">{analysis.analysis}</p>
       </div>
 
-      <Source
-        url={article.url!}
-        name={article.source?.name}
-      />
-      
+      <Source url={article.url!} name={article.source?.name} />
     </div>
   );
 }

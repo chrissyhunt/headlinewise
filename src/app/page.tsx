@@ -4,9 +4,7 @@ import Link from "next/link";
 export default async function Home() {
   const supabase = createServiceClient();
 
-  const {
-    data: topics,
-  } = await supabase.from('topics').select();
+  const { data: topics } = await supabase.from("topics").select();
 
   return (
     <main>
