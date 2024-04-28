@@ -2,10 +2,10 @@ import { evaluateText } from "@/utils/anthropic-ai/anthropic";
 import { createServiceClient } from "@/utils/supabase/server";
 
 export async function GET(request: Request) {
-  const authHeader = request.headers.get('Authorization');
+  const authHeader = request.headers.get("Authorization");
   if (authHeader !== `Bearer ${process.env.ENDPOINT_TOKEN}`) {
-    return new Response('Unauthorized', {
-      status: 401
+    return new Response("Unauthorized", {
+      status: 401,
     });
   }
 
@@ -13,10 +13,11 @@ export async function GET(request: Request) {
 
   // get articles without analysis
   // for each article, get analysis, parse + save
-  const { data: articles, error } = await supabase.from('articles')
-    .select('id,title,analysis(count)');
-  
-  const targetArticles = articles?.filter((a) => a.analysis[0]?.count < 1) || [];
+  const { data: articles, error } = await supabase
+    .from("articles")
+    .select("id,title,analysis(id)");
+
+  const targetArticles = articles?.filter((a) => a.analysis?.length <= 1) || [];
 
   let results = [];
 
@@ -26,30 +27,34 @@ export async function GET(request: Request) {
       results.push({ ...article, response });
     }
   } catch (e) {
-    return new Response('Error evaluating headlines', {
+    return new Response("Error evaluating headlines", {
       status: 500,
     });
   }
 
   if (results.length) {
     try {
+      console.log("attempting to save results: ", results);
       const insertData = results.map((r) => ({
-        language: r.response.language.join(','),
+        language: Array.isArray(r.response.language)
+          ? r.response.language?.join(",")
+          : r.response.language.toString(),
         political_bias: r.response.political_bias,
         analysis: r.response.analysis,
-        model: 'claude-3-sonnet-20240229',
+        model: "claude-3-sonnet-20240229",
         article: r.id,
       }));
-      const { error } = await supabase.from('analysis').insert(insertData);
-      if (error) throw new Error();
+      const { error } = await supabase.from("analysis").insert(insertData);
+      if (error) throw new Error(error.message);
     } catch (e) {
-      return new Response('Error saving analyses', {
+      console.log(e);
+      return new Response("Error saving analyses", {
         status: 500,
       });
     }
   }
-  
-  return new Response('Success', {
+
+  return new Response("Success", {
     status: 200,
   });
 }

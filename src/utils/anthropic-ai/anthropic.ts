@@ -1,7 +1,7 @@
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY!
+  apiKey: process.env.ANTHROPIC_API_KEY!,
 });
 
 export const evaluateText = async (headline: string) => {
@@ -12,16 +12,16 @@ export const evaluateText = async (headline: string) => {
     system: process.env.ANTHROPIC_SYSTEM_PROMPT!,
     messages: [
       {
-        "role": "user",
-        "content": [
+        role: "user",
+        content: [
           {
-            "type": "text",
-            "text": headline,
-          }
-        ]
-      }
-    ]
+            type: "text",
+            text: headline,
+          },
+        ],
+      },
+    ],
   });
   const response = await JSON.parse(msg.content[0]?.text);
   return response;
-}
+};

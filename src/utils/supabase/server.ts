@@ -1,5 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
-import { Database } from '@/database.types';
+import { createClient } from "@supabase/supabase-js";
+import { Database } from "@/database.types";
 
 // only for server-side use to retrieve content
 // TODO: replace with recommended Supabase client code
