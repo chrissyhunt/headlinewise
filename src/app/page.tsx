@@ -16,10 +16,10 @@ export default async function Home() {
         </h1>
         <ul className="flex flex-wrap justify-center align-center space-x-4">
           {topics?.map((t) => (
-            <li key={t.id} className="mb-4">
+            <li key={t.slug} className="mb-4">
               <Link
-                key={t.id}
-                href={`/topics/${t.id}`}
+                key={t.slug}
+                href={`/topics/${t.slug}`}
                 className={buttonVariants({
                   variant: "default",
                   size: "lg",

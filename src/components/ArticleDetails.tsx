@@ -3,14 +3,13 @@ import Badge from "@/components/Badge";
 import DisplayLabel from "@/components/DisplayLabel";
 import Source from "@/components/Source";
 
-export default async function ArticleDetails({ id }: { id: string }) {
+export default async function ArticleDetails({ url }: { url: string }) {
   const supabase = createServiceClient();
 
   const { data: article, error } = await supabase
     .from("articles")
     .select(
       `
-      id,
       title,
       description,
       published_at,
@@ -19,7 +18,7 @@ export default async function ArticleDetails({ id }: { id: string }) {
       analysis ( id, language, political_bias, analysis, model )  
     `
     )
-    .eq("id", id)
+    .eq("url", url)
     .maybeSingle();
 
   if (!article) return null;
@@ -40,7 +39,7 @@ export default async function ArticleDetails({ id }: { id: string }) {
       <div className="grid grid-cols-2 mt-12">
         <div>
           <DisplayLabel>Language</DisplayLabel>
-          {language?.map((l, i) => (
+          {language?.map((l) => (
             <Badge key={l} className="bg-fuchsia-300">
               {l}
             </Badge>
