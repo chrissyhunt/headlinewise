@@ -7,6 +7,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import ArticleDetails from "@/components/ArticleDetails";
+import BackButton from "@/components/BackButton";
+import HeaderSection from "@/components/HeaderSection";
 
 export default async function TopicPage({
   params,
@@ -29,11 +31,12 @@ export default async function TopicPage({
 
   return (
     <>
-      <section className="px-8 py-24">
-        <h1 className="font-serif text-6xl tracking-tighter">
+      <HeaderSection>
+        <BackButton />
+        <h1 className="mt-20 font-serif text-6xl tracking-tighter">
           <span className="bg-fuchsia-400">&ldquo;{topic?.query}&rdquo;</span>
         </h1>
-      </section>
+      </HeaderSection>
       <section className="py-12">
         <h2 className="text-xl mb-16 mx-8">Recent Headlines</h2>
         <ul className="grid grid-cols-3 gap-0">

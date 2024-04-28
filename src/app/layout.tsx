@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Libre_Baskerville, Montserrat, Lato } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -28,10 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${libreBaskerville.variable} ${lato.variable} bg-gradient-to-r from-fuchsia-200 to-cyan-100 font-sans`}
+        className={`${libreBaskerville.variable} ${lato.variable} bg-gradient-to-r from-fuchsia-200 to-cyan-100 font-sans flex flex-col min-h-screen`}
       >
         <Navbar />
-        {children}
+        <div className="flex-grow">{children}</div>
+        <Footer />
       </body>
     </html>
   );

@@ -25,7 +25,7 @@ export default async function ArticleDetails({ id }: { id: string }) {
   if (!article) return null;
 
   const analysis = article.analysis[0];
-  const language = analysis.language?.split(",");
+  const language = analysis?.language?.split(",");
 
   return (
     <div className="mx-10 my-14 text-black">
@@ -44,13 +44,13 @@ export default async function ArticleDetails({ id }: { id: string }) {
         </div>
         <div>
           <DisplayLabel>Politics</DisplayLabel>
-          <Badge className="bg-cyan-300">{analysis.political_bias}</Badge>
+          <Badge className="bg-cyan-300">{analysis?.political_bias}</Badge>
         </div>
       </div>
 
       <div className="mt-12">
         <DisplayLabel>Analysis</DisplayLabel>
-        <p className="text-xl font-serif max-w-prose">{analysis.analysis}</p>
+        <p className="text-xl font-serif max-w-prose">{analysis?.analysis}</p>
       </div>
 
       <Source url={article.url!} name={article.source?.name} />

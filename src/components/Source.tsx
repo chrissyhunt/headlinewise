@@ -13,7 +13,10 @@ export default function Source({ url, name }: SourceProps) {
 
   if (!showSource) {
     return (
-      <Button onClick={() => setShowSource(true)} className="mt-8">
+      <Button
+        onClick={() => setShowSource(true)}
+        className={`${buttonVariants({ variant: "default", size: "lg" })} mt-8`}
+      >
         Reveal Source 👀
       </Button>
     );
@@ -21,7 +24,7 @@ export default function Source({ url, name }: SourceProps) {
 
   return (
     <Link
-      className={`mt-8 ${buttonVariants({ variant: "default" })}`}
+      className={`mt-8 ${buttonVariants({ variant: "default", size: "lg" })}`}
       href={url}
       target="_blank"
     >
