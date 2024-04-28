@@ -32,7 +32,9 @@ export default function RootLayout({
         className={`${libreBaskerville.variable} ${lato.variable} bg-gradient-to-r from-fuchsia-200 to-cyan-100 font-sans flex flex-col min-h-screen`}
       >
         <Navbar />
-        <div className="flex-grow">{children}</div>
+        <main className="flex-grow flex flex-col align-center justify-center">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
