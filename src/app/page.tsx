@@ -14,12 +14,16 @@ export default async function Home() {
         <h1 className="font-serif text-4xl mb-8">
           Select a topic to review headlines:
         </h1>
-        <ul className="flex justify-center space-x-4">
+        <ul className="flex flex-wrap justify-center align-center space-x-4">
           {topics?.map((t) => (
-            <li key={t.id}>
+            <li key={t.id} className="mb-4">
               <Link
+                key={t.id}
                 href={`/topics/${t.id}`}
-                className={buttonVariants({ variant: "default", size: "lg" })}
+                className={buttonVariants({
+                  variant: "default",
+                  size: "lg",
+                })}
               >
                 {t.query}
               </Link>

@@ -33,13 +33,13 @@ export default async function TopicPage({
     <>
       <HeaderSection>
         <BackButton />
-        <h1 className="mt-20 font-serif text-6xl tracking-tighter">
+        <h1 className="mt-20 font-serif text-4xl sm:text-6xl tracking-tighter">
           <span className="bg-fuchsia-400">&ldquo;{topic?.query}&rdquo;</span>
         </h1>
       </HeaderSection>
       <section className="py-12">
         <h2 className="text-xl mb-16 mx-8">Recent Headlines</h2>
-        <ul className="grid grid-cols-3 gap-0">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
           {topic?.articles?.map((a) => (
             <Sheet key={a.id}>
               <SheetTrigger>
@@ -49,7 +49,7 @@ export default async function TopicPage({
                   date={a.published_at!}
                 />
               </SheetTrigger>
-              <SheetContent className="max-w-1/3 sm:max-w-1/3 bg-fuchsia-50 overflow-y-scroll">
+              <SheetContent className="w-screen max-w-screen sm:w-3/4 sm:max-w-3/4 lg:w-2/3 lg:max-w-2/3 bg-fuchsia-50 overflow-y-scroll">
                 <SheetDescription>
                   <ArticleDetails id={a.id} />
                 </SheetDescription>

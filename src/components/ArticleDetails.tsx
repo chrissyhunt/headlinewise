@@ -28,10 +28,14 @@ export default async function ArticleDetails({ id }: { id: string }) {
   const language = analysis?.language?.split(",");
 
   return (
-    <div className="mx-10 my-14 text-black">
+    <div className="mx-2 sm:mx-10 my-4 sm:my-14 text-black">
       <DisplayLabel>The Headline</DisplayLabel>
-      <h1 className="text-6xl font-serif mb-4 max-w-prose">{article.title}</h1>
-      <p className="text-3xl font-serif max-w-prose">{article.description}</p>
+      <h1 className="text-3xl md:text-6xl font-serif mb-4 max-w-prose">
+        {article.title}
+      </h1>
+      <p className="text-xl md:text-3xl font-serif max-w-prose">
+        {article.description}
+      </p>
 
       <div className="grid grid-cols-2 mt-12">
         <div>
@@ -50,7 +54,9 @@ export default async function ArticleDetails({ id }: { id: string }) {
 
       <div className="mt-12">
         <DisplayLabel>Analysis</DisplayLabel>
-        <p className="text-xl font-serif max-w-prose">{analysis?.analysis}</p>
+        <p className="text-lg md:text-xl font-serif max-w-prose">
+          {analysis?.analysis}
+        </p>
       </div>
 
       <Source url={article.url!} name={article.source?.name} />
