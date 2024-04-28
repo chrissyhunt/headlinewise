@@ -58,7 +58,10 @@ export default async function ArticleDetails({ url }: { url: string }) {
         </p>
       </div>
 
-      <Source url={article.url!} name={article.source?.name} />
+      {/* TODO: remove when supabase fixes complex query type generation */}
+      {/* https://github.com/supabase/postgrest-js/issues/303 */}
+      {/* @ts-ignore */}
+      <Source url={article.url!} name={article.source.name} />
     </div>
   );
 }
