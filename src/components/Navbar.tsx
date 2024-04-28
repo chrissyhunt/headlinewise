@@ -4,9 +4,8 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from "@/components/ui/sheet";
 
 interface MenuLink {
@@ -57,9 +56,30 @@ export default function Navbar() {
       </nav>
       <div className="flex sm:hidden">
         <Sheet>
-          <SheetTrigger>Open</SheetTrigger>
+          <SheetTrigger>
+            <span className="text-2xl relative top-[-2px]">☰</span>
+            <span className="sr-only">Menu</span>
+          </SheetTrigger>
           <SheetContent>
-            <SheetDescription>Menu</SheetDescription>
+            <SheetDescription>
+              <ul className="flex flex-col space-y-4">
+                {menuLinks.map((link) => (
+                  <li key={link.href}>
+                    <SheetClose asChild>
+                      <Link
+                        href={link.href}
+                        className={`${buttonVariants({
+                          variant: "link",
+                        })} text-xl`}
+                        target={link.newTab ? "_blank" : undefined}
+                      >
+                        {link.label}
+                      </Link>
+                    </SheetClose>
+                  </li>
+                ))}
+              </ul>
+            </SheetDescription>
           </SheetContent>
         </Sheet>
       </div>
