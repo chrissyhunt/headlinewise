@@ -23,7 +23,7 @@ export default async function TopicPage({
       `
       id,
       query,
-      articles ( id, title, description, published_at )
+      articles ( url, title, description, published_at )
     `
     )
     .eq("id", params.topicId)
@@ -41,17 +41,13 @@ export default async function TopicPage({
         <h2 className="text-xl mb-16 mx-8">Recent Headlines</h2>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
           {topic?.articles?.map((a) => (
-            <Sheet key={a.id}>
+            <Sheet key={a.url}>
               <SheetTrigger>
-                <HeadlineCard
-                  key={a.id}
-                  title={a.title!}
-                  date={a.published_at!}
-                />
+                <HeadlineCard title={a.title!} date={a.published_at!} />
               </SheetTrigger>
               <SheetContent className="w-screen max-w-screen sm:w-3/4 sm:max-w-3/4 lg:w-2/3 lg:max-w-2/3 bg-fuchsia-50 overflow-y-scroll">
                 <SheetDescription>
-                  <ArticleDetails id={a.id} />
+                  <ArticleDetails url={a.url!} />
                 </SheetDescription>
               </SheetContent>
             </Sheet>

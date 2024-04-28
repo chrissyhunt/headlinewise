@@ -15,7 +15,7 @@ export async function GET(request: Request) {
   // for each article, get analysis, parse + save
   const { data: articles, error } = await supabase
     .from("articles")
-    .select("id,title,analysis(id)");
+    .select("url,title,analysis(id)");
 
   const targetArticles = articles?.filter((a) => a.analysis?.length <= 1) || [];
 
@@ -42,7 +42,7 @@ export async function GET(request: Request) {
         political_bias: r.response.political_bias,
         analysis: r.response.analysis,
         model: "claude-3-sonnet-20240229",
-        article: r.id,
+        article: r.url,
       }));
       const { error } = await supabase.from("analysis").insert(insertData);
       if (error) throw new Error(error.message);
