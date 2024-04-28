@@ -1,7 +1,7 @@
 import { evaluateText } from "@/utils/anthropic-ai/anthropic";
 import { createServiceClient } from "@/utils/supabase/server";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   const authHeader = request.headers.get("Authorization");
   if (authHeader !== `Bearer ${process.env.ENDPOINT_TOKEN}`) {
     return new Response("Unauthorized", {
@@ -9,8 +9,8 @@ export async function GET(request: Request) {
     });
   }
 
-  const { searchParams } = new URL(request.url);
-  const articleUrl = searchParams.get("articleUrl");
+  const body = await request.json();
+  const articleUrl = body?.record?.url;
 
   if (!articleUrl) {
     return new Response("articleUrl is required", {
