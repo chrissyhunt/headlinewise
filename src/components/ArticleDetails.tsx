@@ -3,24 +3,6 @@ import Badge from "@/components/Badge";
 import DisplayLabel from "@/components/DisplayLabel";
 import Source from "@/components/Source";
 
-interface NestedArticle {
-  title: string;
-  description: string;
-  published_at: string;
-  url: string;
-  source: {
-    id: string;
-    name: string;
-  };
-  analysis: {
-    id: string;
-    language: string;
-    political_bias: string;
-    analysis: string;
-    model: string;
-  };
-}
-
 export default async function ArticleDetails({ url }: { url: string }) {
   const supabase = createServiceClient();
 
