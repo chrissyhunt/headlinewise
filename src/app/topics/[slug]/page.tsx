@@ -13,7 +13,7 @@ import HeaderSection from "@/components/HeaderSection";
 export default async function TopicPage({
   params,
 }: {
-  params: { topicId: string };
+  params: { slug: string };
 }) {
   const supabase = createServiceClient();
 
@@ -21,12 +21,12 @@ export default async function TopicPage({
     .from("topics")
     .select(
       `
-      id,
+      slug,
       query,
       articles ( url, title, description, published_at )
     `
     )
-    .eq("id", params.topicId)
+    .eq("slug", params.slug)
     .maybeSingle();
 
   return (

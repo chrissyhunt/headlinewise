@@ -56,7 +56,7 @@ export type Database = {
         Insert: {
           article: string;
           created_at?: string;
-          topic?: string;
+          topic: string;
         };
         Update: {
           article?: string;
@@ -76,7 +76,7 @@ export type Database = {
             columns: ["topic"];
             isOneToOne: false;
             referencedRelation: "topics";
-            referencedColumns: ["id"];
+            referencedColumns: ["slug"];
           }
         ];
       };
@@ -157,18 +157,18 @@ export type Database = {
       topics: {
         Row: {
           created_at: string;
-          id: string;
           query: string | null;
+          slug: string;
         };
         Insert: {
           created_at?: string;
-          id?: string;
           query?: string | null;
+          slug: string;
         };
         Update: {
           created_at?: string;
-          id?: string;
           query?: string | null;
+          slug?: string;
         };
         Relationships: [];
       };

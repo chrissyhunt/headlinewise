@@ -15,7 +15,7 @@ export async function GET(request: Request) {
   // get list of topics
   const { data: topics, error } = await supabase
     .from("topics")
-    .select("id, query");
+    .select("slug, query");
 
   if (error || !topics) {
     return new Response("Error retrieving topics", {
@@ -52,12 +52,13 @@ export async function GET(request: Request) {
           }))
         );
       }
+
       // save to Supabase
       if (results.length) {
         try {
           const { data: articles, error: articlesError } = await supabase
             .from("articles")
-            .upsert(results)
+            .upsert(results, { onConflict: "url" })
             .select("url");
 
           if (articlesError) throw new Error(articlesError.message);
@@ -66,10 +67,10 @@ export async function GET(request: Request) {
             const { error } = await supabase
               .from("article_topics")
               .insert(
-                articles.map((a) => ({ article: a.url, topic: topic.id }))
+                articles.map((a) => ({ article: a.url, topic: topic.slug }))
               );
 
-            if (error) throw new Error(error.details);
+            if (error) throw new Error(`${error.message}, ${error.details}`);
           }
         } catch (e) {
           console.log(e);
