@@ -1,8 +1,12 @@
 {
   "crons": [
     {
-      "path": "/api/cron-test",
-      "schedule": "30 22 * * *"
+      "path": "/api/get-news",
+      "schedule": "0 5 * * *"
+    },
+    {
+      "path": "/api/get-batch-analysis",
+      "schedule": "0 7 * * *"
     }
   ]
 }
