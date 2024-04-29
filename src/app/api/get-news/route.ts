@@ -58,7 +58,7 @@ export async function GET(request: Request) {
         try {
           const { data: articles, error: articlesError } = await supabase
             .from("articles")
-            .upsert(results, { onConflict: "url" })
+            .upsert(results)
             .select("url");
 
           if (articlesError) throw new Error(articlesError.message);
