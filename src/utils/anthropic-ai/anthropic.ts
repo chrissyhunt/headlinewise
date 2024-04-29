@@ -4,7 +4,7 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
 });
 
-export const evaluateText = async (headline: string) => {
+export const getAnalysisFromAnthropic = async (headline: string) => {
   const msg = await anthropic.messages.create({
     model: "claude-3-sonnet-20240229",
     max_tokens: 1000,
@@ -23,5 +23,6 @@ export const evaluateText = async (headline: string) => {
     ],
   });
   const response = await JSON.parse(msg.content[0]?.text);
+  response.model = "claude-3-sonnet-20240229";
   return response;
 };
