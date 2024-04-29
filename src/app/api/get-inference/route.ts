@@ -1,4 +1,5 @@
-import { evaluateText } from "@/utils/anthropic-ai/anthropic";
+import { getAnalysisFromAnthropic } from "@/utils/anthropic-ai/anthropic";
+import { getAnalysisFromOpenAI } from "@/utils/openai/openai";
 import { createServiceClient } from "@/utils/supabase/server";
 
 export async function POST(request: Request) {
@@ -30,7 +31,12 @@ export async function POST(request: Request) {
     if (articleError)
       throw new Error(`Error retrieving article: ${articleError.message}`);
 
-    const analysis = await evaluateText(article?.title!);
+    let analysis;
+    try {
+      analysis = await getAnalysisFromAnthropic(article?.title!);
+    } catch (e) {
+      analysis = await getAnalysisFromOpenAI(article?.title!);
+    }
 
     const { error: saveError } = await supabase.from("analysis").insert({
       language: Array.isArray(analysis.language)
@@ -38,7 +44,7 @@ export async function POST(request: Request) {
         : analysis.language.toString(),
       political_bias: analysis.political_bias,
       analysis: analysis.analysis,
-      model: "claude-3-sonnet-20240229",
+      model: analysis.model,
       article: articleUrl,
     });
 
