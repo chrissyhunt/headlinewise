@@ -3,6 +3,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { createServiceClient } from "@/utils/supabase/server";
 import Link from "next/link";
 
+export const revalidate = 43000;
+
 export default async function Home() {
   const supabase = createServiceClient();
 

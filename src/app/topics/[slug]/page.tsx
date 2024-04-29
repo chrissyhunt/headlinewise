@@ -10,6 +10,8 @@ import ArticleDetails from "@/components/ArticleDetails";
 import BackButton from "@/components/BackButton";
 import HeaderSection from "@/components/HeaderSection";
 
+export const revalidate = 43000;
+
 export default async function TopicPage({
   params,
 }: {
