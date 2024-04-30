@@ -1,6 +1,7 @@
 import { getAnalysisFromAnthropic } from "@/lib/anthropic-ai/anthropic";
 import { getAnalysisFromOpenAI } from "@/lib/openai/openai";
 import { createServiceClient } from "@/lib/supabase/server";
+import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
   const authHeader = request.headers.get("Authorization");
@@ -54,6 +55,8 @@ export async function GET(request: Request) {
       status: 500,
     });
   }
+
+  revalidatePath("/topics/[slug]");
 
   return new Response("Success", {
     status: 200,

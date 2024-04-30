@@ -1,6 +1,8 @@
-import { createServiceClient } from "@/lib/supabase/server";
 import { fetchNews, limitSamplePerSource } from "@/lib/news-api/fetch-news";
 import { makeSourceBatches } from "@/lib/news-api/sources";
+import { getTopics } from "@/lib/supabase/get-topics";
+import { upsertArticles } from "@/lib/supabase/upsert-articles";
+import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
   const authHeader = request.headers.get("Authorization");
@@ -10,12 +12,8 @@ export async function GET(request: Request) {
     });
   }
 
-  const supabase = createServiceClient();
-
   // get list of topics
-  const { data: topics, error } = await supabase
-    .from("topics")
-    .select("slug, query");
+  const { topics, error } = await getTopics();
 
   if (error || !topics) {
     return new Response("Error retrieving topics", {
@@ -56,22 +54,7 @@ export async function GET(request: Request) {
       // save to Supabase
       if (results.length) {
         try {
-          const { data: articles, error: articlesError } = await supabase
-            .from("articles")
-            .upsert(results)
-            .select("url");
-
-          if (articlesError) throw new Error(articlesError.message);
-
-          if (articles?.length) {
-            const { error } = await supabase
-              .from("article_topics")
-              .insert(
-                articles.map((a) => ({ article: a.url, topic: topic.slug }))
-              );
-
-            if (error) throw new Error(`${error.message}, ${error.details}`);
-          }
+          await upsertArticles(results, topic.slug);
         } catch (e) {
           console.log(e);
           return new Response("Error saving news articles", {
@@ -85,6 +68,9 @@ export async function GET(request: Request) {
       status: 500,
     });
   }
+
+  revalidatePath("/");
+  revalidatePath("/topics/[slug]");
 
   return new Response("Success!", {
     status: 200,

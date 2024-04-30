@@ -1,5 +1,4 @@
 import HeadlineCard from "@/components/HeadlineCard";
-import { createServiceClient } from "@/lib/supabase/server";
 import {
   Sheet,
   SheetContent,
@@ -9,27 +8,14 @@ import {
 import ArticleDetails from "@/components/ArticleDetails";
 import BackButton from "@/components/BackButton";
 import HeaderSection from "@/components/HeaderSection";
-
-export const revalidate = 43000;
+import { getArticlesForTopic } from "@/lib/supabase/get-articles-for-topic";
 
 export default async function TopicPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const supabase = createServiceClient();
-
-  const { data: topic, error } = await supabase
-    .from("topics")
-    .select(
-      `
-      slug,
-      query,
-      articles ( url, title, description, published_at )
-    `
-    )
-    .eq("slug", params.slug)
-    .maybeSingle();
+  const { topic, articles } = await getArticlesForTopic(params.slug);
 
   return (
     <>
@@ -42,7 +28,7 @@ export default async function TopicPage({
       <section className="py-12">
         <h2 className="text-xl mb-16 mx-8">Recent Headlines</h2>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
-          {topic?.articles?.map((a) => (
+          {articles?.map((a) => (
             <Sheet key={a.url}>
               <SheetTrigger>
                 <HeadlineCard title={a.title!} date={a.published_at!} />

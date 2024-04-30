@@ -1,14 +1,10 @@
 import HeaderSection from "@/components/HeaderSection";
 import { buttonVariants } from "@/components/ui/button";
-import { createServiceClient } from "@/lib/supabase/server";
+import { getActiveTopics } from "@/lib/supabase/get-active-topics";
 import Link from "next/link";
 
-export const revalidate = 43000;
-
 export default async function Home() {
-  const supabase = createServiceClient();
-
-  const { data: topics } = await supabase.from("topics").select();
+  const topics = await getActiveTopics();
 
   return (
     <>
