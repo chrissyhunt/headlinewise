@@ -2,11 +2,12 @@ import { fetchNews, limitSamplePerSource } from "@/lib/news-api/fetch-news";
 import { makeSourceBatches } from "@/lib/news-api/sources";
 import { getTopics } from "@/lib/supabase/get-topics";
 import { upsertArticles } from "@/lib/supabase/upsert-articles";
+import { hasEndpointSecret } from "@/utils/has-endpoint-secret";
 import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
-  const authHeader = request.headers.get("Authorization");
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  const isAuth = hasEndpointSecret(request);
+  if (!isAuth) {
     return new Response("Unauthorized", {
       status: 401,
     });

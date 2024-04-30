@@ -2,11 +2,12 @@ import { getAnalysisFromAnthropic } from "@/lib/anthropic-ai/anthropic";
 import { getAnalysisFromOpenAI } from "@/lib/openai/openai";
 import { getNewArticles } from "@/lib/supabase/get-new-articles";
 import { insertAnalysis } from "@/lib/supabase/insert-analysis";
+import { hasEndpointSecret } from "@/utils/has-endpoint-secret";
 import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
-  const authHeader = request.headers.get("Authorization");
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  const isAuth = hasEndpointSecret(request);
+  if (!isAuth) {
     return new Response("Unauthorized", {
       status: 401,
     });
