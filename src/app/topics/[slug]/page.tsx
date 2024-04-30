@@ -27,7 +27,7 @@ export default async function TopicPage({
       </HeaderSection>
       <section className="py-12">
         <h2 className="text-xl mb-16 mx-8">Recent Headlines</h2>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 grid-rows-fr">
           {articles?.map((a) => (
             <Sheet key={a.url}>
               <SheetTrigger>
