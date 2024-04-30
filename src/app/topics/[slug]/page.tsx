@@ -1,5 +1,5 @@
 import HeadlineCard from "@/components/HeadlineCard";
-import { createServiceClient } from "@/utils/supabase/server";
+import { createServiceClient } from "@/lib/supabase/server";
 import {
   Sheet,
   SheetContent,

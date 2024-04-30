@@ -1,4 +1,4 @@
-import { createServiceClient } from "@/utils/supabase/server";
+import { createServiceClient } from "@/lib/supabase/server";
 import Badge from "@/components/Badge";
 import DisplayLabel from "@/components/DisplayLabel";
 import Source from "@/components/Source";

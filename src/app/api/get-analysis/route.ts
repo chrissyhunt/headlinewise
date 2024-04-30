@@ -1,6 +1,6 @@
-import { getAnalysisFromAnthropic } from "@/utils/anthropic-ai/anthropic";
-import { getAnalysisFromOpenAI } from "@/utils/openai/openai";
-import { createServiceClient } from "@/utils/supabase/server";
+import { getAnalysisFromAnthropic } from "@/lib/anthropic-ai/anthropic";
+import { getAnalysisFromOpenAI } from "@/lib/openai/openai";
+import { createServiceClient } from "@/lib/supabase/server";
 
 export async function POST(request: Request) {
   const authHeader = request.headers.get("Authorization");

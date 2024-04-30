@@ -1,6 +1,6 @@
 import HeaderSection from "@/components/HeaderSection";
 import { buttonVariants } from "@/components/ui/button";
-import { createServiceClient } from "@/utils/supabase/server";
+import { createServiceClient } from "@/lib/supabase/server";
 import Link from "next/link";
 
 export const revalidate = 43000;

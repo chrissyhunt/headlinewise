@@ -1,6 +1,6 @@
-import { createServiceClient } from "@/utils/supabase/server";
-import { fetchNews, limitSamplePerSource } from "@/utils/news-api/fetch-news";
-import { makeSourceBatches } from "@/utils/news-api/sources";
+import { createServiceClient } from "@/lib/supabase/server";
+import { fetchNews, limitSamplePerSource } from "@/lib/news-api/fetch-news";
+import { makeSourceBatches } from "@/lib/news-api/sources";
 
 export async function GET(request: Request) {
   const authHeader = request.headers.get("Authorization");
