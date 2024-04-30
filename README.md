@@ -16,4 +16,4 @@ Note: You will need a `.env.local` in the root of the project to connect to Supa
 
 ## Deployment
 
-Code merged to the `main` branch is automatically deployed via Vercal.
+Code merged to the `main` branch is automatically deployed to Vercal.
