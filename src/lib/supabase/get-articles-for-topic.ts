@@ -1,5 +1,7 @@
 import { createServiceClient } from "@/lib/supabase/server";
 
+const MAX_RECENT_ARTICLES = 18;
+
 export const getArticlesForTopic = async (topicSlug: string) => {
   const supabase = createServiceClient();
   const { data, error } = await supabase
@@ -20,7 +22,8 @@ export const getArticlesForTopic = async (topicSlug: string) => {
   const articles = data?.articles
     .filter((a) => a.analysis.length > 0)
     // @ts-ignore
-    .sort((a, b) => new Date(b.published_at!) - new Date(a.published_at!));
+    .sort((a, b) => new Date(b.published_at!) - new Date(a.published_at!))
+    .slice(0, MAX_RECENT_ARTICLES);
 
   return { topic, articles };
 };
