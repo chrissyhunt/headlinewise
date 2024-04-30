@@ -21,6 +21,9 @@ export async function GET(request: Request) {
       const sources = await makeSourceBatches();
       let results = [];
       for (let batch of sources) {
+        console.log(
+          `requesting '${topic.query}' news from ${batch.join(", ")}`
+        );
         const data = await fetchNews(topic.query!, batch);
 
         // sample recent results: x per source per topic

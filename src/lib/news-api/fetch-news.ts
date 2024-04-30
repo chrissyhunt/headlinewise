@@ -56,6 +56,7 @@ export async function fetchNews(query: string, sources: string[]) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${process.env.NEWS_API_KEY!}`,
     },
+    cache: "no-store",
   });
 
   const data = await res.json();
