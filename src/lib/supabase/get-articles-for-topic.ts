@@ -17,7 +17,10 @@ export const getArticlesForTopic = async (topicSlug: string) => {
   if (error) throw new Error("Error retrieving topic", { cause: error });
 
   const topic = { slug: data?.slug, query: data?.query };
-  const articles = data?.articles.filter((a) => a.analysis.length > 0);
+  const articles = data?.articles
+    .filter((a) => a.analysis.length > 0)
+    // @ts-ignore
+    .sort((a, b) => new Date(b.published_at!) - new Date(a.published_at!));
 
   return { topic, articles };
 };
