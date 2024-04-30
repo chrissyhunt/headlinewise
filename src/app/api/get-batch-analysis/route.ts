@@ -1,6 +1,7 @@
 import { getAnalysisFromAnthropic } from "@/lib/anthropic-ai/anthropic";
 import { getAnalysisFromOpenAI } from "@/lib/openai/openai";
-import { createServiceClient } from "@/lib/supabase/server";
+import { getNewArticles } from "@/lib/supabase/get-new-articles";
+import { insertAnalysis } from "@/lib/supabase/insert-analysis";
 import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
@@ -11,17 +12,8 @@ export async function GET(request: Request) {
     });
   }
 
-  const supabase = createServiceClient();
-
   try {
-    const { data: articles, error: articleError } = await supabase
-      .from("articles")
-      .select("url,title,description,analysis(id)");
-
-    if (articleError)
-      throw new Error(`Error retrieving articles: ${articleError.message}`);
-
-    const articlesToAnalyze = articles?.filter((a) => a.analysis.length < 1);
+    const articlesToAnalyze = await getNewArticles();
 
     const analyses = await Promise.all(
       articlesToAnalyze.map(async (article) => {
@@ -43,12 +35,7 @@ export async function GET(request: Request) {
       })
     );
 
-    const { error: saveError } = await supabase
-      .from("analysis")
-      .insert(analyses);
-
-    if (saveError)
-      throw new Error(`Error saving analyses: ${saveError.message}`);
+    await insertAnalysis(analyses);
   } catch (e) {
     console.log(e);
     return new Response("Error", {
@@ -56,7 +43,7 @@ export async function GET(request: Request) {
     });
   }
 
-  revalidatePath("/topics/[slug]");
+  revalidatePath("/topics/[slug]", "page");
 
   return new Response("Success", {
     status: 200,

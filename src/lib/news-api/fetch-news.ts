@@ -31,7 +31,6 @@ export const limitSamplePerSource = (
 
     const currentCount = sources.get(item.source.id) ?? 0;
     if (currentCount < limitPerSource) {
-      console.log("adding one from: ", item.source.id);
       sample.push(item);
       sources.set(item.source.id, currentCount + 1);
     }

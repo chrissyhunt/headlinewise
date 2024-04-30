@@ -12,17 +12,11 @@ export async function GET(request: Request) {
     });
   }
 
-  // get list of topics
-  const { topics, error } = await getTopics();
-
-  if (error || !topics) {
-    return new Response("Error retrieving topics", {
-      status: 500,
-    });
-  }
-
-  // get articles from NewsAPI
   try {
+    // get list of topics
+    const topics = await getTopics();
+
+    // get articles from NewsAPI
     for (let topic of topics) {
       const sources = await makeSourceBatches();
       let results = [];
@@ -70,7 +64,7 @@ export async function GET(request: Request) {
   }
 
   revalidatePath("/");
-  revalidatePath("/topics/[slug]");
+  revalidatePath("/topics/[slug]", "page");
 
   return new Response("Success!", {
     status: 200,
