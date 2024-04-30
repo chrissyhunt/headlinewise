@@ -12,11 +12,11 @@ export default async function Home() {
 
   return (
     <>
-      <HeaderSection className="text-center">
+      <HeaderSection className="text-center flex flex-col justify-center items-center">
         <h1 className="font-serif text-4xl mb-8">
           Select a topic to review headlines:
         </h1>
-        <ul className="flex flex-wrap justify-center align-center space-x-4">
+        <ul className="flex flex-wrap justify-center items-center space-x-4 max-w-prose">
           {topics?.map((t) => (
             <li key={t.slug} className="mb-4">
               <Link
