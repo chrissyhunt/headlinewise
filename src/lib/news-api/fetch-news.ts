@@ -31,7 +31,6 @@ export const limitSamplePerSource = (
 
     const currentCount = sources.get(item.source.id) ?? 0;
     if (currentCount < limitPerSource) {
-      console.log("adding one from: ", item.source.id);
       sample.push(item);
       sources.set(item.source.id, currentCount + 1);
     }
@@ -44,7 +43,7 @@ export async function fetchNews(query: string, sources: string[]) {
   const twoDaysAgo = getDaysAgoISOString(2);
   const yesterday = getDaysAgoISOString(1);
   const newsApiUrl = new URL("https://newsapi.org/v2/everything");
-  newsApiUrl.searchParams.set("pageSize", "30"); // can be max 100
+  newsApiUrl.searchParams.set("pageSize", "50"); // can be max 100
   newsApiUrl.searchParams.set("language", "en");
   newsApiUrl.searchParams.set("sortBy", "relevancy");
   newsApiUrl.searchParams.set("from", twoDaysAgo);
@@ -57,6 +56,7 @@ export async function fetchNews(query: string, sources: string[]) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${process.env.NEWS_API_KEY!}`,
     },
+    cache: "no-store",
   });
 
   const data = await res.json();

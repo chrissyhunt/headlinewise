@@ -1,34 +1,30 @@
-import { createServiceClient } from "@/utils/supabase/server";
-import { fetchNews, limitSamplePerSource } from "@/utils/news-api/fetch-news";
-import { makeSourceBatches } from "@/utils/news-api/sources";
+import { fetchNews, limitSamplePerSource } from "@/lib/news-api/fetch-news";
+import { makeSourceBatches } from "@/lib/news-api/sources";
+import { getTopics } from "@/lib/supabase/get-topics";
+import { upsertArticles } from "@/lib/supabase/upsert-articles";
+import { hasEndpointSecret } from "@/utils/has-endpoint-secret";
+import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
-  const authHeader = request.headers.get("Authorization");
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  const isAuth = hasEndpointSecret(request);
+  if (!isAuth) {
     return new Response("Unauthorized", {
       status: 401,
     });
   }
 
-  const supabase = createServiceClient();
-
-  // get list of topics
-  const { data: topics, error } = await supabase
-    .from("topics")
-    .select("slug, query");
-
-  if (error || !topics) {
-    return new Response("Error retrieving topics", {
-      status: 500,
-    });
-  }
-
-  // get articles from NewsAPI
   try {
+    // get list of topics
+    const topics = await getTopics();
+
+    // get articles from NewsAPI
     for (let topic of topics) {
       const sources = await makeSourceBatches();
       let results = [];
       for (let batch of sources) {
+        console.log(
+          `requesting '${topic.query}' news from ${batch.join(", ")}`
+        );
         const data = await fetchNews(topic.query!, batch);
 
         // sample recent results: x per source per topic
@@ -56,22 +52,7 @@ export async function GET(request: Request) {
       // save to Supabase
       if (results.length) {
         try {
-          const { data: articles, error: articlesError } = await supabase
-            .from("articles")
-            .upsert(results)
-            .select("url");
-
-          if (articlesError) throw new Error(articlesError.message);
-
-          if (articles?.length) {
-            const { error } = await supabase
-              .from("article_topics")
-              .insert(
-                articles.map((a) => ({ article: a.url, topic: topic.slug }))
-              );
-
-            if (error) throw new Error(`${error.message}, ${error.details}`);
-          }
+          await upsertArticles(results, topic.slug);
         } catch (e) {
           console.log(e);
           return new Response("Error saving news articles", {
@@ -85,6 +66,9 @@ export async function GET(request: Request) {
       status: 500,
     });
   }
+
+  revalidatePath("/");
+  revalidatePath("/topics/[slug]", "page");
 
   return new Response("Success!", {
     status: 200,

@@ -1,26 +1,20 @@
-import { getAnalysisFromAnthropic } from "@/utils/anthropic-ai/anthropic";
-import { getAnalysisFromOpenAI } from "@/utils/openai/openai";
-import { createServiceClient } from "@/utils/supabase/server";
+import { getAnalysisFromAnthropic } from "@/lib/anthropic-ai/anthropic";
+import { getAnalysisFromOpenAI } from "@/lib/openai/openai";
+import { getNewArticles } from "@/lib/supabase/get-new-articles";
+import { insertAnalysis } from "@/lib/supabase/insert-analysis";
+import { hasEndpointSecret } from "@/utils/has-endpoint-secret";
+import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
-  const authHeader = request.headers.get("Authorization");
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  const isAuth = hasEndpointSecret(request);
+  if (!isAuth) {
     return new Response("Unauthorized", {
       status: 401,
     });
   }
 
-  const supabase = createServiceClient();
-
   try {
-    const { data: articles, error: articleError } = await supabase
-      .from("articles")
-      .select("url,title,description,analysis(id)");
-
-    if (articleError)
-      throw new Error(`Error retrieving articles: ${articleError.message}`);
-
-    const articlesToAnalyze = articles?.filter((a) => a.analysis.length < 1);
+    const articlesToAnalyze = await getNewArticles();
 
     const analyses = await Promise.all(
       articlesToAnalyze.map(async (article) => {
@@ -42,18 +36,15 @@ export async function GET(request: Request) {
       })
     );
 
-    const { error: saveError } = await supabase
-      .from("analysis")
-      .insert(analyses);
-
-    if (saveError)
-      throw new Error(`Error saving analyses: ${saveError.message}`);
+    await insertAnalysis(analyses);
   } catch (e) {
     console.log(e);
     return new Response("Error", {
       status: 500,
     });
   }
+
+  revalidatePath("/topics/[slug]", "page");
 
   return new Response("Success", {
     status: 200,
