@@ -12,6 +12,7 @@
     "@anthropic-ai/sdk": "^0.20.7",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-slot": "^1.0.2",
+    "@supabase/ssr": "^0.3.0",
     "@supabase/supabase-js": "^2.42.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

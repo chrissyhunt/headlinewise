@@ -16,6 +16,11 @@ export default function Footer() {
         </Link>
       </p>
       <ul className="flex space-x-4">
+        <li>
+          <Link href="/login" className={buttonVariants({ variant: "link" })}>
+            Admin
+          </Link>
+        </li>
         {menuLinks.map((link) => (
           <li key={link.href}>
             <Link
