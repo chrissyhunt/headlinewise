@@ -37,7 +37,7 @@ export const menuLinks: MenuLink[] = [
 
 export default function Navbar() {
   return (
-    <header className="flex justify-between align-center p-8 w-full fixed backdrop-blur-xl supports-backdrop-blur:bg-fuchsia-200/90 border-b-[1px] border-b-fuchsia-50">
+    <header className="flex justify-between align-center p-8 w-full fixed backdrop-blur-xl -supports-backdrop-blur:bg-fuchsia-200/90 border-b-[1px] border-b-fuchsia-50">
       <h1 className="text-xl self-center">🦉 HeadlineWise</h1>
       <nav className="hidden sm:flex">
         <ul className="flex justify-end align-center space-x-4">

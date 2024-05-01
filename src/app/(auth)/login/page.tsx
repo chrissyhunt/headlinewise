@@ -33,7 +33,7 @@ export default function LoginPage({
                   name="email"
                   type="email"
                   required
-                  className="bg-transparent border-fuchsia-200 focus-visible:ring-violet-700"
+                  className="bg-transparent border-violet-200 focus-visible:ring-violet-700"
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
@@ -43,7 +43,7 @@ export default function LoginPage({
                   name="password"
                   type="password"
                   required
-                  className="bg-transparent border-fuchsia-200 focus-visible:ring-violet-700"
+                  className="bg-transparent border-violet-200 focus-visible:ring-violet-700"
                 />
               </div>
               {error && (
