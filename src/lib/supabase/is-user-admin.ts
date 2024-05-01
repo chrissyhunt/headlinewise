@@ -6,6 +6,9 @@ export const isUserAdmin = async () => {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  if (!user) return false;
+
   const { data: userProfile } = await supabase
     .from("profiles")
     .select("role")
