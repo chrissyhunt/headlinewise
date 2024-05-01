@@ -12,6 +12,7 @@ export type Database = {
       analysis: {
         Row: {
           analysis: string | null;
+          approved: boolean | null;
           article: string | null;
           created_at: string;
           id: string;
@@ -21,6 +22,7 @@ export type Database = {
         };
         Insert: {
           analysis?: string | null;
+          approved?: boolean | null;
           article?: string | null;
           created_at?: string;
           id?: string;
@@ -30,6 +32,7 @@ export type Database = {
         };
         Update: {
           analysis?: string | null;
+          approved?: boolean | null;
           article?: string | null;
           created_at?: string;
           id?: string;
@@ -126,6 +129,35 @@ export type Database = {
             columns: ["source"];
             isOneToOne: false;
             referencedRelation: "sources";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+      profiles: {
+        Row: {
+          created_at: string;
+          id: string;
+          role: string | null;
+          username: string | null;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          role?: string | null;
+          username?: string | null;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          role?: string | null;
+          username?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "users";
             referencedColumns: ["id"];
           }
         ];
