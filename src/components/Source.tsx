@@ -17,7 +17,7 @@ export default function Source({ url, name }: SourceProps) {
         onClick={() => setShowSource(true)}
         className={`${buttonVariants({ variant: "default", size: "lg" })} mt-8`}
       >
-        Reveal Source 👀
+        Reveal News Source 👀
       </Button>
     );
   }

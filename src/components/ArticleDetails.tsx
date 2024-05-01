@@ -58,6 +58,15 @@ export default async function ArticleDetails({ url }: { url: string }) {
         </p>
       </div>
 
+      <div className="mt-4 mb-8 text-xs space-x-2 italic">
+        <span>
+          Analysis by&nbsp;
+          <span className="font-mono not-italic bg-fuchsia-100 px-2 py-1 rounded-md">
+            🤖 {analysis?.model}
+          </span>
+        </span>
+      </div>
+
       {/* TODO: remove when supabase fixes complex query type generation */}
       {/* https://github.com/supabase/postgrest-js/issues/303 */}
       {/* @ts-ignore */}
