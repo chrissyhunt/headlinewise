@@ -10,7 +10,7 @@ export const getArticlesForTopic = async (topicSlug: string) => {
       `
       slug,
       query,
-      articles ( url, title, description, published_at, analysis (id) )
+      articles ( url, title, description, published_at, analysis (id, approved) )
     `
     )
     .eq("slug", topicSlug)

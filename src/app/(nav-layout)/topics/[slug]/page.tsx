@@ -1,14 +1,14 @@
-import HeadlineCard from "@/components/HeadlineCard";
+import BackButton from "@/components/BackButton";
+import HeaderSection from "@/components/HeaderSection";
+import { getArticlesForTopic } from "@/lib/supabase/get-articles-for-topic";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import HeadlineCard from "@/components/HeadlineCard";
 import ArticleDetails from "@/components/ArticleDetails";
-import BackButton from "@/components/BackButton";
-import HeaderSection from "@/components/HeaderSection";
-import { getArticlesForTopic } from "@/lib/supabase/get-articles-for-topic";
 
 export default async function TopicPage({
   params,
@@ -27,11 +27,15 @@ export default async function TopicPage({
       </HeaderSection>
       <section className="py-12">
         <h2 className="text-xl mb-16 mx-8">Recent Headlines</h2>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 grid-rows-fr">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 grid-rows-fr">
           {articles?.map((a) => (
             <Sheet key={a.url}>
               <SheetTrigger>
-                <HeadlineCard title={a.title!} date={a.published_at!} />
+                <HeadlineCard
+                  title={a.title!}
+                  date={a.published_at!}
+                  approved={a.analysis[0].approved ?? false}
+                />
               </SheetTrigger>
               <SheetContent className="w-screen max-w-screen sm:w-3/4 sm:max-w-3/4 lg:w-2/3 lg:max-w-2/3 bg-fuchsia-50 overflow-y-scroll">
                 <SheetDescription>
@@ -40,7 +44,7 @@ export default async function TopicPage({
               </SheetContent>
             </Sheet>
           ))}
-        </ul>
+        </div>
       </section>
     </>
   );
