@@ -1,14 +1,12 @@
-import HeaderSection from "@/components/HeaderSection";
+"use client";
+import AboutContent from "@/content/about.mdx";
 
 export default function About() {
   return (
-    <>
-      <HeaderSection>
-        <h1 className="mt-20 font-serif text-6xl tracking-tighter">About</h1>
-      </HeaderSection>
-      <section className="py-12 px-8">
-        <p>Coming soon!</p>
-      </section>
-    </>
+    <div className="mt-36 md:mt-48 mb-24 px-8 flex justify-center">
+      <article className="prose prose-md md:prose-xl prose-gray prose-headings:font-serif prose-headings:font-normal prose-li:marker:text-inherit">
+        <AboutContent />
+      </article>
+    </div>
   );
 }
