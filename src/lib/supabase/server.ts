@@ -3,7 +3,7 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { Database } from "@/database.types";
 
-// only for server-side use to retrieve content
+// only for server-side use to retrieve content and automated processes
 // TODO: replace with recommended Supabase client code
 // once auth is introduced - see https://supabase.com/docs/guides/getting-started/tutorials/with-nextjs
 export function createServiceClient() {

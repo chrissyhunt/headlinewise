@@ -1,25 +1,13 @@
-import { createServiceClient } from "@/lib/supabase/server";
 import Badge from "@/components/Badge";
 import DisplayLabel from "@/components/DisplayLabel";
 import Source from "@/components/Source";
+import { getArticleDetails } from "@/lib/supabase/get-article-details";
+import { ArticleApprovalStatus } from "./ArticleApprovalStatus";
+import { isUserAdmin } from "@/lib/supabase/is-user-admin";
 
 export default async function ArticleDetails({ url }: { url: string }) {
-  const supabase = createServiceClient();
-
-  const { data: article, error } = await supabase
-    .from("articles")
-    .select(
-      `
-      title,
-      description,
-      published_at,
-      url,
-      source ( id, name ),
-      analysis ( id, language, political_bias, analysis, model )  
-    `
-    )
-    .eq("url", url)
-    .maybeSingle();
+  const isAdmin = await isUserAdmin();
+  const article = await getArticleDetails(url);
 
   if (!article) return null;
 
@@ -65,6 +53,12 @@ export default async function ArticleDetails({ url }: { url: string }) {
             🤖 {analysis?.model}
           </span>
         </span>
+        <span>&middot;</span>
+        <ArticleApprovalStatus
+          approved={analysis?.approved}
+          analysisId={analysis?.id}
+          isAdmin={isAdmin}
+        />
       </div>
 
       {/* TODO: remove when supabase fixes complex query type generation */}
