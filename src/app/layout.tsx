@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Libre_Baskerville, Lato } from "next/font/google";
 import "./globals.css";
+import { AnalyticsScript } from "@/components/AnalyticsScript";
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <AnalyticsScript />
       <body
         className={`${libreBaskerville.variable} ${lato.variable} bg-gradient-to-r from-fuchsia-200 to-cyan-100 font-sans flex flex-col min-h-screen`}
       >
