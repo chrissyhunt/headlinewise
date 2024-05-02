@@ -25,7 +25,7 @@ export const ModelHoverCard = ({ model }: { model: string }) => {
           className={`${buttonVariants({
             variant: "link",
             size: "sm",
-          })} text-xs px-0`}
+          })} text-xs !px-0`}
           href="/about"
         >
           Read more &rarr;
