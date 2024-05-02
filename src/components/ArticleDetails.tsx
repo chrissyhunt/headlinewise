@@ -4,6 +4,7 @@ import Source from "@/components/Source";
 import { getArticleDetails } from "@/lib/supabase/get-article-details";
 import { ArticleApprovalStatus } from "./ArticleApprovalStatus";
 import { isUserAdmin } from "@/lib/supabase/is-user-admin";
+import { ModelHoverCard } from "@/components/ModelHoverCard";
 
 export default async function ArticleDetails({ url }: { url: string }) {
   const isAdmin = await isUserAdmin();
@@ -49,9 +50,7 @@ export default async function ArticleDetails({ url }: { url: string }) {
       <div className="mt-4 mb-8 text-xs space-x-2 italic">
         <span>
           Analysis by&nbsp;
-          <span className="font-mono not-italic bg-fuchsia-100 px-2 py-1 rounded-md">
-            🤖 {analysis?.model}
-          </span>
+          <ModelHoverCard model={analysis?.model!} />
         </span>
         <span>&middot;</span>
         <ArticleApprovalStatus
