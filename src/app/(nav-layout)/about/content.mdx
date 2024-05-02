@@ -1,0 +1,48 @@
+# About
+
+HeadlineWise is a media literacy training tool built with [Next.js](https://nextjs.org/) and [Supabase](https://supabase.com/). It retrieves headlines from the [News API](https://newsapi.org/), and uses [Anthropic's Claude AI](https://www.anthropic.com/) and [OpenAI](https://openai.com/) for headline analysis. It was designed and developed by [Chrissy Hunt](https://chrissyhunt.com).
+
+## Project History
+
+The kernel of the idea for _HeadlineWise_ began in 2018 in my Flatiron School capstone project, an app called _Map the News_. (This project is no longer online, but a blog post outlining the development process [is here](https://chrissyhunt.com/blog/map-the-news).) I became very interested in the siloing of media consumption during the 2016 election in the U.S., and _Map the News_ was an attempt to bring projects like the viral [Media Bias Chart](https://www.adfontesmedia.com/) to life. The goal was to allow a user see at a glance the whole landscape of media coverage about a subject, to break out of their usual “bubble” to compare multiple viewpoints.
+
+Back in 2018, I was already thinking about how to take this project further. What about understanding the headlines themselves? Headlines are our first (and sometimes, I fear, our _only_) point of engagement with more complex news coverage via social media. We also know that social media algorithms favor content predicted to spark higher levels of engagement, and that we tend to react more strongly to content that sparks a negative reaction.
+
+So how do we guard against manipulation? How could technology help make visible the way headlines and clickbait titles are crafted to provoke and engage us?
+
+In 2018 I didn’t have the tools to delve too deeply into these questions, but with the rapid advancement of LLMs and generative AI in 2023-24, it seemed like a good time to experiment!
+
+## Project Goals
+
+_HeadlineWise_ aims to help readers build critical thinking skills around headlines and short pieces of content.
+
+Using LLMs trained on a vast range of human writing, _HeadlineWise_ analyzes the language of headlines to try to illustrate exactly how language choice can affect the way we respond to information. If we can learn to recognize language that is subjective and inflammatory or meant to provoke an emotional response, then perhaps we can be more conscious of how our attention is being engaged and used.
+
+## How It Works
+
+Each night, _HeadlineWise_ retrieves recent news articles from the News API. We search for the most relevant articles about a select list of topics from a curated list of sources. (Topics and sources are chosen to try to elicit a wide range of perspectives and coverage styles about contentious issues.)
+
+Each headline is then sent to an AI model for analysis. Currently _HeadlineWise_ uses models by Anthropic and OpenAI, but may expand to others in the future.
+
+When visiting _HeadlineWise_, users review the headline and the results of the analysis first before choosing to reveal the news source and visit the article in full. For transparency, users also see which AI model generated the analysis, and whether the model-generated analysis has been human-reviewed and approved (by just me right now 👋, checking for generally cogent and reasonable critical conclusions about the language used) or rejected (for obvious nonsense violating the common sense of a reasonably well-educated and thoughtful non-expert 🫡).
+
+In the future, I hope to make the experience more interactive and game-like, collecting users’ reactions to the headlines before they view the generated analysis to compare results.
+
+## Caveats & Limitations
+
+A couple of important notes about this project:
+
+- The current state of generative AI is not entirely to be trusted. LLMs aren’t knowledgeable or wise; they’re just trying to provide a statistically likely answer to a question based on training data. Sometimes their answers go wrong in unpredictable ways, but I’m trying to build in some human guardrails with the review process described above, and I hope to improve results over time.
+- I’m not an expert in the fields of journalism, media criticism, or psychology; I’m just an avid news reader with two liberal arts degrees and (I think) fairly well-developed critical thinking skills. Take my judgments with a grain of salt! 😊 **If you _are_ an expert in these areas, I would love to collaborate!** (See “How to Help” below.)
+
+## How to Help
+
+I’m looking for help in a few areas as this project continues:
+
+- Designers, especially with instructional game experience, to bring the fun and help make the experience more interactive and effective
+- Journalists, media critics, psychologists, and other domain experts to critique the concept, contribute to future features, and participate in AI analysis review
+- Anyone else who’d like to buy me a coffee to help cover project costs (particularly database storage and API costs) so that this project can continue longer term
+
+Please don’t hesitate to reach out if you’re interested in collaborating!
+
+## More Resources
