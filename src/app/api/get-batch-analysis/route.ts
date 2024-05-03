@@ -1,8 +1,9 @@
-import { getAnalysisFromAnthropic } from "@/lib/anthropic-ai/anthropic";
-import { getAnalysisFromOpenAI } from "@/lib/openai/openai";
+import { getBatchAnalysisFromAnthropic } from "@/lib/anthropic-ai/anthropic";
+import { getBatchAnalysisFromOpenAI } from "@/lib/openai/openai";
 import { getNewArticles } from "@/lib/supabase/get-new-articles";
 import { insertAnalysis } from "@/lib/supabase/insert-analysis";
 import { hasEndpointSecret } from "@/utils/has-endpoint-secret";
+import { makePromptBatches } from "@/utils/make-prompt-batches";
 import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
@@ -15,28 +16,33 @@ export async function GET(request: Request) {
 
   try {
     const articlesToAnalyze = await getNewArticles();
+    const promptBatches = makePromptBatches(articlesToAnalyze);
 
     const analyses = await Promise.all(
-      articlesToAnalyze.map(async (article) => {
-        let analysis;
+      promptBatches.map(async (batch) => {
+        let responses = [];
+        const batchText = batch.map((b) => b.prompt);
         try {
-          analysis = await getAnalysisFromAnthropic(article?.title!);
+          responses = await getBatchAnalysisFromAnthropic(batchText);
         } catch (e) {
-          analysis = await getAnalysisFromOpenAI(article?.title!);
+          responses = await getBatchAnalysisFromOpenAI(batchText);
         }
-        return {
-          language: Array.isArray(analysis.language)
-            ? analysis.language?.join(",")
-            : analysis.language.toString(),
-          political_bias: analysis.political_bias,
-          analysis: analysis.analysis,
-          model: analysis.model,
-          article: article.url,
-        };
+
+        return responses.map((response: any, index: number) => ({
+          language: Array.isArray(response.language)
+            ? response.language?.join(",")
+            : response.language.toString(),
+          political_bias: response.political_bias,
+          analysis: response.analysis,
+          model: response.model,
+          article: batch[index].url,
+        }));
       })
     );
 
-    await insertAnalysis(analyses);
+    const analysesFlat = analyses.flat();
+
+    await insertAnalysis(analysesFlat);
   } catch (e) {
     console.log(e);
     return new Response("Error", {

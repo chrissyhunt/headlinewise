@@ -6,9 +6,11 @@ export const openai = new OpenAI({
   apiKey: process.env.OPENAI_KEY!,
 });
 
+const model = "gpt-3.5-turbo";
+
 export const getAnalysisFromOpenAI = async (headline: string) => {
   const completion = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
+    model,
     messages: [
       {
         role: "system",
@@ -24,5 +26,27 @@ export const getAnalysisFromOpenAI = async (headline: string) => {
   });
   const response = await JSON.parse(completion.choices[0]?.message?.content!);
   response.model = "gpt-3.5-turbo";
+  return response;
+};
+
+export const getBatchAnalysisFromOpenAI = async (headlineBatch: string[]) => {
+  const completion = await openai.chat.completions.create({
+    model,
+    max_tokens: 2000,
+    temperature: 1,
+    stream: false,
+    messages: [
+      {
+        role: "system",
+        content: process.env.BATCH_SYSTEM_PROMPT!,
+      },
+      {
+        role: "user",
+        content: JSON.stringify(headlineBatch),
+      },
+    ],
+  });
+  const response = await JSON.parse(completion.choices[0]?.message?.content!);
+  response.model = model;
   return response;
 };
