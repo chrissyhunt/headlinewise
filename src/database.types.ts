@@ -133,6 +133,24 @@ export type Database = {
           }
         ];
       };
+      logs: {
+        Row: {
+          created_at: string;
+          details: Json | null;
+          id: number;
+        };
+        Insert: {
+          created_at?: string;
+          details?: Json | null;
+          id?: number;
+        };
+        Update: {
+          created_at?: string;
+          details?: Json | null;
+          id?: number;
+        };
+        Relationships: [];
+      };
       profiles: {
         Row: {
           created_at: string;

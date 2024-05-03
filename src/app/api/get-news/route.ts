@@ -5,6 +5,7 @@ import { upsertArticles } from "@/lib/supabase/upsert-articles";
 import { hasEndpointSecret } from "@/utils/has-endpoint-secret";
 import { revalidatePath } from "next/cache";
 import { GET as getBatchAnalysis } from "@/app/api/get-batch-analysis/route";
+import { insertLog } from "@/lib/supabase/insert-log";
 
 export const revalidate = 0;
 
@@ -56,8 +57,18 @@ export async function GET(request: Request) {
       if (results.length) {
         try {
           await upsertArticles(results, topic.slug);
+          await insertLog({
+            type: "success",
+            from: "get-news",
+            message: `Saved ${results.length} articles`,
+          });
         } catch (e) {
           console.log(e);
+          await insertLog({
+            type: "error",
+            from: "get-news",
+            message: JSON.stringify(e),
+          });
           return new Response("Error saving news articles", {
             status: 500,
           });
