@@ -6,6 +6,8 @@ import { hasEndpointSecret } from "@/utils/has-endpoint-secret";
 import { makePromptBatches } from "@/utils/make-prompt-batches";
 import { revalidatePath } from "next/cache";
 
+export const revalidate = 0;
+
 export async function GET(request: Request) {
   const isAuth = hasEndpointSecret(request);
   if (!isAuth) {

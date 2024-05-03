@@ -4,6 +4,9 @@ import { getTopics } from "@/lib/supabase/get-topics";
 import { upsertArticles } from "@/lib/supabase/upsert-articles";
 import { hasEndpointSecret } from "@/utils/has-endpoint-secret";
 import { revalidatePath } from "next/cache";
+import { GET as getBatchAnalysis } from "@/app/api/get-batch-analysis/route";
+
+export const revalidate = 0;
 
 export async function GET(request: Request) {
   const isAuth = hasEndpointSecret(request);
@@ -67,8 +70,16 @@ export async function GET(request: Request) {
     });
   }
 
-  revalidatePath("/");
-  revalidatePath("/topics/[slug]", "page");
+  try {
+    const res = await getBatchAnalysis(request);
+    if (res.status !== 200) throw new Error("Error getting batch analysis");
+    revalidatePath("/");
+    revalidatePath("/topics/[slug]", "page");
+  } catch (e) {
+    return new Response("Error getting batch analysis", {
+      status: 500,
+    });
+  }
 
   return new Response("Success!", {
     status: 200,

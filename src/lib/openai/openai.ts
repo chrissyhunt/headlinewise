@@ -25,7 +25,7 @@ export const getAnalysisFromOpenAI = async (headline: string) => {
     temperature: 1,
   });
   const response = await JSON.parse(completion.choices[0]?.message?.content!);
-  response.model = "gpt-3.5-turbo";
+  response.model = model;
   return response;
 };
 
@@ -47,6 +47,6 @@ export const getBatchAnalysisFromOpenAI = async (headlineBatch: string[]) => {
     ],
   });
   const response = await JSON.parse(completion.choices[0]?.message?.content!);
-  response.model = model;
-  return response;
+  const responseWithModel = response.map((r: any) => ({ ...r, model }));
+  return responseWithModel;
 };

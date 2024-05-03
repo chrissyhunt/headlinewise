@@ -50,6 +50,6 @@ export const getBatchAnalysisFromAnthropic = async (
     ],
   });
   const response = await JSON.parse(msg.content[0]?.text);
-  response.model = model;
-  return response;
+  const responseWithModel = response.map((r: any) => ({ ...r, model }));
+  return responseWithModel;
 };
