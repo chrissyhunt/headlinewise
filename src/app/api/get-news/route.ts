@@ -85,7 +85,7 @@ export async function GET(request: Request) {
     const res = await getBatchAnalysis(request);
     if (res.status !== 200) throw new Error("Error getting batch analysis");
     revalidatePath("/");
-    revalidatePath("/topics/[slug]", "page");
+    revalidatePath("/(nav-layout)/topics/[slug]", "page");
   } catch (e) {
     return new Response("Error getting batch analysis", {
       status: 500,
