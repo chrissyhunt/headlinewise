@@ -24,6 +24,10 @@ export const menuLinks: MenuLink[] = [
     href: "/about",
   },
   {
+    label: "Data",
+    href: "/data",
+  },
+  {
     label: "GitHub",
     href: "https://github.com/chrissyhunt/headlinewise",
     newTab: true,
