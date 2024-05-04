@@ -27,7 +27,7 @@ export const upsertArticles = async (
   if (data?.length) {
     const { error } = await supabase
       .from("article_topics")
-      .insert(
+      .upsert(
         data.map((article) => ({ article: article.url, topic: topicSlug }))
       );
 

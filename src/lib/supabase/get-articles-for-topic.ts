@@ -1,6 +1,6 @@
 import { createServiceClient } from "@/lib/supabase/server";
 
-const MAX_RECENT_ARTICLES = 18;
+const MAX_RECENT_ARTICLES = 24;
 
 export const getArticlesForTopic = async (topicSlug: string) => {
   const supabase = createServiceClient();
