@@ -32,7 +32,7 @@ export async function GET(request: Request) {
         const data = await fetchNews(topic.query!, batch);
 
         // sample recent results: x per source per topic
-        const MAX_PER_SOURCE = 1;
+        const MAX_PER_SOURCE = 2;
         const filteredArticles = limitSamplePerSource(
           data.articles,
           MAX_PER_SOURCE
