@@ -8,8 +8,10 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  Label,
 } from "recharts";
 import colors from "tailwindcss/colors";
+import { CustomToolTip } from "./CustomToolTip";
 
 interface ModelData {
   name: string;
@@ -23,21 +25,27 @@ export const ModelBarChart = ({ data }: { data: ModelData[] }) => {
     <ResponsiveContainer width="100%" aspect={1.5}>
       <RechartsBarChart
         data={data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
       >
         <XAxis
           dataKey="name"
-          label={{ value: "Models", position: "insideBottom" }}
+          axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
+          tickLine={false}
+          tick={{ fill: colors["black"], fontSize: "1rem" }}
         />
         <YAxis
-          label={{
-            value: "Analysis Count",
-            angle: -90,
-            position: "insideLeft",
-          }}
+          axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
+          tickLine={false}
+          tick={{ fill: colors["black"], fontSize: "1rem" }}
         />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
+        <CartesianGrid
+          strokeDasharray="4 4"
+          stroke={colors["fuchsia"]["400"]}
+        />
+        <Tooltip
+          cursor={{ fill: colors["fuchsia"]["100"] }}
+          content={<CustomToolTip />}
+        />
         <Legend />
         <Bar dataKey="approved" stackId="a" fill={colors["cyan"]?.["800"]} />
         <Bar dataKey="rejected" stackId="a" fill={colors["fuchsia"]?.["700"]} />

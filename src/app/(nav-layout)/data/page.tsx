@@ -3,16 +3,20 @@ import { getAnalysisData } from "@/lib/supabase/get-analysis-data";
 import { ModelBarChart } from "./ModelBarChart";
 import {
   attributesPerModel,
-  attributesPerSource,
+  attributesPerSourceModel,
 } from "@/utils/report-data-reducers";
+import { SourceLanguageBarChart } from "./SourceLanguageBarChart";
 
 export default async function DataPage() {
   const analyses = await getAnalysisData();
   const modelAttributes = analyses.reduce(attributesPerModel, {});
   const models = Object.keys(modelAttributes);
-  const sourceAttributes = analyses.reduce(attributesPerSource, {});
+  const sourceAttributes = analyses.reduce(attributesPerSourceModel, {});
+  const sources = Object.keys(sourceAttributes).sort((a, b) =>
+    a.localeCompare(b)
+  );
   // console.log(modelAttributes);
-  console.log(sourceAttributes);
+  // console.log(sourceAttributes);
   return (
     <div className="mt-36 md:mt-48 mb-24 px-8 flex justify-center">
       <section className="prose prose-md md:prose-xl prose-gray prose-headings:font-serif prose-headings:font-normal prose-li:marker:text-inherit">
@@ -36,6 +40,15 @@ export default async function DataPage() {
         </div>
 
         <h2>Analysis by Media Source</h2>
+        {sources.map((source) => (
+          <div key={source}>
+            <h3>{source}</h3>
+            <SourceLanguageBarChart
+              data={sourceAttributes[source]}
+              models={models}
+            />
+          </div>
+        ))}
       </section>
     </div>
   );
