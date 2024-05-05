@@ -4,6 +4,7 @@ import { ModelBarChart } from "./ModelBarChart";
 import {
   attributesPerModel,
   attributesPerSourceModel,
+  uniqueLanguageKeys,
 } from "@/utils/report-data-reducers";
 import { SourceLanguageBarChart } from "./SourceLanguageBarChart";
 
@@ -15,8 +16,15 @@ export default async function DataPage() {
   const sources = Object.keys(sourceAttributes).sort((a, b) =>
     a.localeCompare(b)
   );
+  const languageKeys = Array.from(
+    analyses.reduce(uniqueLanguageKeys, new Set())
+  ).sort((a, b) => a.localeCompare(b));
   // console.log(modelAttributes);
-  // console.log(sourceAttributes);
+  console.log(sourceAttributes);
+  // console.log("language keys: ", languageKeys);
+  const sourceMaxCount = Math.max(
+    ...sources.map((s) => sourceAttributes[s].count)
+  );
   return (
     <div className="mt-36 md:mt-48 mb-24 px-8 flex justify-center">
       <section className="prose prose-md md:prose-xl prose-gray prose-headings:font-serif prose-headings:font-normal prose-li:marker:text-inherit">
@@ -46,6 +54,8 @@ export default async function DataPage() {
             <SourceLanguageBarChart
               data={sourceAttributes[source]}
               models={models}
+              languageKeys={languageKeys}
+              max={sourceMaxCount}
             />
           </div>
         ))}

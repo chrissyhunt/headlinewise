@@ -25,16 +25,6 @@ interface SourceData {
   };
 }
 
-const getUniqueLanguageKeys = (data: SourceData, models: string[]) => {
-  const keys = new Set<string>();
-  models.forEach((model) => {
-    if (!data.language[model]) return;
-    Object.keys(data.language?.[model]).forEach((key) => keys.add(key));
-  });
-
-  return Array.from(keys);
-};
-
 const modelColors = [
   colors["cyan"]["600"],
   colors["fuchsia"]["600"],
@@ -44,12 +34,15 @@ const modelColors = [
 export const SourceLanguageBarChart = ({
   data,
   models,
+  languageKeys,
+  max,
 }: {
   data: SourceData;
   models: string[];
+  languageKeys: string[];
+  max: number;
 }) => {
-  const languageColNames = getUniqueLanguageKeys(data, models);
-  const chartData = languageColNames
+  const chartData = languageKeys
     .map((name) => {
       const bar = { name };
       models.forEach((model) => {
@@ -62,18 +55,22 @@ export const SourceLanguageBarChart = ({
     <ResponsiveContainer width="100%" aspect={2}>
       <RechartsBarChart
         data={chartData}
-        margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
+        margin={{ top: 5, right: 30, left: 30, bottom: 5 }}
       >
         <XAxis
           dataKey="name"
           axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
           tickLine={false}
-          tick={{ fill: colors["black"], fontSize: "1rem" }}
+          tick={{
+            fill: colors["black"],
+            fontSize: "0.75rem",
+          }}
         />
         <YAxis
           axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
           tickLine={false}
           tick={{ fill: colors["black"], fontSize: "1rem" }}
+          // domain={[0, max]}
         />
         <CartesianGrid
           strokeDasharray="4 4"

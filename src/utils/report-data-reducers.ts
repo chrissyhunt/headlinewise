@@ -68,6 +68,7 @@ interface SourceModelAttributes {
         [key: string]: number;
       };
     };
+    count: number;
   };
 }
 
@@ -80,6 +81,7 @@ export const attributesPerSourceModel = (
     acc[source] = {
       language: {},
       political_bias: {},
+      count: 0,
     };
   }
   if (!acc[source].language[curr.model as string]) {
@@ -103,5 +105,13 @@ export const attributesPerSourceModel = (
   }
   acc[source].political_bias[curr.model as string][political_bias] += 1;
 
+  acc[source].count += 1;
+
+  return acc;
+};
+
+export const uniqueLanguageKeys = (acc: Set<string>, curr: Analysis) => {
+  const language = curr.language?.split(",").map((l) => l.trim());
+  language?.forEach((l) => acc.add(l));
   return acc;
 };
