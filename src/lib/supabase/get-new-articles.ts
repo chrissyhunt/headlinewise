@@ -7,8 +7,6 @@ export const getNewArticles = async () => {
     .select("url,title,description,analysis(id)");
 
   if (error) throw new Error("Error getting articles", { cause: error });
-  const articlesWithoutAnalysis = data
-    ?.filter((a) => a.analysis.length < 1)
-    .slice(0, 60);
+  const articlesWithoutAnalysis = data?.filter((a) => a.analysis.length < 1);
   return articlesWithoutAnalysis;
 };
