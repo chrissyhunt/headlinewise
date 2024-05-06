@@ -56,7 +56,7 @@ export const attributesPerModel = (acc: Attributes, curr: Analysis) => {
   return acc;
 };
 
-interface SourceModelAttributes {
+export interface SourceModelAttributes {
   [source: string]: {
     language: {
       [model: string]: {

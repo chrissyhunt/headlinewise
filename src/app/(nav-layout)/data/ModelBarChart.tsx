@@ -22,7 +22,7 @@ interface ModelData {
 
 export const ModelBarChart = ({ data }: { data: ModelData[] }) => {
   return (
-    <ResponsiveContainer width="100%" aspect={1.5}>
+    <ResponsiveContainer width="100%" aspect={3}>
       <RechartsBarChart
         data={data}
         margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
