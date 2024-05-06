@@ -13,7 +13,7 @@ export default async function HeadlineCard({
   approved,
 }: HeadlineCardProps) {
   const isAdmin = await isUserAdmin();
-  const needsReview = isAdmin && !approved;
+  const needsReview = isAdmin && approved === null;
   return (
     <div className="h-full text-2xl text-left p-8 pb-16 border-b-4 border-b-transparent hover:bg-fuchsia-50 hover:border-b-4 hover:border-b-fuchsia-400 hover:shadow-sm">
       <span className="font-serif">{title}</span>

@@ -4,7 +4,7 @@ export type Analysis = Database["public"]["Tables"]["analysis"]["Row"] & {
   articles?: { source: string | null } | null;
 };
 
-export interface Attributes {
+export interface ModelAttributes {
   [model: string]: {
     language: {
       [key: string]: number;
@@ -18,7 +18,7 @@ export interface Attributes {
   };
 }
 
-export const attributesPerModel = (acc: Attributes, curr: Analysis) => {
+export const attributesPerModel = (acc: ModelAttributes, curr: Analysis) => {
   const model = curr.model as string;
   if (!acc[model]) {
     acc[model] = {
@@ -68,7 +68,6 @@ export interface SourceModelAttributes {
         [key: string]: number;
       };
     };
-    count: number;
   };
 }
 
@@ -81,7 +80,6 @@ export const attributesPerSourceModel = (
     acc[source] = {
       language: {},
       political_bias: {},
-      count: 0,
     };
   }
   if (!acc[source].language[curr.model as string]) {
@@ -104,8 +102,6 @@ export const attributesPerSourceModel = (
     acc[source].political_bias[curr.model as string][political_bias] = 0;
   }
   acc[source].political_bias[curr.model as string][political_bias] += 1;
-
-  acc[source].count += 1;
 
   return acc;
 };

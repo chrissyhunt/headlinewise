@@ -31,7 +31,8 @@ export const ModelBarChart = ({ data }: { data: ModelData[] }) => {
           dataKey="name"
           axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
           tickLine={false}
-          tick={{ fill: colors["black"], fontSize: "1rem" }}
+          tick={{ fill: colors["black"], fontSize: "1em" }}
+          height={40}
         />
         <YAxis
           axisLine={{ stroke: colors["fuchsia"]?.["400"] }}

@@ -13,21 +13,35 @@ import {
 import colors from "tailwindcss/colors";
 import { CustomToolTip } from "./CustomToolTip";
 import { SourceModelAttributes } from "@/utils/report-data-reducers";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { DataSelect } from "@/components/DataSelect";
 
 const modelColors = [
   colors["cyan"]["600"],
   colors["fuchsia"]["600"],
   colors["violet"]["600"],
 ];
+
+export const CustomizedAxisTick = ({ x, y, stroke, payload }: any) => {
+  const words = payload.value.split(" ");
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text
+        x={0}
+        y={0}
+        dy={0}
+        textAnchor="middle"
+        fill={colors["black"]}
+        fontSize="0.8em"
+      >
+        {words.map((word: string, i: number) => (
+          <tspan key={i} x={0} dy={16}>
+            {word}
+          </tspan>
+        ))}
+      </text>
+    </g>
+  );
+};
 
 export const SourceLanguageBarChart = ({
   data,
@@ -46,7 +60,7 @@ export const SourceLanguageBarChart = ({
 
   const chartData = languageKeys
     .map((name) => {
-      const bar = { name };
+      const bar: { name: string; [key: string]: string | number } = { name };
       models.forEach((model) => {
         bar[model] = data[selectedSource]?.language?.[model]?.[name] || 0;
       });
@@ -57,21 +71,12 @@ export const SourceLanguageBarChart = ({
   return (
     <>
       <div className="mb-14">
-        <Select onValueChange={(value) => setSelectedSource(value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select a news source" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>News Sources</SelectLabel>
-              {sources.map((source) => (
-                <SelectItem key={source} value={source}>
-                  {source}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <DataSelect
+          value={selectedSource}
+          setValue={(value) => setSelectedSource(value)}
+          options={sources.map((source) => ({ value: source, label: source }))}
+          placeholder="Select a media organization"
+        />
       </div>
       <ResponsiveContainer width="100%" aspect={3}>
         <RechartsBarChart
@@ -84,11 +89,9 @@ export const SourceLanguageBarChart = ({
             dataKey="name"
             axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
             tickLine={false}
-            tick={{
-              fill: colors["black"],
-              fontSize: "0.9rem",
-            }}
-            // padding={{ left: 40, right: 10 }}
+            height={80}
+            tick={<CustomizedAxisTick />}
+            interval={0}
           />
           <YAxis
             axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
@@ -99,7 +102,6 @@ export const SourceLanguageBarChart = ({
             }}
             domain={[0, max]}
             interval="preserveEnd"
-            // mirror
           />
           <CartesianGrid
             strokeDasharray="4 4"
