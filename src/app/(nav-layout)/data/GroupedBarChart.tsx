@@ -10,12 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { CustomToolTip } from "./CustomToolTip";
-
-const modelColors = [
-  colors["cyan"]["600"],
-  colors["fuchsia"]["600"],
-  colors["violet"]["600"],
-];
+import { chartColors, lineColor } from "./chart-colors";
 
 export const CustomizedAxisTick = ({ x, y, stroke, payload }: any) => {
   const words = payload.value.split(" ");
@@ -60,14 +55,14 @@ export const GroupedBarChart = ({
       >
         <XAxis
           dataKey="name"
-          axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
+          axisLine={{ stroke: lineColor }}
           tickLine={false}
           height={80}
           tick={<CustomizedAxisTick />}
           interval={0}
         />
         <YAxis
-          axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
+          axisLine={{ stroke: lineColor }}
           tickLine={false}
           tick={{
             fill: colors["black"],
@@ -77,17 +72,20 @@ export const GroupedBarChart = ({
           interval="preserveEnd"
           width={30}
         />
-        <CartesianGrid
-          strokeDasharray="4 4"
-          stroke={colors["fuchsia"]["400"]}
-        />
+        <CartesianGrid strokeDasharray="4 4" stroke={lineColor} />
         <Tooltip
-          cursor={{ fill: colors["fuchsia"]["100"] }}
-          content={<CustomToolTip />}
+          cursor={{ fill: colors["fuchsia"]["100"], opacity: "80%" }}
+          content={<CustomToolTip barLabel="Category" />}
         />
-        <Legend />
+        <Legend
+          formatter={(value: string) => (
+            <span className="text-black ml-1 mr-4">
+              {value.replace("_", " ")}
+            </span>
+          )}
+        />
         {bars.map((b, i) => (
-          <Bar key={b} dataKey={b} fill={modelColors[i]} />
+          <Bar key={b} dataKey={b} fill={chartColors[i]} />
         ))}
       </RechartsBarChart>
     </ResponsiveContainer>

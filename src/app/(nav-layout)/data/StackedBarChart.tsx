@@ -12,16 +12,11 @@ import {
 } from "recharts";
 import colors from "tailwindcss/colors";
 import { CustomToolTip } from "./CustomToolTip";
+import { chartColors } from "./chart-colors";
 
 interface StackedBarChartProps {
   data: { [key: string]: number | string }[];
 }
-
-const modelColors = [
-  colors["cyan"]["600"],
-  colors["fuchsia"]["600"],
-  colors["violet"]["600"],
-];
 
 export const StackedBarChart = ({ data }: StackedBarChartProps) => {
   return (
@@ -48,14 +43,20 @@ export const StackedBarChart = ({ data }: StackedBarChartProps) => {
           stroke={colors["fuchsia"]["400"]}
         />
         <Tooltip
-          cursor={{ fill: colors["fuchsia"]["100"] }}
-          content={<CustomToolTip />}
+          cursor={{ fill: colors["fuchsia"]["100"], opacity: "80%" }}
+          content={<CustomToolTip barLabel="Model" />}
         />
-        <Legend />
+        <Legend
+          formatter={(value: string) => (
+            <span className="text-black ml-1 mr-4">
+              {value.replace("_", " ")}
+            </span>
+          )}
+        />
         {Object.keys(data[0])
           .filter((i) => i !== "name")
           .map((key, i) => (
-            <Bar key={key} dataKey={key} stackId="a" fill={modelColors[i]} />
+            <Bar key={key} dataKey={key} stackId="a" fill={chartColors[i]} />
           ))}
       </RechartsBarChart>
     </ResponsiveContainer>
