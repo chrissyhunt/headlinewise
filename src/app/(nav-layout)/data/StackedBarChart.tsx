@@ -13,14 +13,17 @@ import {
 import colors from "tailwindcss/colors";
 import { CustomToolTip } from "./CustomToolTip";
 
-interface ModelData {
-  name: string;
-  approved: number;
-  rejected: number;
-  needs_review: number;
+interface StackedBarChartProps {
+  data: { [key: string]: number | string }[];
 }
 
-export const ModelBarChart = ({ data }: { data: ModelData[] }) => {
+const modelColors = [
+  colors["cyan"]["600"],
+  colors["fuchsia"]["600"],
+  colors["violet"]["600"],
+];
+
+export const StackedBarChart = ({ data }: StackedBarChartProps) => {
   return (
     <ResponsiveContainer width="100%" aspect={3}>
       <RechartsBarChart
@@ -48,13 +51,11 @@ export const ModelBarChart = ({ data }: { data: ModelData[] }) => {
           content={<CustomToolTip />}
         />
         <Legend />
-        <Bar dataKey="approved" stackId="a" fill={colors["cyan"]?.["800"]} />
-        <Bar dataKey="rejected" stackId="a" fill={colors["fuchsia"]?.["700"]} />
-        <Bar
-          dataKey="needs_review"
-          stackId="a"
-          fill={colors["violet"]?.["600"]}
-        />
+        {Object.keys(data[0])
+          .filter((i) => i !== "name")
+          .map((key, i) => (
+            <Bar key={key} dataKey={key} stackId="a" fill={modelColors[i]} />
+          ))}
       </RechartsBarChart>
     </ResponsiveContainer>
   );

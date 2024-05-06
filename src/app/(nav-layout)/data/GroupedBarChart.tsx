@@ -43,30 +43,30 @@ export const CustomizedAxisTick = ({ x, y, stroke, payload }: any) => {
   );
 };
 
-export const SourceLanguageBarChart = ({
+export const GroupedBarChart = ({
   data,
-  models,
+  attributeParentKey,
+  bars,
   sources,
-  languageKeys,
+  categories,
   max,
 }: {
   data: SourceModelAttributes;
-  models: string[];
+  attributeParentKey: string;
+  bars: string[];
   sources: string[];
-  languageKeys: string[];
+  categories: string[];
   max: number;
 }) => {
   const [selectedSource, setSelectedSource] = useState<string>(sources[0]);
 
-  const chartData = languageKeys
-    .map((name) => {
-      const bar: { name: string; [key: string]: string | number } = { name };
-      models.forEach((model) => {
-        bar[model] = data[selectedSource]?.language?.[model]?.[name] || 0;
-      });
-      return bar;
-    })
-    .sort((a, b) => a.name.localeCompare(b.name));
+  const chartData = categories.map((name) => {
+    const bar: { name: string; [key: string]: string | number } = { name };
+    bars.forEach((b) => {
+      bar[b] = data[selectedSource]?.[attributeParentKey]?.[b]?.[name] || 0;
+    });
+    return bar;
+  });
 
   return (
     <>
@@ -112,8 +112,8 @@ export const SourceLanguageBarChart = ({
             content={<CustomToolTip />}
           />
           <Legend />
-          {models.map((model, i) => (
-            <Bar key={model} dataKey={model} fill={modelColors[i]} />
+          {bars.map((b, i) => (
+            <Bar key={b} dataKey={b} fill={modelColors[i]} />
           ))}
         </RechartsBarChart>
       </ResponsiveContainer>

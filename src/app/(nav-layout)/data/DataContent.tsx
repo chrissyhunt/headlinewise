@@ -3,12 +3,12 @@ import DataIntro from "@/content/data-intro.mdx";
 import DataModels from "@/content/data-models.mdx";
 import DataLanguage from "@/content/data-language.mdx";
 import DataPolitics from "@/content/data-politics.mdx";
-import { ModelBarChart } from "./ModelBarChart";
+import { StackedBarChart } from "./StackedBarChart";
 import {
   ModelAttributes,
   SourceModelAttributes,
 } from "@/utils/report-data-reducers";
-import { SourceLanguageBarChart } from "./SourceLanguageBarChart";
+import { GroupedBarChart } from "./GroupedBarChart";
 
 interface DataContentProps {
   models: string[];
@@ -17,6 +17,8 @@ interface DataContentProps {
   sources: string[];
   languageKeys: string[];
   languageMaxCount: number;
+  politicsKeys: string[];
+  politicsMaxCount: number;
 }
 
 export const DataContent = ({
@@ -26,6 +28,8 @@ export const DataContent = ({
   sources,
   languageKeys,
   languageMaxCount,
+  politicsKeys,
+  politicsMaxCount,
 }: DataContentProps) => {
   const proseClasses =
     "prose prose-md md:prose-xl prose-gray prose-headings:font-serif prose-headings:font-normal prose-li:marker:text-inherit";
@@ -39,7 +43,7 @@ export const DataContent = ({
           <DataModels />
         </div>
         <div className="w-3/4">
-          <ModelBarChart
+          <StackedBarChart
             data={models.map((m) => ({
               name: m,
               approved: modelAttributes[m].approved,
@@ -54,11 +58,12 @@ export const DataContent = ({
           <DataLanguage />
         </div>
         <div className="w-3/4">
-          <SourceLanguageBarChart
+          <GroupedBarChart
             data={sourceAttributes}
-            models={models}
+            attributeParentKey="language"
+            bars={models}
             sources={sources}
-            languageKeys={languageKeys}
+            categories={languageKeys}
             max={languageMaxCount}
           />
         </div>
@@ -67,7 +72,16 @@ export const DataContent = ({
         <div className={proseClasses}>
           <DataPolitics />
         </div>
-        <div className="w-3/4"></div>
+        <div className="w-3/4">
+          <GroupedBarChart
+            data={sourceAttributes}
+            attributeParentKey="political_bias"
+            bars={models}
+            sources={sources}
+            categories={politicsKeys}
+            max={politicsMaxCount}
+          />
+        </div>
       </section>
     </div>
   );

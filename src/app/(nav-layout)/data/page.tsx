@@ -16,16 +16,35 @@ export default async function DataPage() {
   const languageKeys = Array.from(
     analyses.reduce(uniqueLanguageKeys, new Set())
   ).sort((a, b) => a.localeCompare(b));
+  const politicsKeys = [
+    "very left-leaning",
+    "slightly left-leaning",
+    "neutral",
+    "slightly right-leaning",
+    "very right-leaning",
+  ];
   const sources = Object.keys(sourceAttributes).sort((a, b) =>
     a.localeCompare(b)
   );
 
   const languageMaxCount = Math.max(
     ...sources
-      .map((s) => {
-        return models.map((m) => {
-          return languageKeys.map((l) => {
-            return sourceAttributes[s].language[m]?.[l] || 0;
+      .map((source) => {
+        return models.map((model) => {
+          return languageKeys.map((key) => {
+            return sourceAttributes[source].language[model]?.[key] || 0;
+          });
+        });
+      })
+      .flat(3)
+  );
+
+  const politicsMaxCount = Math.max(
+    ...sources
+      .map((source) => {
+        return models.map((model) => {
+          return politicsKeys.map((key) => {
+            return sourceAttributes[source].political_bias[model]?.[key] || 0;
           });
         });
       })
@@ -40,6 +59,8 @@ export default async function DataPage() {
       sources={sources}
       languageKeys={languageKeys}
       languageMaxCount={languageMaxCount}
+      politicsKeys={politicsKeys}
+      politicsMaxCount={politicsMaxCount}
     />
   );
 }
