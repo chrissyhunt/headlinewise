@@ -41,6 +41,7 @@ export const StackedBarChart = ({ data }: StackedBarChartProps) => {
           axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
           tickLine={false}
           tick={{ fill: colors["black"], fontSize: "1rem" }}
+          width={30}
         />
         <CartesianGrid
           strokeDasharray="4 4"

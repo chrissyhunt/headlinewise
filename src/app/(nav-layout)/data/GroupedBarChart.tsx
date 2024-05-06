@@ -75,6 +75,7 @@ export const GroupedBarChart = ({
           }}
           domain={[0, max]}
           interval="preserveEnd"
+          width={30}
         />
         <CartesianGrid
           strokeDasharray="4 4"

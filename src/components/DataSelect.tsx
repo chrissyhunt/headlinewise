@@ -22,7 +22,7 @@ export const DataSelect = ({
   placeholder,
 }: DataSelectProps) => {
   return (
-    <div className="flex items-center space-x-2 pl-[60px]">
+    <div className="flex items-center space-x-2">
       <Label className="whitespace-nowrap">News Source: </Label>
       <div className="min-w-[300px]">
         <Select onValueChange={(value) => setValue(value)} value={value}>
