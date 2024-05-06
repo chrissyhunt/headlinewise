@@ -58,12 +58,7 @@ export const attributesPerModel = (acc: ModelAttributes, curr: Analysis) => {
 
 export interface SourceModelAttributes {
   [source: string]: {
-    language: {
-      [model: string]: {
-        [key: string]: number;
-      };
-    };
-    political_bias: {
+    [attributeType: string]: {
       [model: string]: {
         [key: string]: number;
       };

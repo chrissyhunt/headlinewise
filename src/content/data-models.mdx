@@ -1,10 +1,10 @@
 ## Analysis Quality by Model
 
-_HeadlineWise_ sends headlines to several different generative models for analysis. The same system prompt is used across models. Each analysis has three parts: language categorization, political bias categorization, and a text analysis explaining how the model arrived at its conclusions, quoting directly from the analyzed text if possible.
+_HeadlineWise_ sends each headline to one of several different generative models for analysis. Models are prompted with identical instructions for the analysis. Each analysis has three parts: language categorization, political bias categorization, and a text analysis explaining how the model arrived at its conclusions, quoting directly from the analyzed headline if possible.
 
 A few notes about my analysis review process:
 
-- Reviews are conducted by me alone, so there's inherently some subjectivity to this process. I accept or reject the analysis as a whole.
-- I compare the generated analysis to the headline in the UI, blind to the news source.
-- I mark a generated analysis as **accepted** if it passes my common sense test: language and politics categories seem defensible and the logic in the analysis text is cogent and a reasonable interpretation of the text.
-- I mark an analysis as **rejected** if something seems obviously off: categorization is very obviously wrong or not explained in any way linked to the text.
+- Reviews are conducted by me alone, so there's inherently some subjectivity to this process. I accept or reject the analysis as a whole, and try to be consistent.
+- I compare the generated analysis to the headline in the UI, where only the headline itself and the analysis are displayed. The news source is hidden.
+- I mark a generated analysis as **accepted** if it passes my common sense test: language and politics categories seem defensible and the logic in the analysis text is cogent and a reasonable interpretation of the headline text.
+- I mark an analysis as **rejected** if something seems obviously off: categorization is very obviously wrong or the explanation does not seem connected to the text.

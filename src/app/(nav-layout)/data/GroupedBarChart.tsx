@@ -1,5 +1,4 @@
-"use client";
-import { useState } from "react";
+import colors from "tailwindcss/colors";
 import {
   BarChart as RechartsBarChart,
   Bar,
@@ -10,10 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import colors from "tailwindcss/colors";
 import { CustomToolTip } from "./CustomToolTip";
-import { SourceModelAttributes } from "@/utils/report-data-reducers";
-import { DataSelect } from "@/components/DataSelect";
 
 const modelColors = [
   colors["cyan"]["600"],
@@ -44,79 +40,55 @@ export const CustomizedAxisTick = ({ x, y, stroke, payload }: any) => {
 };
 
 export const GroupedBarChart = ({
-  data,
-  attributeParentKey,
+  chartData,
   bars,
-  sources,
-  categories,
   max,
+  selectedSource,
 }: {
-  data: SourceModelAttributes;
-  attributeParentKey: string;
+  chartData: { name: string; [key: string]: string | number }[];
   bars: string[];
-  sources: string[];
-  categories: string[];
   max: number;
+  selectedSource: string;
 }) => {
-  const [selectedSource, setSelectedSource] = useState<string>(sources[0]);
-
-  const chartData = categories.map((name) => {
-    const bar: { name: string; [key: string]: string | number } = { name };
-    bars.forEach((b) => {
-      bar[b] = data[selectedSource]?.[attributeParentKey]?.[b]?.[name] || 0;
-    });
-    return bar;
-  });
-
   return (
-    <>
-      <div className="mb-14">
-        <DataSelect
-          value={selectedSource}
-          setValue={(value) => setSelectedSource(value)}
-          options={sources.map((source) => ({ value: source, label: source }))}
-          placeholder="Select a media organization"
+    <ResponsiveContainer width="100%" aspect={3}>
+      <RechartsBarChart
+        data={chartData}
+        margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
+        key={selectedSource}
+        barGap={2}
+      >
+        <XAxis
+          dataKey="name"
+          axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
+          tickLine={false}
+          height={80}
+          tick={<CustomizedAxisTick />}
+          interval={0}
         />
-      </div>
-      <ResponsiveContainer width="100%" aspect={3}>
-        <RechartsBarChart
-          data={chartData}
-          margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
-          key={selectedSource}
-          barGap={2}
-        >
-          <XAxis
-            dataKey="name"
-            axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
-            tickLine={false}
-            height={80}
-            tick={<CustomizedAxisTick />}
-            interval={0}
-          />
-          <YAxis
-            axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
-            tickLine={false}
-            tick={{
-              fill: colors["black"],
-              fontSize: "1rem",
-            }}
-            domain={[0, max]}
-            interval="preserveEnd"
-          />
-          <CartesianGrid
-            strokeDasharray="4 4"
-            stroke={colors["fuchsia"]["400"]}
-          />
-          <Tooltip
-            cursor={{ fill: colors["fuchsia"]["100"] }}
-            content={<CustomToolTip />}
-          />
-          <Legend />
-          {bars.map((b, i) => (
-            <Bar key={b} dataKey={b} fill={modelColors[i]} />
-          ))}
-        </RechartsBarChart>
-      </ResponsiveContainer>
-    </>
+        <YAxis
+          axisLine={{ stroke: colors["fuchsia"]?.["400"] }}
+          tickLine={false}
+          tick={{
+            fill: colors["black"],
+            fontSize: "1rem",
+          }}
+          domain={[0, max]}
+          interval="preserveEnd"
+        />
+        <CartesianGrid
+          strokeDasharray="4 4"
+          stroke={colors["fuchsia"]["400"]}
+        />
+        <Tooltip
+          cursor={{ fill: colors["fuchsia"]["100"] }}
+          content={<CustomToolTip />}
+        />
+        <Legend />
+        {bars.map((b, i) => (
+          <Bar key={b} dataKey={b} fill={modelColors[i]} />
+        ))}
+      </RechartsBarChart>
+    </ResponsiveContainer>
   );
 };

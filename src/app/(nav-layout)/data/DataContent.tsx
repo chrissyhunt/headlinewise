@@ -8,7 +8,8 @@ import {
   ModelAttributes,
   SourceModelAttributes,
 } from "@/utils/report-data-reducers";
-import { GroupedBarChart } from "./GroupedBarChart";
+import { GroupedBarChartWidget } from "./GroupedBarChartWidget";
+import { DataTable } from "./DataTable";
 
 interface DataContentProps {
   models: string[];
@@ -38,7 +39,7 @@ export const DataContent = ({
       <section className={`${proseClasses}`}>
         <DataIntro />
       </section>
-      <section className="w-full flex flex-col items-center space-y-8">
+      <section className="w-full flex flex-col items-center space-y-12">
         <div className={proseClasses}>
           <DataModels />
         </div>
@@ -51,14 +52,28 @@ export const DataContent = ({
               needs_review: modelAttributes[m].needs_review,
             }))}
           />
+          <DataTable
+            rows={models.map((m) => ({
+              name: m,
+              approved: modelAttributes[m].approved,
+              rejected: modelAttributes[m].rejected,
+              needs_review: modelAttributes[m].needs_review,
+            }))}
+            cols={[
+              { key: "name", label: "Model" },
+              { key: "approved", label: "Approved" },
+              { key: "rejected", label: "Rejected" },
+              { key: "needs_review", label: "Needs Review" },
+            ]}
+          />
         </div>
       </section>
-      <section className="w-full flex flex-col items-center space-y-8">
+      <section className="w-full flex flex-col items-center space-y-12">
         <div className={proseClasses}>
           <DataLanguage />
         </div>
         <div className="w-3/4">
-          <GroupedBarChart
+          <GroupedBarChartWidget
             data={sourceAttributes}
             attributeParentKey="language"
             bars={models}
@@ -68,12 +83,12 @@ export const DataContent = ({
           />
         </div>
       </section>
-      <section className="w-full flex flex-col items-center space-y-8">
+      <section className="w-full flex flex-col items-center space-y-12">
         <div className={proseClasses}>
           <DataPolitics />
         </div>
         <div className="w-3/4">
-          <GroupedBarChart
+          <GroupedBarChartWidget
             data={sourceAttributes}
             attributeParentKey="political_bias"
             bars={models}
