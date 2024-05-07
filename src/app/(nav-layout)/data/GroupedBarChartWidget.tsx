@@ -34,8 +34,8 @@ export const GroupedBarChartWidget = ({
 
   return (
     <>
-      <div className="mb-8 flex justify-between align-center space-x-4">
-        <div className="flex-0">
+      <div className="mb-8 flex flex-col sm:flex-row sm:justify-between items-center sm:space-x-4">
+        <div className="flex-0 mb-6 sm:mb-0">
           <DataSelect
             value={selectedSource}
             setValue={(value) => setSelectedSource(value)}

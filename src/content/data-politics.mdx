@@ -2,6 +2,11 @@
 
 As part of each analysis, the model is instructed to classify the perspective of the headline writer along the following scale: "very right-leaning, slightly right-leaning, neutral, slightly left-leaning, very left-leaning (in the context of American politics)."
 
-In my observation, this category tends to be the most inconsistent part of the analysis, particularly for the `claude-sonnet` and `gpt-3.5-turbo` models, and especially when the headline comments on or frames a quote by a political actor, or (to me) seems to be phrased sarcastically or insincerely.
+In my review, this category is often the area of the analysis I'm most inclined to disagree with, but I've made a rule to accept the categorization if it seems like a reasonable interpretation of the text (even if other interpretations are possible). The issue seems to arise particularly when the headline comments on or frames a quote by a political actor, or (to me) seems to be phrased sarcastically or insincerely, or focuses coverage on something I believe to be a politically-charged pet issue that's statistically uncommon.
 
-Another complication I've observed is that certain news organizations sometimes include their name in the text of the headline. Although the system prompt instructs the model to ignore names of publications or media outlets when generating analysis, the models seem to ignore this instruction, at least some of the time. I've specifically observed a few cases where the model explicitly bases their political classification on this reference, for example: a headline that included "Breitbart" was classified as right-leaning because Breitbart "is a right-leaning" organization, and a headline that included "CNN" was classified as slightly left-leaning because CNN "is a slightly left-leaning" organization.
+One complication I've observed is that certain news organizations sometimes include their name in the text of the headline. Although the system prompt instructs the model to ignore names of publications or media outlets when generating analysis, the models seem to ignore this instruction, at least some of the time. I've specifically observed a few cases where the model explicitly bases their political classification on this reference, for example:
+
+- Several headlines that included "Breitbart" or even the truncated "Breit..." were classified as right-leaning because Breitbart "is known to be a conservative organization"
+- A headline that included "CNN" was classified as slightly left-leaning because CNN "is a slightly left-leaning" organization
+
+In the future I may introduce some text filtering to try to mitigate against this bias and see if the results change, but for now all headlines are sent for analysis as published.

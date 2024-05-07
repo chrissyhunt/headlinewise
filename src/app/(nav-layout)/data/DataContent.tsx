@@ -3,14 +3,22 @@ import DataIntro from "@/content/data-intro.mdx";
 import DataModels from "@/content/data-models.mdx";
 import DataLanguage from "@/content/data-language.mdx";
 import DataPolitics from "@/content/data-politics.mdx";
-import { StackedBarChart } from "./StackedBarChart";
 import {
   ModelAttributes,
   SourceModelAttributes,
 } from "@/utils/report-data-reducers";
 import { GroupedBarChartWidget } from "./GroupedBarChartWidget";
-import { DataTable } from "./DataTable";
 import { StackedBarChartWidget } from "./StackedBarChartWidget";
+
+const Section = ({ children }: { children: React.ReactNode }) => (
+  <section className="w-full flex flex-col items-center space-y-12">
+    {children}
+  </section>
+);
+
+const DataArea = ({ children }: { children: React.ReactNode }) => (
+  <div className="w-full md:w-3/4">{children}</div>
+);
 
 interface DataContentProps {
   models: string[];
@@ -36,26 +44,26 @@ export const DataContent = ({
   const proseClasses =
     "prose prose-md md:prose-xl prose-gray prose-headings:font-serif prose-headings:font-normal prose-li:marker:text-inherit";
   return (
-    <div className="mt-36 md:mt-48 mb-24 px-8 space-y-24 flex flex-col items-center w-full">
+    <div className="mt-36 md:mt-48 mb-24 px-8 space-y-14 md:space-y-24 flex flex-col items-center w-full">
       <section className={`${proseClasses}`}>
         <DataIntro />
       </section>
-      <section className="w-full flex flex-col items-center space-y-12">
+      <Section>
         <div className={proseClasses}>
           <DataModels />
         </div>
-        <div className="w-3/4">
+        <DataArea>
           <StackedBarChartWidget
             models={models}
             modelAttributes={modelAttributes}
           />
-        </div>
-      </section>
-      <section className="w-full flex flex-col items-center space-y-12">
+        </DataArea>
+      </Section>
+      <Section>
         <div className={proseClasses}>
           <DataLanguage />
         </div>
-        <div className="w-3/4">
+        <DataArea>
           <GroupedBarChartWidget
             data={sourceAttributes}
             attributeParentKey="language"
@@ -64,13 +72,13 @@ export const DataContent = ({
             categories={languageKeys}
             max={languageMaxCount}
           />
-        </div>
-      </section>
-      <section className="w-full flex flex-col items-center space-y-12">
+        </DataArea>
+      </Section>
+      <Section>
         <div className={proseClasses}>
           <DataPolitics />
         </div>
-        <div className="w-3/4">
+        <DataArea>
           <GroupedBarChartWidget
             data={sourceAttributes}
             attributeParentKey="political_bias"
@@ -79,8 +87,8 @@ export const DataContent = ({
             categories={politicsKeys}
             max={politicsMaxCount}
           />
-        </div>
-      </section>
+        </DataArea>
+      </Section>
     </div>
   );
 };

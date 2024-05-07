@@ -17,8 +17,7 @@ export const StackedBarChartWidget = ({
   const [showChart, setShowChart] = useState<boolean>(true);
   return (
     <>
-      <div className="mb-8 flex justify-between align-center space-x-4">
-        <div></div>
+      <div className="mb-8 flex justify-center sm:justify-end align-center space-x-4">
         <TwoWayToggle
           value={showChart}
           setValue={setShowChart}

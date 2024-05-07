@@ -46,7 +46,7 @@ export const GroupedBarChart = ({
   selectedSource: string;
 }) => {
   return (
-    <ResponsiveContainer width="100%" aspect={3}>
+    <ResponsiveContainer width="100%" minHeight={300}>
       <RechartsBarChart
         data={chartData}
         margin={{ top: 5, right: 0, left: 0, bottom: 5 }}

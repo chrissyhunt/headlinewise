@@ -20,7 +20,7 @@ interface StackedBarChartProps {
 
 export const StackedBarChart = ({ data }: StackedBarChartProps) => {
   return (
-    <ResponsiveContainer width="100%" aspect={3}>
+    <ResponsiveContainer width="100%" minHeight={300}>
       <RechartsBarChart
         data={data}
         margin={{ top: 5, right: 10, left: 10, bottom: 5 }}

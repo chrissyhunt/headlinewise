@@ -17,7 +17,7 @@ export const TwoWayToggle = ({
   trueLabel,
 }: TwoWayToggleProps) => {
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2 !mt-0">
       <Label htmlFor={id}>{falseLabel}</Label>
       <Switch
         id={id}
