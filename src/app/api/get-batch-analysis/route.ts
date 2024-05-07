@@ -64,6 +64,7 @@ export async function GET(request: Request) {
   }
 
   revalidatePath("/(nav-layout)/topics/[slug]", "page");
+  revalidatePath("/(nav-layout)/data");
 
   return new Response("Success", {
     status: 200,

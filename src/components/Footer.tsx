@@ -10,8 +10,8 @@ export default async function Footer() {
   } = await supabase.auth.getUser();
 
   return (
-    <footer className="border-t-[1px] bg-fuchsia-200  border-b-fuchsia-50 p-8 flex flex-col sm:flex-row justify-between align-center text-sm">
-      <p>
+    <footer className="border-t-[1px] bg-fuchsia-200  border-b-fuchsia-50 p-8 flex flex-col justify-center md:flex-row md:justify-between align-center text-sm">
+      <p className="text-center md:text-left">
         &copy; {new Date().getFullYear()}{" "}
         <Link
           href="https://chrissyhunt.com"
@@ -30,7 +30,7 @@ export default async function Footer() {
         </Link>
       </p>
       <nav>
-        <ul className="flex space-x-4">
+        <ul className="flex flex-wrap justify-center md:justify-end space-x-4">
           {user ? (
             <li>
               <form action="/auth/signout" method="post">
