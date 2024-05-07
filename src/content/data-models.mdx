@@ -2,9 +2,14 @@
 
 _HeadlineWise_ sends each headline to one of several different generative models for analysis. Models are prompted with identical instructions for the analysis. Each analysis has three parts: language categorization, political bias categorization, and a written explanation of how the model arrived at its conclusions, quoting directly from the analyzed headline if possible.
 
-A few notes about my analysis review process:
+A few notes about my analysis review methods:
 
-- Reviews are conducted by me alone, so there's inherently some subjectivity to this process. I accept or reject each analysis as a whole, and try to be consistent.
-- I compare the generated analysis to the headline in the UI, where only the headline itself and the analysis are displayed. The news source is hidden.
+- I compare the generated analysis to the headline in the UI, where only the headline itself and the analysis are displayed. The news source is hidden. I accept or reject each analysis as a whole.
 - I mark a generated analysis as **accepted** if it passes my common sense test: language and politics categories seem reasonable (even if other interpretations are possible) and the logic in the analysis text is cogent and a reasonable interpretation of the headline text.
 - I mark an analysis as **rejected** if something seems obviously off: categorization is very obviously wrong, the explanation does not seem connected to the text, or the written explanation includes hallucinated quotes not in the headline.
+
+And a few limitations to be aware of:
+
+- Reviews are conducted by me alone, so there's still some subjectivity to this process, although I try to be consistent.
+- I currently accept or reject the analysis as a whole, but in the future I would also like to collect more data on reasons for rejection to understand which types of tasks are more difficult for the models.
+- When viewing aggregate data per media source below, keep in mind that _HeadlineWise_ selectively queries the News API for specific topics; the headlines analyzed are not a representative sample of all the content published by that source.

@@ -20,14 +20,14 @@ export default async function Footer() {
         >
           Chrissy Hunt
         </Link>
-        &nbsp;&nbsp;/&nbsp;&nbsp;
+        {/* &nbsp;&nbsp;/&nbsp;&nbsp;
         <Link
           href="https://buymeacoffee.com/chrissyhunt"
           target="_blank"
           className={buttonVariants({ variant: "link" })}
         >
           Buy me a coffee &nbsp;☕️
-        </Link>
+        </Link> */}
       </p>
       <nav>
         <ul className="flex flex-wrap justify-center md:justify-end space-x-4">
