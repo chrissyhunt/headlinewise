@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { TwoWayToggle } from "./TwoWayToggle";
-import { DataTable } from "./DataTable";
-import { StackedBarChart } from "./StackedBarChart";
+import { DataTable } from "./charts/DataTable";
+import { StackedBarChart } from "./charts/StackedBarChart";
 import { ModelAttributes } from "@/utils/report-data-reducers";
 
 interface StackedBarChartWidgetProps {

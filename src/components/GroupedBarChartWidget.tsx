@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { SourceModelAttributes } from "@/utils/report-data-reducers";
 import { DataSelect } from "@/components/DataSelect";
-import { DataTable } from "./DataTable";
-import { GroupedBarChart } from "./GroupedBarChart";
+import { DataTable } from "./charts/DataTable";
+import { GroupedBarChart } from "./charts/GroupedBarChart";
 import { TwoWayToggle } from "./TwoWayToggle";
 
 export const GroupedBarChartWidget = ({

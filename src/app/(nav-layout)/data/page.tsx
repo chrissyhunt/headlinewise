@@ -4,7 +4,7 @@ import {
   attributesPerSourceModel,
   uniqueLanguageKeys,
 } from "@/utils/report-data-reducers";
-import { DataContent } from "./DataContent";
+import { DataContent } from "../../../components/DataContent";
 
 export default async function DataPage() {
   const analyses = await getAnalysisData();
