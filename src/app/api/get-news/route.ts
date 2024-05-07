@@ -81,16 +81,19 @@ export async function GET(request: Request) {
     });
   }
 
-  try {
-    const res = await getBatchAnalysis(request);
-    if (res.status !== 200) throw new Error("Error getting batch analysis");
-    revalidatePath("/");
-    revalidatePath("/(nav-layout)/topics/[slug]", "page");
-  } catch (e) {
-    return new Response("Error getting batch analysis", {
-      status: 500,
-    });
-  }
+  revalidatePath("/");
+  revalidatePath("/(nav-layout)/topics/[slug]", "page");
+
+  // TODO: re-enable batch analysis call after upgrading Vercel and increasing timeout
+
+  // try {
+  //   const res = await getBatchAnalysis(request);
+  //   if (res.status !== 200) throw new Error("Error getting batch analysis");
+  // } catch (e) {
+  //   return new Response("Error getting batch analysis", {
+  //     status: 500,
+  //   });
+  // }
 
   return new Response("Success!", {
     status: 200,

@@ -24,6 +24,10 @@ export const menuLinks: MenuLink[] = [
     href: "/about",
   },
   {
+    label: "Data",
+    href: "/data",
+  },
+  {
     label: "GitHub",
     href: "https://github.com/chrissyhunt/headlinewise",
     newTab: true,
@@ -37,7 +41,7 @@ export const menuLinks: MenuLink[] = [
 
 export default function Navbar() {
   return (
-    <header className="flex justify-between align-center p-8 w-full fixed bg-fuchsia-200/90 backdrop-blur-xl supports-[backdrop-filter]:bg-transparent border-b-[1px] border-b-fuchsia-50">
+    <header className="flex justify-between align-center p-8 w-full fixed bg-fuchsia-200/90 backdrop-blur-xl supports-[backdrop-filter]:bg-transparent border-b-[1px] border-b-fuchsia-50 z-50">
       <h1 className="text-lg self-center">
         🦉 <Link href="/">HeadlineWise</Link>
       </h1>

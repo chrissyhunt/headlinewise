@@ -1,0 +1,10 @@
+## Analysis Quality by Model
+
+_HeadlineWise_ sends each headline to one of several different generative models for analysis. Models are prompted with identical instructions for the analysis. Each analysis has three parts: language categorization, political bias categorization, and a written explanation of how the model arrived at its conclusions, quoting directly from the analyzed headline if possible.
+
+A few notes about my analysis review process:
+
+- Reviews are conducted by me alone, so there's inherently some subjectivity to this process. I accept or reject each analysis as a whole, and try to be consistent.
+- I compare the generated analysis to the headline in the UI, where only the headline itself and the analysis are displayed. The news source is hidden.
+- I mark a generated analysis as **accepted** if it passes my common sense test: language and politics categories seem reasonable (even if other interpretations are possible) and the logic in the analysis text is cogent and a reasonable interpretation of the headline text.
+- I mark an analysis as **rejected** if something seems obviously off: categorization is very obviously wrong, the explanation does not seem connected to the text, or the written explanation includes hallucinated quotes not in the headline.
