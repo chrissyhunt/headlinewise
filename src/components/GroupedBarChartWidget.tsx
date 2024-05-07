@@ -11,6 +11,7 @@ export const GroupedBarChartWidget = ({
   attributeParentKey,
   bars,
   sources,
+  sourceNames,
   categories,
   max,
 }: {
@@ -18,6 +19,7 @@ export const GroupedBarChartWidget = ({
   attributeParentKey: string;
   bars: string[];
   sources: string[];
+  sourceNames: { [key: string]: string };
   categories: string[];
   max: number;
 }) => {
@@ -41,7 +43,7 @@ export const GroupedBarChartWidget = ({
             setValue={(value) => setSelectedSource(value)}
             options={sources.map((source) => ({
               value: source,
-              label: source,
+              label: sourceNames[source],
             }))}
             placeholder="Select a media organization"
           />

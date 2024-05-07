@@ -5,9 +5,11 @@ import {
   uniqueLanguageKeys,
 } from "@/utils/report-data-reducers";
 import { DataContent } from "../../../components/DataContent";
+import { getSources } from "@/lib/supabase/get-sources";
 
 export default async function DataPage() {
   const analyses = await getAnalysisData();
+  const allSources = await getSources();
   const modelAttributes = analyses.reduce(attributesPerModel, {});
   const models = Object.keys(modelAttributes).sort((a, b) =>
     a.localeCompare(b)
@@ -25,6 +27,14 @@ export default async function DataPage() {
   ];
   const sources = Object.keys(sourceAttributes).sort((a, b) =>
     a.localeCompare(b)
+  );
+  const sourceNames = sources.reduce(
+    (acc: { [key: string]: string }, sourceId: string) => {
+      acc[sourceId] =
+        allSources.find((source) => source.id === sourceId)?.name || "";
+      return acc;
+    },
+    {}
   );
 
   const languageMaxCount = Math.max(
@@ -57,6 +67,7 @@ export default async function DataPage() {
       modelAttributes={modelAttributes}
       sourceAttributes={sourceAttributes}
       sources={sources}
+      sourceNames={sourceNames}
       languageKeys={languageKeys}
       languageMaxCount={languageMaxCount}
       politicsKeys={politicsKeys}

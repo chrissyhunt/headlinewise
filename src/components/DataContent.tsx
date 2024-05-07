@@ -25,6 +25,7 @@ interface DataContentProps {
   modelAttributes: ModelAttributes;
   sourceAttributes: SourceModelAttributes;
   sources: string[];
+  sourceNames: { [key: string]: string };
   languageKeys: string[];
   languageMaxCount: number;
   politicsKeys: string[];
@@ -36,6 +37,7 @@ export const DataContent = ({
   modelAttributes,
   sourceAttributes,
   sources,
+  sourceNames,
   languageKeys,
   languageMaxCount,
   politicsKeys,
@@ -69,6 +71,7 @@ export const DataContent = ({
             attributeParentKey="language"
             bars={models}
             sources={sources}
+            sourceNames={sourceNames}
             categories={languageKeys}
             max={languageMaxCount}
           />
@@ -84,6 +87,7 @@ export const DataContent = ({
             attributeParentKey="political_bias"
             bars={models}
             sources={sources}
+            sourceNames={sourceNames}
             categories={politicsKeys}
             max={politicsMaxCount}
           />
