@@ -34,7 +34,7 @@ export default async function TopicPage({
                 <HeadlineCard
                   title={a.title!}
                   date={a.published_at!}
-                  approved={a.analysis[0].approved ?? false}
+                  needsReview={a.analysis[0].approved === null}
                 />
               </SheetTrigger>
               <SheetContent className="w-screen max-w-screen sm:w-3/4 sm:max-w-3/4 lg:w-2/3 lg:max-w-2/3 bg-fuchsia-50 overflow-y-scroll">
