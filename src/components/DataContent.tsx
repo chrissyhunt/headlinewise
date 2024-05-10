@@ -7,8 +7,8 @@ import {
   ModelAttributes,
   SourceModelAttributes,
 } from "@/utils/report-data-reducers";
-import { GroupedBarChartWidget } from "./GroupedBarChartWidget";
-import { StackedBarChartWidget } from "./StackedBarChartWidget";
+import { FilterBarChartWidget } from "./FilterBarChartWidget";
+import { ToggleBarChartWidget } from "./ToggleBarChartWidget";
 
 const Section = ({ children }: { children: React.ReactNode }) => (
   <section className="w-full flex flex-col items-center space-y-12">
@@ -55,9 +55,12 @@ export const DataContent = ({
           <DataModels />
         </div>
         <DataArea>
-          <StackedBarChartWidget
+          <ToggleBarChartWidget
             models={models}
             modelAttributes={modelAttributes}
+            bars={["approved", "rejected", "needs_review"]}
+            isStacked
+            customCategoryLabel="Model"
           />
         </DataArea>
       </Section>
@@ -66,7 +69,7 @@ export const DataContent = ({
           <DataLanguage />
         </div>
         <DataArea>
-          <GroupedBarChartWidget
+          <FilterBarChartWidget
             data={sourceAttributes}
             attributeParentKey="language"
             bars={models}
@@ -82,7 +85,7 @@ export const DataContent = ({
           <DataPolitics />
         </div>
         <DataArea>
-          <GroupedBarChartWidget
+          <FilterBarChartWidget
             data={sourceAttributes}
             attributeParentKey="political_bias"
             bars={models}
@@ -90,6 +93,7 @@ export const DataContent = ({
             sourceNames={sourceNames}
             categories={politicsKeys}
             max={politicsMaxCount}
+            isStacked
           />
         </DataArea>
       </Section>
