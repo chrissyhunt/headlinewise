@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { SourceModelAttributes } from "@/utils/report-data-reducers";
+import { SourceModelAttributes } from "@/utils/report-data";
 import { DataSelect } from "@/components/DataSelect";
 import { DataTable } from "./charts/DataTable";
 import { BarChart } from "./charts/BarChart";

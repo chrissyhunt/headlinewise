@@ -3,7 +3,7 @@ import {
   statusCountsPerModel,
   attributesPerSourceModel,
   uniqueLanguageKeys,
-} from "@/utils/report-data-reducers";
+} from "@/utils/report-data";
 import { DataContent } from "../../../components/DataContent";
 import { getSources } from "@/lib/supabase/get-sources";
 
@@ -49,18 +49,6 @@ export default async function DataPage() {
       .flat(3)
   );
 
-  const politicsMaxCount = Math.max(
-    ...sources
-      .map((source) => {
-        return models.map((model) => {
-          return politicsKeys.map((key) => {
-            return sourceAttributes[source].political_bias[model]?.[key] || 0;
-          });
-        });
-      })
-      .flat(3)
-  );
-
   return (
     <DataContent
       models={models}
@@ -71,7 +59,6 @@ export default async function DataPage() {
       languageKeys={languageKeys}
       languageMaxCount={languageMaxCount}
       politicsKeys={politicsKeys}
-      politicsMaxCount={politicsMaxCount}
     />
   );
 }

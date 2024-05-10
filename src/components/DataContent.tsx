@@ -6,9 +6,9 @@ import DataPolitics from "@/content/data-politics.mdx";
 import {
   ModelApprovalStatusCounts,
   SourceModelAttributes,
-} from "@/utils/report-data-reducers";
+} from "@/utils/report-data";
 import { FilterBarChartWidget } from "./FilterBarChartWidget";
-import { ToggleBarChartWidget } from "./ToggleBarChartWidget";
+import { ModelReviewDataViz } from "./ModelReviewDataViz";
 
 const Section = ({ children }: { children: React.ReactNode }) => (
   <section className="w-full flex flex-col items-center space-y-12">
@@ -29,7 +29,6 @@ interface DataContentProps {
   languageKeys: string[];
   languageMaxCount: number;
   politicsKeys: string[];
-  politicsMaxCount: number;
 }
 
 export const DataContent = ({
@@ -41,7 +40,6 @@ export const DataContent = ({
   languageKeys,
   languageMaxCount,
   politicsKeys,
-  politicsMaxCount,
 }: DataContentProps) => {
   const proseClasses =
     "prose prose-md md:prose-xl prose-gray prose-headings:font-serif prose-headings:font-normal prose-li:marker:text-inherit";
@@ -55,7 +53,7 @@ export const DataContent = ({
           <DataModels />
         </div>
         <DataArea>
-          <ToggleBarChartWidget
+          <ModelReviewDataViz
             models={models}
             modelApprovalStatusCounts={modelApprovalStatusCounts}
             bars={["approved", "rejected", "needs_review"]}
@@ -92,7 +90,6 @@ export const DataContent = ({
             sources={sources}
             sourceNames={sourceNames}
             categories={politicsKeys}
-            max={politicsMaxCount}
             isStacked
           />
         </DataArea>

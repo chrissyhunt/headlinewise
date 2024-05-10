@@ -2,10 +2,10 @@
 import { useState } from "react";
 import { TwoWayToggle } from "./TwoWayToggle";
 import { DataTable } from "./charts/DataTable";
-import { ModelApprovalStatusCounts } from "@/utils/report-data-reducers";
+import { ModelApprovalStatusCounts } from "@/utils/report-data";
 import { BarChart } from "./charts/BarChart";
 
-interface ToggleBarChartWidgetProps {
+interface ModelReviewDataVizProps {
   models: string[];
   modelApprovalStatusCounts: ModelApprovalStatusCounts;
   bars: string[];
@@ -13,13 +13,13 @@ interface ToggleBarChartWidgetProps {
   customCategoryLabel?: string;
 }
 
-export const ToggleBarChartWidget = ({
+export const ModelReviewDataViz = ({
   models,
   modelApprovalStatusCounts,
   bars,
   isStacked,
   customCategoryLabel,
-}: ToggleBarChartWidgetProps) => {
+}: ModelReviewDataVizProps) => {
   const [showChart, setShowChart] = useState<boolean>(true);
   return (
     <>
