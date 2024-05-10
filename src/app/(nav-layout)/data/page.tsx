@@ -1,6 +1,6 @@
 import { getAnalysisData } from "@/lib/supabase/get-analysis-data";
 import {
-  attributesPerModel,
+  statusCountsPerModel,
   attributesPerSourceModel,
   uniqueLanguageKeys,
 } from "@/utils/report-data-reducers";
@@ -10,8 +10,8 @@ import { getSources } from "@/lib/supabase/get-sources";
 export default async function DataPage() {
   const analyses = await getAnalysisData();
   const allSources = await getSources();
-  const modelAttributes = analyses.reduce(attributesPerModel, {});
-  const models = Object.keys(modelAttributes).sort((a, b) =>
+  const modelApprovalStatusCounts = analyses.reduce(statusCountsPerModel, {});
+  const models = Object.keys(modelApprovalStatusCounts).sort((a, b) =>
     a.localeCompare(b)
   );
   const sourceAttributes = analyses.reduce(attributesPerSourceModel, {});
@@ -64,7 +64,7 @@ export default async function DataPage() {
   return (
     <DataContent
       models={models}
-      modelAttributes={modelAttributes}
+      modelApprovalStatusCounts={modelApprovalStatusCounts}
       sourceAttributes={sourceAttributes}
       sources={sources}
       sourceNames={sourceNames}

@@ -2,12 +2,12 @@
 import { useState } from "react";
 import { TwoWayToggle } from "./TwoWayToggle";
 import { DataTable } from "./charts/DataTable";
-import { ModelAttributes } from "@/utils/report-data-reducers";
+import { ModelApprovalStatusCounts } from "@/utils/report-data-reducers";
 import { BarChart } from "./charts/BarChart";
 
 interface ToggleBarChartWidgetProps {
   models: string[];
-  modelAttributes: ModelAttributes;
+  modelApprovalStatusCounts: ModelApprovalStatusCounts;
   bars: string[];
   isStacked?: boolean;
   customCategoryLabel?: string;
@@ -15,7 +15,7 @@ interface ToggleBarChartWidgetProps {
 
 export const ToggleBarChartWidget = ({
   models,
-  modelAttributes,
+  modelApprovalStatusCounts,
   bars,
   isStacked,
   customCategoryLabel,
@@ -36,9 +36,9 @@ export const ToggleBarChartWidget = ({
         <BarChart
           data={models.map((m) => ({
             name: m,
-            approved: modelAttributes[m].approved,
-            rejected: modelAttributes[m].rejected,
-            needs_review: modelAttributes[m].needs_review,
+            approved: modelApprovalStatusCounts[m].approved,
+            rejected: modelApprovalStatusCounts[m].rejected,
+            needs_review: modelApprovalStatusCounts[m].needs_review,
           }))}
           bars={bars}
           isStacked={isStacked}
@@ -48,9 +48,9 @@ export const ToggleBarChartWidget = ({
         <DataTable
           rows={models.map((m) => ({
             name: m,
-            approved: modelAttributes[m].approved,
-            rejected: modelAttributes[m].rejected,
-            needs_review: modelAttributes[m].needs_review,
+            approved: modelApprovalStatusCounts[m].approved,
+            rejected: modelApprovalStatusCounts[m].rejected,
+            needs_review: modelApprovalStatusCounts[m].needs_review,
           }))}
           cols={[
             { key: "name", label: "Model" },

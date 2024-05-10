@@ -4,7 +4,7 @@ import DataModels from "@/content/data-models.mdx";
 import DataLanguage from "@/content/data-language.mdx";
 import DataPolitics from "@/content/data-politics.mdx";
 import {
-  ModelAttributes,
+  ModelApprovalStatusCounts,
   SourceModelAttributes,
 } from "@/utils/report-data-reducers";
 import { FilterBarChartWidget } from "./FilterBarChartWidget";
@@ -22,7 +22,7 @@ const DataArea = ({ children }: { children: React.ReactNode }) => (
 
 interface DataContentProps {
   models: string[];
-  modelAttributes: ModelAttributes;
+  modelApprovalStatusCounts: ModelApprovalStatusCounts;
   sourceAttributes: SourceModelAttributes;
   sources: string[];
   sourceNames: { [key: string]: string };
@@ -34,7 +34,7 @@ interface DataContentProps {
 
 export const DataContent = ({
   models,
-  modelAttributes,
+  modelApprovalStatusCounts,
   sourceAttributes,
   sources,
   sourceNames,
@@ -57,7 +57,7 @@ export const DataContent = ({
         <DataArea>
           <ToggleBarChartWidget
             models={models}
-            modelAttributes={modelAttributes}
+            modelApprovalStatusCounts={modelApprovalStatusCounts}
             bars={["approved", "rejected", "needs_review"]}
             isStacked
             customCategoryLabel="Model"
