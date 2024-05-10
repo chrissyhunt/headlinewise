@@ -1,4 +1,3 @@
-import { Database } from "@/database.types";
 import chunk from "lodash.chunk";
 
 const MAX_PROMPTS_PER_REQUEST = 20;

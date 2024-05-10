@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
-import { SourceModelAttributes } from "@/utils/report-data-reducers";
+import { SourceModelAttributes } from "@/utils/report-data";
 import { DataSelect } from "@/components/DataSelect";
 import { DataTable } from "./charts/DataTable";
-import { GroupedBarChart } from "./charts/GroupedBarChart";
+import { BarChart } from "./charts/BarChart";
 import { TwoWayToggle } from "./TwoWayToggle";
 
-export const GroupedBarChartWidget = ({
+export const FilterBarChartWidget = ({
   data,
   attributeParentKey,
   bars,
@@ -14,6 +14,7 @@ export const GroupedBarChartWidget = ({
   sourceNames,
   categories,
   max,
+  isStacked,
 }: {
   data: SourceModelAttributes;
   attributeParentKey: string;
@@ -21,7 +22,8 @@ export const GroupedBarChartWidget = ({
   sources: string[];
   sourceNames: { [key: string]: string };
   categories: string[];
-  max: number;
+  max?: number | undefined;
+  isStacked?: boolean;
 }) => {
   const [selectedSource, setSelectedSource] = useState<string>(sources[0]);
   const [showChart, setShowChart] = useState<boolean>(true);
@@ -57,11 +59,11 @@ export const GroupedBarChartWidget = ({
         />
       </div>
       {showChart ? (
-        <GroupedBarChart
-          chartData={filteredData}
+        <BarChart
+          data={filteredData}
           bars={bars}
-          max={max}
-          selectedSource={selectedSource}
+          yMax={max}
+          isStacked={isStacked}
         />
       ) : (
         <DataTable

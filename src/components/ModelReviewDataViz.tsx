@@ -2,18 +2,24 @@
 import { useState } from "react";
 import { TwoWayToggle } from "./TwoWayToggle";
 import { DataTable } from "./charts/DataTable";
-import { StackedBarChart } from "./charts/StackedBarChart";
-import { ModelAttributes } from "@/utils/report-data-reducers";
+import { ModelApprovalStatusCounts } from "@/utils/report-data";
+import { BarChart } from "./charts/BarChart";
 
-interface StackedBarChartWidgetProps {
+interface ModelReviewDataVizProps {
   models: string[];
-  modelAttributes: ModelAttributes;
+  modelApprovalStatusCounts: ModelApprovalStatusCounts;
+  bars: string[];
+  isStacked?: boolean;
+  customCategoryLabel?: string;
 }
 
-export const StackedBarChartWidget = ({
+export const ModelReviewDataViz = ({
   models,
-  modelAttributes,
-}: StackedBarChartWidgetProps) => {
+  modelApprovalStatusCounts,
+  bars,
+  isStacked,
+  customCategoryLabel,
+}: ModelReviewDataVizProps) => {
   const [showChart, setShowChart] = useState<boolean>(true);
   return (
     <>
@@ -27,21 +33,24 @@ export const StackedBarChartWidget = ({
         />
       </div>
       {showChart ? (
-        <StackedBarChart
+        <BarChart
           data={models.map((m) => ({
             name: m,
-            approved: modelAttributes[m].approved,
-            rejected: modelAttributes[m].rejected,
-            needs_review: modelAttributes[m].needs_review,
+            approved: modelApprovalStatusCounts[m].approved,
+            rejected: modelApprovalStatusCounts[m].rejected,
+            needs_review: modelApprovalStatusCounts[m].needs_review,
           }))}
+          bars={bars}
+          isStacked={isStacked}
+          customCategoryLabel={customCategoryLabel}
         />
       ) : (
         <DataTable
           rows={models.map((m) => ({
             name: m,
-            approved: modelAttributes[m].approved,
-            rejected: modelAttributes[m].rejected,
-            needs_review: modelAttributes[m].needs_review,
+            approved: modelApprovalStatusCounts[m].approved,
+            rejected: modelApprovalStatusCounts[m].rejected,
+            needs_review: modelApprovalStatusCounts[m].needs_review,
           }))}
           cols={[
             { key: "name", label: "Model" },

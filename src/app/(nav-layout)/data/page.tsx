@@ -1,17 +1,17 @@
 import { getAnalysisData } from "@/lib/supabase/get-analysis-data";
 import {
-  attributesPerModel,
+  statusCountsPerModel,
   attributesPerSourceModel,
   uniqueLanguageKeys,
-} from "@/utils/report-data-reducers";
+} from "@/utils/report-data";
 import { DataContent } from "../../../components/DataContent";
 import { getSources } from "@/lib/supabase/get-sources";
 
 export default async function DataPage() {
   const analyses = await getAnalysisData();
   const allSources = await getSources();
-  const modelAttributes = analyses.reduce(attributesPerModel, {});
-  const models = Object.keys(modelAttributes).sort((a, b) =>
+  const modelApprovalStatusCounts = analyses.reduce(statusCountsPerModel, {});
+  const models = Object.keys(modelApprovalStatusCounts).sort((a, b) =>
     a.localeCompare(b)
   );
   const sourceAttributes = analyses.reduce(attributesPerSourceModel, {});
@@ -49,29 +49,16 @@ export default async function DataPage() {
       .flat(3)
   );
 
-  const politicsMaxCount = Math.max(
-    ...sources
-      .map((source) => {
-        return models.map((model) => {
-          return politicsKeys.map((key) => {
-            return sourceAttributes[source].political_bias[model]?.[key] || 0;
-          });
-        });
-      })
-      .flat(3)
-  );
-
   return (
     <DataContent
       models={models}
-      modelAttributes={modelAttributes}
+      modelApprovalStatusCounts={modelApprovalStatusCounts}
       sourceAttributes={sourceAttributes}
       sources={sources}
       sourceNames={sourceNames}
       languageKeys={languageKeys}
       languageMaxCount={languageMaxCount}
       politicsKeys={politicsKeys}
-      politicsMaxCount={politicsMaxCount}
     />
   );
 }

@@ -34,23 +34,24 @@ export const CustomizedAxisTick = ({ x, y, stroke, payload }: any) => {
   );
 };
 
-export const GroupedBarChart = ({
-  chartData,
+export const BarChart = ({
+  data,
   bars,
-  max,
-  selectedSource,
+  yMax,
+  isStacked,
+  customCategoryLabel,
 }: {
-  chartData: { name: string; [key: string]: string | number }[];
+  data: { name: string; [key: string]: string | number }[];
   bars: string[];
-  max: number;
-  selectedSource: string;
+  yMax?: number | undefined;
+  isStacked?: boolean;
+  customCategoryLabel?: string;
 }) => {
   return (
     <ResponsiveContainer width="100%" minHeight={300}>
       <RechartsBarChart
-        data={chartData}
+        data={data}
         margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
-        key={selectedSource}
         barGap={2}
       >
         <XAxis
@@ -68,14 +69,16 @@ export const GroupedBarChart = ({
             fill: colors["black"],
             fontSize: "1rem",
           }}
-          domain={[0, max]}
+          domain={yMax ? [0, yMax] : undefined}
           interval="preserveEnd"
-          width={30}
+          width={40}
         />
         <CartesianGrid strokeDasharray="4 4" stroke={lineColor} />
         <Tooltip
           cursor={{ fill: colors["fuchsia"]["100"], opacity: "80%" }}
-          content={<CustomToolTip barLabel="Category" />}
+          content={
+            <CustomToolTip barLabel={customCategoryLabel ?? "Category"} />
+          }
         />
         <Legend
           formatter={(value: string) => (
@@ -85,7 +88,12 @@ export const GroupedBarChart = ({
           )}
         />
         {bars.map((b, i) => (
-          <Bar key={b} dataKey={b} fill={chartColors[i]} />
+          <Bar
+            key={b}
+            dataKey={b}
+            stackId={isStacked ? "a" : undefined}
+            fill={chartColors[i]}
+          />
         ))}
       </RechartsBarChart>
     </ResponsiveContainer>
