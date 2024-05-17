@@ -22,7 +22,7 @@ export const FilterBarChartWidget = ({
   sources: string[];
   sourceNames: { [key: string]: string };
   categories: string[];
-  max?: number | undefined;
+  max?: number;
   isStacked?: boolean;
 }) => {
   const [selectedSource, setSelectedSource] = useState<string>(sources[0]);

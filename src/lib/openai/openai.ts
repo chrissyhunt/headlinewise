@@ -6,7 +6,7 @@ export const openai = new OpenAI({
   apiKey: process.env.OPENAI_KEY!,
 });
 
-const model = "gpt-3.5-turbo";
+const model = "gpt-4-turbo";
 
 export const getAnalysisFromOpenAI = async (headline: string) => {
   const completion = await openai.chat.completions.create({

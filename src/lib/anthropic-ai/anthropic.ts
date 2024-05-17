@@ -4,7 +4,7 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
 });
 
-const model = "claude-3-sonnet-20240229";
+const model = "claude-3-opus-20240229";
 
 export const getAnalysisFromAnthropic = async (headline: string) => {
   const msg = await anthropic.messages.create({
