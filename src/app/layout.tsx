@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
 import { Libre_Baskerville, Lato } from "next/font/google";
 import "./globals.css";
 import { AnalyticsScript } from "@/components/AnalyticsScript";
+import { defaultMetadata } from "@/lib/constants";
 
 const libreBaskerville = Libre_Baskerville({
   subsets: ["latin"],
@@ -15,15 +15,7 @@ const lato = Lato({
   variable: "--font-lato",
 });
 
-export const metadata: Metadata = {
-  title: "HeadlineWise",
-  description: "A headline analysis tool built by Chrissy Hunt",
-  authors: {
-    url: "https://chrissyhunt.com",
-    name: "Chrissy Hunt",
-  },
-  keywords: "media literacy, news, headlines, ai analysis, claude ai",
-};
+export const metadata = defaultMetadata;
 
 export default function RootLayout({
   children,
