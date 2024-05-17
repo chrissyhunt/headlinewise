@@ -7,6 +7,8 @@ import {
 import { DataContent } from "../../../components/DataContent";
 import { getSources } from "@/lib/supabase/get-sources";
 
+export const revalidate = 86400;
+
 export default async function DataPage() {
   const analyses = await getAnalysisData();
   const allSources = await getSources();
