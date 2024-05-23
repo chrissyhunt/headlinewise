@@ -43,7 +43,7 @@ export async function fetchNews(query: string, sources: string[]) {
   const twoDaysAgo = getDaysAgoISOString(2);
   const yesterday = getDaysAgoISOString(1);
   const newsApiUrl = new URL("https://newsapi.org/v2/everything");
-  newsApiUrl.searchParams.set("pageSize", "50"); // max 100, limited by API
+  newsApiUrl.searchParams.set("pageSize", "20"); // max 100, limited by API
   newsApiUrl.searchParams.set("language", "en");
   newsApiUrl.searchParams.set("sortBy", "relevancy");
   newsApiUrl.searchParams.set("from", twoDaysAgo);
