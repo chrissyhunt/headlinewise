@@ -9,7 +9,7 @@ export default function NavLayout({ children }: Readonly<NavLayoutProps>) {
   return (
     <>
       <Navbar />
-      <main className="flex-grow flex flex-col align-center justify-center">
+      <main className="align-center flex flex-grow flex-col justify-center">
         {children}
       </main>
       <Footer />

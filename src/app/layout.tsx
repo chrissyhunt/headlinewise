@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <AnalyticsScript />
       <body
-        className={`${libreBaskerville.variable} ${lato.variable} bg-gradient-to-r from-fuchsia-200 to-cyan-100 font-sans flex flex-col min-h-screen`}
+        className={`${libreBaskerville.variable} ${lato.variable} flex min-h-screen flex-col bg-gradient-to-r from-fuchsia-200 to-cyan-100 font-sans`}
       >
         {children}
       </body>

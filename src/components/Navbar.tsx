@@ -41,12 +41,12 @@ export const menuLinks: MenuLink[] = [
 
 export default function Navbar() {
   return (
-    <header className="flex justify-between align-center p-8 w-full fixed bg-fuchsia-200/90 backdrop-blur-xl supports-[backdrop-filter]:bg-transparent border-b-[1px] border-b-fuchsia-50 z-50">
-      <h1 className="text-lg self-center">
+    <header className="align-center fixed z-50 flex w-full justify-between border-b-[1px] border-b-fuchsia-50 bg-fuchsia-200/90 p-8 backdrop-blur-xl supports-[backdrop-filter]:bg-transparent">
+      <h1 className="self-center text-lg">
         🦉 <Link href="/">HeadlineWise</Link>
       </h1>
       <nav className="hidden sm:flex">
-        <ul className="flex justify-end align-center space-x-4">
+        <ul className="align-center flex justify-end space-x-4">
           {menuLinks.map((link) => (
             <li key={link.href}>
               <Link
@@ -63,7 +63,7 @@ export default function Navbar() {
       <div className="flex sm:hidden">
         <Sheet>
           <SheetTrigger>
-            <span className="text-2xl relative top-[-2px]">☰</span>
+            <span className="relative top-[-2px] text-2xl">☰</span>
             <span className="sr-only">Menu</span>
           </SheetTrigger>
           <SheetContent>

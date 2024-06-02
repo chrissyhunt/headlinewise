@@ -20,9 +20,9 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
   return (
     <div className="flex justify-center">
       <form>
-        <Card className="w-[400px] shadow-none bg-fuchsia-50 border-none">
+        <Card className="w-[400px] border-none bg-fuchsia-50 shadow-none">
           <CardHeader>
-            <CardTitle className="font-semibold text-center">Log in</CardTitle>
+            <CardTitle className="text-center font-semibold">Log in</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid w-full items-center gap-4">
@@ -33,7 +33,7 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
                   name="email"
                   type="email"
                   required
-                  className="bg-transparent border-violet-200 focus-visible:ring-violet-700"
+                  className="border-violet-200 bg-transparent focus-visible:ring-violet-700"
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
@@ -43,7 +43,7 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
                   name="password"
                   type="password"
                   required
-                  className="bg-transparent border-violet-200 focus-visible:ring-violet-700"
+                  className="border-violet-200 bg-transparent focus-visible:ring-violet-700"
                 />
               </div>
               {error && (
@@ -54,7 +54,7 @@ export default function LoginPage({ searchParams }: LoginPageProps) {
             </div>
           </CardContent>
           <CardFooter>
-            <div className="flex flex-col w-full align-center justify-center space-y-2">
+            <div className="align-center flex w-full flex-col justify-center space-y-2">
               <Button variant="default" size="lg" formAction={login}>
                 Log in
               </Button>

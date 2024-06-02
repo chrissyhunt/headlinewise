@@ -15,7 +15,7 @@ interface SectionProps {
 }
 
 const Section = ({ children }: SectionProps) => (
-  <section className="w-full flex flex-col items-center space-y-12">
+  <section className="flex w-full flex-col items-center space-y-12">
     {children}
   </section>
 )
@@ -52,7 +52,7 @@ export const DataContent = ({
   const proseClasses =
     'prose prose-md md:prose-xl prose-gray prose-headings:font-serif prose-headings:font-normal prose-li:marker:text-inherit'
   return (
-    <div className="mt-36 md:mt-48 mb-24 px-8 space-y-14 md:space-y-24 flex flex-col items-center w-full">
+    <div className="mb-24 mt-36 flex w-full flex-col items-center space-y-14 px-8 md:mt-48 md:space-y-24">
       <section className={`${proseClasses}`}>
         <DataIntro />
       </section>

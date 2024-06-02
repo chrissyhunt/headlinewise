@@ -16,9 +16,9 @@ export const CustomToolTip = ({
 }: CustomToolTipProps) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-fuchsia-50 p-4 rounded-md shadow-md">
+      <div className="rounded-md bg-fuchsia-50 p-4 shadow-md">
         <p className="mb-4">
-          <span className="text-xs uppercase tracking-wide -mb-2">
+          <span className="-mb-2 text-xs uppercase tracking-wide">
             {barLabel}
           </span>
           <br />

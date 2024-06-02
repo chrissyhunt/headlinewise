@@ -20,16 +20,16 @@ export default async function ArticleDetails({ url }: ArticleDetailsProps) {
   const language = analysis?.language?.split(',')
 
   return (
-    <div className="mx-2 sm:mx-10 my-4 sm:my-14 text-black">
+    <div className="mx-2 my-4 text-black sm:mx-10 sm:my-14">
       <DisplayLabel>The Headline</DisplayLabel>
-      <h1 className="text-3xl md:text-6xl font-serif mb-4 max-w-prose">
+      <h1 className="mb-4 max-w-prose font-serif text-3xl md:text-6xl">
         {article.title}
       </h1>
-      <p className="text-xl md:text-3xl font-serif max-w-prose">
+      <p className="max-w-prose font-serif text-xl md:text-3xl">
         {article.description}
       </p>
 
-      <div className="grid grid-cols-2 mt-12">
+      <div className="mt-12 grid grid-cols-2">
         <div>
           <DisplayLabel>Language</DisplayLabel>
           {language?.map((l) => (
@@ -46,12 +46,12 @@ export default async function ArticleDetails({ url }: ArticleDetailsProps) {
 
       <div className="mt-12">
         <DisplayLabel>Analysis</DisplayLabel>
-        <p className="text-lg md:text-xl font-serif max-w-prose">
+        <p className="max-w-prose font-serif text-lg md:text-xl">
           {analysis?.analysis}
         </p>
       </div>
 
-      <div className="mt-4 mb-8 text-xs space-x-2 italic">
+      <div className="mb-8 mt-4 space-x-2 text-xs italic">
         <span>
           Analysis by&nbsp;
           <ModelHoverCard model={analysis?.model || ''} />

@@ -11,7 +11,7 @@ export const ModelHoverCard = ({ model }: { model: string }) => {
     <HoverCard>
       <HoverCardTrigger>
         {' '}
-        <button className="font-mono not-italic bg-fuchsia-100 px-2 py-1 rounded-md">
+        <button className="rounded-md bg-fuchsia-100 px-2 py-1 font-mono not-italic">
           🤖 {model}
         </button>
       </HoverCardTrigger>
@@ -25,7 +25,7 @@ export const ModelHoverCard = ({ model }: { model: string }) => {
           className={`${buttonVariants({
             variant: 'link',
             size: 'sm',
-          })} text-xs !px-0`}
+          })} !px-0 text-xs`}
           href="/about"
         >
           Read more &rarr;

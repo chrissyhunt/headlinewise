@@ -3,5 +3,5 @@ interface DisplayLabelProps {
 }
 
 export default function DisplayLabel({ children }: DisplayLabelProps) {
-  return <p className="text-sm uppercase tracking-wide mb-2">{children}</p>
+  return <p className="mb-2 text-sm uppercase tracking-wide">{children}</p>
 }

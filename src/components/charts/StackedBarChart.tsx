@@ -47,7 +47,7 @@ export const StackedBarChart = ({ data }: StackedBarChartProps) => {
         />
         <Legend
           formatter={(value: string) => (
-            <span className="text-black ml-1 mr-4">
+            <span className="ml-1 mr-4 text-black">
               {value.replace('_', ' ')}
             </span>
           )}

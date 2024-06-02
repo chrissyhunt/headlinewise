@@ -23,7 +23,7 @@ export const ModelReviewDataViz = ({
   const [showChart, setShowChart] = useState<boolean>(true)
   return (
     <>
-      <div className="mb-8 flex justify-center sm:justify-end align-center space-x-4">
+      <div className="align-center mb-8 flex justify-center space-x-4 sm:justify-end">
         <TwoWayToggle
           value={showChart}
           setValue={setShowChart}
