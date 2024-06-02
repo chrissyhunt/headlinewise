@@ -1,15 +1,19 @@
-import { buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
+import { buttonVariants } from '@/components/ui/button'
+import Link from 'next/link'
 
-export default function BackButton({ className }: { className?: string }) {
+interface BackButtonProps {
+  className?: string
+}
+
+export default function BackButton({ className }: BackButtonProps) {
   return (
     <Link
-      href={"/"}
+      href={'/'}
       className={`${buttonVariants({
-        variant: "link",
+        variant: 'link',
       })} ${className}`}
     >
       &larr; All Topics
     </Link>
-  );
+  )
 }

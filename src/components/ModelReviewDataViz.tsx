@@ -1,16 +1,16 @@
-"use client";
-import { useState } from "react";
-import { TwoWayToggle } from "./TwoWayToggle";
-import { DataTable } from "./charts/DataTable";
-import { ModelApprovalStatusCounts } from "@/utils/report-data";
-import { BarChart } from "./charts/BarChart";
+'use client'
+import { useState } from 'react'
+import { TwoWayToggle } from './TwoWayToggle'
+import { DataTable } from './charts/DataTable'
+import { ModelApprovalStatusCounts } from '@/utils/report-data'
+import { BarChart } from './charts/BarChart'
 
 interface ModelReviewDataVizProps {
-  models: string[];
-  modelApprovalStatusCounts: ModelApprovalStatusCounts;
-  bars: string[];
-  isStacked?: boolean;
-  customCategoryLabel?: string;
+  models: string[]
+  modelApprovalStatusCounts: ModelApprovalStatusCounts
+  bars: string[]
+  isStacked?: boolean
+  customCategoryLabel?: string
 }
 
 export const ModelReviewDataViz = ({
@@ -20,10 +20,10 @@ export const ModelReviewDataViz = ({
   isStacked,
   customCategoryLabel,
 }: ModelReviewDataVizProps) => {
-  const [showChart, setShowChart] = useState<boolean>(true);
+  const [showChart, setShowChart] = useState<boolean>(true)
   return (
     <>
-      <div className="mb-8 flex justify-center sm:justify-end align-center space-x-4">
+      <div className="align-center mb-8 flex justify-center space-x-4 sm:justify-end">
         <TwoWayToggle
           value={showChart}
           setValue={setShowChart}
@@ -53,13 +53,13 @@ export const ModelReviewDataViz = ({
             needs_review: modelApprovalStatusCounts[m].needs_review,
           }))}
           cols={[
-            { key: "name", label: "Model" },
-            { key: "approved", label: "Approved" },
-            { key: "rejected", label: "Rejected" },
-            { key: "needs_review", label: "Needs Review" },
+            { key: 'name', label: 'Model' },
+            { key: 'approved', label: 'Approved' },
+            { key: 'rejected', label: 'Rejected' },
+            { key: 'needs_review', label: 'Needs Review' },
           ]}
         />
       )}
     </>
-  );
-};
+  )
+}

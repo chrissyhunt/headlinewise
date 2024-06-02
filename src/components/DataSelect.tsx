@@ -5,14 +5,14 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Label } from "./ui/label";
+} from '@/components/ui/select'
+import { Label } from './ui/label'
 
 interface DataSelectProps {
-  value: string;
-  setValue: (value: string) => void;
-  options: { value: string; label: string }[];
-  placeholder: string;
+  value: string
+  setValue: (value: string) => void
+  options: { value: string; label: string }[]
+  placeholder: string
 }
 
 export const DataSelect = ({
@@ -22,7 +22,7 @@ export const DataSelect = ({
   placeholder,
 }: DataSelectProps) => {
   return (
-    <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
+    <div className="flex flex-col items-center space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
       <Label className="whitespace-nowrap">News Source: </Label>
       <div className="min-w-[250px]">
         <Select onValueChange={(value) => setValue(value)} value={value}>
@@ -41,5 +41,5 @@ export const DataSelect = ({
         </Select>
       </div>
     </div>
-  );
-};
+  )
+}

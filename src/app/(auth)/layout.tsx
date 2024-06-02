@@ -1,11 +1,11 @@
-export default function AuthLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+interface AuthLayoutProps {
+  children: React.ReactNode
+}
+
+export default function AuthLayout({ children }: Readonly<AuthLayoutProps>) {
   return (
-    <main className="flex-grow flex flex-col align-center justify-center">
+    <main className="align-center flex flex-grow flex-col justify-center">
       {children}
     </main>
-  );
+  )
 }

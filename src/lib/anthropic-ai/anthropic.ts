@@ -1,10 +1,11 @@
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from '@anthropic-ai/sdk'
+import { AnalysisResult } from '../shared.types'
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
-});
+})
 
-const model = "claude-3-opus-20240229";
+const model = 'claude-3-opus-20240229'
 
 export const getAnalysisFromAnthropic = async (headline: string) => {
   const msg = await anthropic.messages.create({
@@ -14,24 +15,24 @@ export const getAnalysisFromAnthropic = async (headline: string) => {
     system: process.env.ANTHROPIC_SYSTEM_PROMPT!,
     messages: [
       {
-        role: "user",
+        role: 'user',
         content: [
           {
-            type: "text",
+            type: 'text',
             text: headline,
           },
         ],
       },
     ],
-  });
-  const response = await JSON.parse(msg.content[0]?.text);
-  response.model = model;
-  return response;
-};
+  })
+  const response = await JSON.parse(msg.content[0]?.text)
+  response.model = model
+  return response
+}
 
 export const getBatchAnalysisFromAnthropic = async (
   headlineBatch: string[]
-) => {
+): Promise<AnalysisResult[]> => {
   const msg = await anthropic.messages.create({
     model,
     max_tokens: 2000,
@@ -39,17 +40,20 @@ export const getBatchAnalysisFromAnthropic = async (
     system: process.env.BATCH_SYSTEM_PROMPT!,
     messages: [
       {
-        role: "user",
+        role: 'user',
         content: [
           {
-            type: "text",
+            type: 'text',
             text: JSON.stringify(headlineBatch),
           },
         ],
       },
     ],
-  });
-  const response = await JSON.parse(msg.content[0]?.text);
-  const responseWithModel = response.map((r: any) => ({ ...r, model }));
-  return responseWithModel;
-};
+  })
+  const response = await JSON.parse(msg.content[0]?.text)
+  const responseWithModel = response.map((r: unknown) => ({
+    ...(r || {}),
+    model,
+  }))
+  return responseWithModel
+}

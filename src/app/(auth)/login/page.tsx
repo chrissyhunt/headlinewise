@@ -1,28 +1,28 @@
-import { login } from "@/app/(auth)/login/actions";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { login } from '@/app/(auth)/login/actions'
+import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Link from "next/link";
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import Link from 'next/link'
 
-export default function LoginPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  const error = searchParams?.error;
+interface LoginPageProps {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default function LoginPage({ searchParams }: LoginPageProps) {
+  const error = searchParams?.error
   return (
     <div className="flex justify-center">
       <form>
-        <Card className="w-[400px] shadow-none bg-fuchsia-50 border-none">
+        <Card className="w-[400px] border-none bg-fuchsia-50 shadow-none">
           <CardHeader>
-            <CardTitle className="font-semibold text-center">Log in</CardTitle>
+            <CardTitle className="text-center font-semibold">Log in</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid w-full items-center gap-4">
@@ -33,7 +33,7 @@ export default function LoginPage({
                   name="email"
                   type="email"
                   required
-                  className="bg-transparent border-violet-200 focus-visible:ring-violet-700"
+                  className="border-violet-200 bg-transparent focus-visible:ring-violet-700"
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
@@ -43,7 +43,7 @@ export default function LoginPage({
                   name="password"
                   type="password"
                   required
-                  className="bg-transparent border-violet-200 focus-visible:ring-violet-700"
+                  className="border-violet-200 bg-transparent focus-visible:ring-violet-700"
                 />
               </div>
               {error && (
@@ -54,13 +54,13 @@ export default function LoginPage({
             </div>
           </CardContent>
           <CardFooter>
-            <div className="flex flex-col w-full align-center justify-center space-y-2">
+            <div className="align-center flex w-full flex-col justify-center space-y-2">
               <Button variant="default" size="lg" formAction={login}>
                 Log in
               </Button>
               <Link
                 href="/"
-                className={buttonVariants({ variant: "link", size: "lg" })}
+                className={buttonVariants({ variant: 'link', size: 'lg' })}
               >
                 &larr; Go Back
               </Link>
@@ -69,5 +69,5 @@ export default function LoginPage({
         </Card>
       </form>
     </div>
-  );
+  )
 }

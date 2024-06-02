@@ -1,17 +1,15 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table'
 
 interface DataTableProps {
-  rows: { [key: string]: number | string }[];
-  cols: { key: string; label: string }[];
+  rows: { [key: string]: number | string }[]
+  cols: { key: string; label: string }[]
 }
 
 export const DataTable = ({ rows, cols }: DataTableProps) => {
@@ -34,5 +32,5 @@ export const DataTable = ({ rows, cols }: DataTableProps) => {
         ))}
       </TableBody>
     </Table>
-  );
-};
+  )
+}

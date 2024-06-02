@@ -1,16 +1,11 @@
-import { createServiceClient } from "@/lib/supabase/server";
+import { createServiceClient } from '@/lib/supabase/server'
+import { RequestLog } from '../shared.types'
 
-interface Log {
-  type: "success" | "error";
-  from: string;
-  message: string;
-}
-
-export const insertLog = async (details: Log) => {
-  const supabase = createServiceClient();
+export const insertLog = async (details: RequestLog) => {
+  const supabase = createServiceClient()
   const { data, error } = await supabase
-    .from("logs")
-    .insert({ details: JSON.stringify(details) });
-  if (error) throw new Error("Error saving log", { cause: error });
-  return data;
-};
+    .from('logs')
+    .insert({ details: JSON.stringify(details) })
+  if (error) throw new Error('Error saving log', { cause: error })
+  return data
+}

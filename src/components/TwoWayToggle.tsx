@@ -1,12 +1,12 @@
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
 
 interface TwoWayToggleProps {
-  value: boolean;
-  setValue: (value: boolean) => void;
-  id: string;
-  falseLabel: string;
-  trueLabel: string;
+  value: boolean
+  setValue: (value: boolean) => void
+  id: string
+  falseLabel: string
+  trueLabel: string
 }
 
 export const TwoWayToggle = ({
@@ -17,7 +17,7 @@ export const TwoWayToggle = ({
   trueLabel,
 }: TwoWayToggleProps) => {
   return (
-    <div className="flex items-center space-x-2 !mt-0">
+    <div className="!mt-0 flex items-center space-x-2">
       <Label htmlFor={id}>{falseLabel}</Label>
       <Switch
         id={id}
@@ -27,5 +27,5 @@ export const TwoWayToggle = ({
       />
       <Label htmlFor={id}>{trueLabel}</Label>
     </div>
-  );
-};
+  )
+}

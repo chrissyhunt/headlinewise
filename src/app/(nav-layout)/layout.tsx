@@ -1,18 +1,18 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
-export default function NavLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+interface NavLayoutProps {
+  children: React.ReactNode
+}
+
+export default function NavLayout({ children }: Readonly<NavLayoutProps>) {
   return (
     <>
       <Navbar />
-      <main className="flex-grow flex flex-col align-center justify-center">
+      <main className="align-center flex flex-grow flex-col justify-center">
         {children}
       </main>
       <Footer />
     </>
-  );
+  )
 }
