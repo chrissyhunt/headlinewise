@@ -1,3 +1,5 @@
+import { NewsAPIItem } from '../shared.types'
+
 const getDaysAgoISOString = (daysAgo: number) => {
   const today = new Date()
   const yesterday = new Date(today)
@@ -5,19 +7,8 @@ const getDaysAgoISOString = (daysAgo: number) => {
   return yesterday.toISOString()
 }
 
-interface NewsResponseItem {
-  title: string
-  description: string
-  author: string
-  url: string
-  urlToImage: string
-  content: string
-  publishedAt: string
-  source: { id: string; name: string }
-}
-
 export const limitSamplePerSource = (
-  results: NewsResponseItem[],
+  results: NewsAPIItem[],
   limitPerSource: number
 ) => {
   const sources = new Map()

@@ -1,10 +1,10 @@
-import HeaderSection from "@/components/HeaderSection";
-import { buttonVariants } from "@/components/ui/button";
-import { getActiveTopics } from "@/lib/supabase/get-active-topics";
-import Link from "next/link";
+import HeaderSection from '@/components/HeaderSection'
+import { buttonVariants } from '@/components/ui/button'
+import { getActiveTopics } from '@/lib/supabase/get-active-topics'
+import Link from 'next/link'
 
 export default async function Home() {
-  const topics = await getActiveTopics();
+  const topics = await getActiveTopics()
 
   return (
     <>
@@ -19,8 +19,8 @@ export default async function Home() {
                 key={t.slug}
                 href={`/topics/${t.slug}`}
                 className={buttonVariants({
-                  variant: "default",
-                  size: "lg",
+                  variant: 'default',
+                  size: 'lg',
                 })}
               >
                 {t.query}
@@ -30,5 +30,5 @@ export default async function Home() {
         </ul>
       </HeaderSection>
     </>
-  );
+  )
 }

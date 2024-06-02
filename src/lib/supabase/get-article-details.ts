@@ -1,10 +1,10 @@
-import { createServiceClient } from "@/lib/supabase/server";
+import { createServiceClient } from '@/lib/supabase/server'
 
 export const getArticleDetails = async (articleUrl: string) => {
-  const supabase = createServiceClient();
+  const supabase = createServiceClient()
 
   const { data, error } = await supabase
-    .from("articles")
+    .from('articles')
     .select(
       `
         title,
@@ -15,9 +15,9 @@ export const getArticleDetails = async (articleUrl: string) => {
         analysis ( id, language, political_bias, analysis, model, approved )  
       `
     )
-    .eq("url", articleUrl)
-    .maybeSingle();
+    .eq('url', articleUrl)
+    .maybeSingle()
 
-  if (error) throw new Error("Error getting article details", { cause: error });
-  return data;
-};
+  if (error) throw new Error('Error getting article details', { cause: error })
+  return data
+}

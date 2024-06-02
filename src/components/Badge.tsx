@@ -1,6 +1,6 @@
 interface BadgeProps {
-  className: string;
-  children: React.ReactNode;
+  className: string
+  children: React.ReactNode
 }
 
 export default function Badge({ className, children }: BadgeProps) {
@@ -10,5 +10,5 @@ export default function Badge({ className, children }: BadgeProps) {
     >
       {children}
     </div>
-  );
+  )
 }

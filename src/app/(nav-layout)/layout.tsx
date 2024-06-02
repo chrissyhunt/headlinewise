@@ -1,11 +1,11 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
-export default function NavLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+interface NavLayoutProps {
+  children: React.ReactNode
+}
+
+export default function NavLayout({ children }: Readonly<NavLayoutProps>) {
   return (
     <>
       <Navbar />
@@ -14,5 +14,5 @@ export default function NavLayout({
       </main>
       <Footer />
     </>
-  );
+  )
 }

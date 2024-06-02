@@ -1,5 +1,5 @@
-"use client";
-import AboutContent from "@/content/about.mdx";
+'use client'
+import AboutContent from '@/content/about.mdx'
 
 export default function About() {
   return (
@@ -8,5 +8,5 @@ export default function About() {
         <AboutContent />
       </article>
     </div>
-  );
+  )
 }

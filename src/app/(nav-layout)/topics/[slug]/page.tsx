@@ -1,21 +1,21 @@
-import BackButton from "@/components/BackButton";
-import HeaderSection from "@/components/HeaderSection";
-import { getArticlesForTopic } from "@/lib/supabase/get-articles-for-topic";
+import BackButton from '@/components/BackButton'
+import HeaderSection from '@/components/HeaderSection'
+import { getArticlesForTopic } from '@/lib/supabase/get-articles-for-topic'
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import HeadlineCard from "@/components/HeadlineCard";
-import ArticleDetails from "@/components/ArticleDetails";
+} from '@/components/ui/sheet'
+import HeadlineCard from '@/components/HeadlineCard'
+import ArticleDetails from '@/components/ArticleDetails'
 
 export default async function TopicPage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }) {
-  const { topic, articles } = await getArticlesForTopic(params.slug);
+  const { topic, articles } = await getArticlesForTopic(params.slug)
 
   return (
     <>
@@ -47,5 +47,5 @@ export default async function TopicPage({
         </div>
       </section>
     </>
-  );
+  )
 }

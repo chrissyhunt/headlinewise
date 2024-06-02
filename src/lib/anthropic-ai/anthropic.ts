@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
+import { AnalysisResult } from '../shared.types'
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
@@ -29,16 +30,9 @@ export const getAnalysisFromAnthropic = async (headline: string) => {
   return response
 }
 
-interface AnthropicAnalysis {
-  language: string
-  political_bias: string
-  analysis: string
-  model: string
-}
-
 export const getBatchAnalysisFromAnthropic = async (
   headlineBatch: string[]
-): Promise<AnthropicAnalysis[]> => {
+): Promise<AnalysisResult[]> => {
   const msg = await anthropic.messages.create({
     model,
     max_tokens: 2000,

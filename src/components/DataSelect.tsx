@@ -5,14 +5,14 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Label } from "./ui/label";
+} from '@/components/ui/select'
+import { Label } from './ui/label'
 
 interface DataSelectProps {
-  value: string;
-  setValue: (value: string) => void;
-  options: { value: string; label: string }[];
-  placeholder: string;
+  value: string
+  setValue: (value: string) => void
+  options: { value: string; label: string }[]
+  placeholder: string
 }
 
 export const DataSelect = ({
@@ -41,5 +41,5 @@ export const DataSelect = ({
         </Select>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,34 +1,42 @@
-"use client";
-import DataIntro from "@/content/data-intro.mdx";
-import DataModels from "@/content/data-models.mdx";
-import DataLanguage from "@/content/data-language.mdx";
-import DataPolitics from "@/content/data-politics.mdx";
+'use client'
+import DataIntro from '@/content/data-intro.mdx'
+import DataModels from '@/content/data-models.mdx'
+import DataLanguage from '@/content/data-language.mdx'
+import DataPolitics from '@/content/data-politics.mdx'
 import {
   ModelApprovalStatusCounts,
   SourceModelAttributes,
-} from "@/utils/report-data";
-import { FilterBarChartWidget } from "./FilterBarChartWidget";
-import { ModelReviewDataViz } from "./ModelReviewDataViz";
+} from '@/utils/report-data'
+import { FilterBarChartWidget } from './FilterBarChartWidget'
+import { ModelReviewDataViz } from './ModelReviewDataViz'
 
-const Section = ({ children }: { children: React.ReactNode }) => (
+interface SectionProps {
+  children: React.ReactNode
+}
+
+const Section = ({ children }: SectionProps) => (
   <section className="w-full flex flex-col items-center space-y-12">
     {children}
   </section>
-);
+)
 
-const DataArea = ({ children }: { children: React.ReactNode }) => (
+interface DataAreaProps {
+  children: React.ReactNode
+}
+
+const DataArea = ({ children }: DataAreaProps) => (
   <div className="w-full md:w-3/4">{children}</div>
-);
+)
 
 interface DataContentProps {
-  models: string[];
-  modelApprovalStatusCounts: ModelApprovalStatusCounts;
-  sourceAttributes: SourceModelAttributes;
-  sources: string[];
-  sourceNames: { [key: string]: string };
-  languageKeys: string[];
-  languageMaxCount: number;
-  politicsKeys: string[];
+  models: string[]
+  modelApprovalStatusCounts: ModelApprovalStatusCounts
+  sourceAttributes: SourceModelAttributes
+  sources: string[]
+  sourceNames: { [key: string]: string }
+  languageKeys: string[]
+  languageMaxCount: number
+  politicsKeys: string[]
 }
 
 export const DataContent = ({
@@ -42,7 +50,7 @@ export const DataContent = ({
   politicsKeys,
 }: DataContentProps) => {
   const proseClasses =
-    "prose prose-md md:prose-xl prose-gray prose-headings:font-serif prose-headings:font-normal prose-li:marker:text-inherit";
+    'prose prose-md md:prose-xl prose-gray prose-headings:font-serif prose-headings:font-normal prose-li:marker:text-inherit'
   return (
     <div className="mt-36 md:mt-48 mb-24 px-8 space-y-14 md:space-y-24 flex flex-col items-center w-full">
       <section className={`${proseClasses}`}>
@@ -56,7 +64,7 @@ export const DataContent = ({
           <ModelReviewDataViz
             models={models}
             modelApprovalStatusCounts={modelApprovalStatusCounts}
-            bars={["approved", "rejected", "needs_review"]}
+            bars={['approved', 'rejected', 'needs_review']}
             isStacked
             customCategoryLabel="Model"
           />
@@ -95,5 +103,5 @@ export const DataContent = ({
         </DataArea>
       </Section>
     </div>
-  );
-};
+  )
+}

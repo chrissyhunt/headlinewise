@@ -1,22 +1,22 @@
-import Link from "next/link";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { menuLinks } from "@/components/Navbar";
-import { createClient } from "@/lib/supabase/server";
+import Link from 'next/link'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { menuLinks } from '@/components/Navbar'
+import { createClient } from '@/lib/supabase/server'
 
 export default async function Footer() {
-  const supabase = createClient();
+  const supabase = createClient()
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser()
 
   return (
     <footer className="border-t-[1px] bg-fuchsia-200  border-b-fuchsia-50 p-8 flex flex-col justify-center md:flex-row md:justify-between align-center text-sm">
       <p className="text-center md:text-left">
-        &copy; {new Date().getFullYear()}{" "}
+        &copy; {new Date().getFullYear()}{' '}
         <Link
           href="https://chrissyhunt.com"
           target="_blank"
-          className={buttonVariants({ variant: "link" })}
+          className={buttonVariants({ variant: 'link' })}
         >
           Chrissy Hunt
         </Link>
@@ -43,7 +43,7 @@ export default async function Footer() {
             <li>
               <Link
                 href="/login"
-                className={buttonVariants({ variant: "link" })}
+                className={buttonVariants({ variant: 'link' })}
               >
                 Admin Login
               </Link>
@@ -53,8 +53,8 @@ export default async function Footer() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={buttonVariants({ variant: "link" })}
-                target={link.newTab ? "_blank" : undefined}
+                className={buttonVariants({ variant: 'link' })}
+                target={link.newTab ? '_blank' : undefined}
               >
                 {link.label}
               </Link>
@@ -63,5 +63,5 @@ export default async function Footer() {
         </ul>
       </nav>
     </footer>
-  );
+  )
 }

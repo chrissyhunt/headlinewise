@@ -1,23 +1,23 @@
-"use client";
-import { updateAnalysisApproval } from "@/lib/supabase/actions";
-import { usePathname } from "next/navigation";
+'use client'
+import { updateAnalysisApproval } from '@/lib/supabase/actions'
+import { usePathname } from 'next/navigation'
 
-interface ArticleApprovalStatus {
-  analysisId: string;
-  approved: boolean | null;
-  isAdmin: boolean;
+interface ArticleApprovalStatusProps {
+  analysisId: string
+  approved: boolean | null
+  isAdmin: boolean
 }
 
 export const ArticleApprovalStatus = ({
   analysisId,
   approved,
   isAdmin,
-}: ArticleApprovalStatus) => {
-  const pathName = usePathname();
+}: ArticleApprovalStatusProps) => {
+  const pathName = usePathname()
   if (approved === true) {
-    return <span>Approved</span>;
+    return <span>Approved</span>
   } else if (approved === false) {
-    return <span>Rejected</span>;
+    return <span>Rejected</span>
   } else if (isAdmin) {
     return (
       <>
@@ -41,7 +41,7 @@ export const ArticleApprovalStatus = ({
           👎 <span className="sr-only">Reject analysis</span>
         </button>
       </>
-    );
+    )
   }
-  return <span>Needs Review</span>;
-};
+  return <span>Needs Review</span>
+}

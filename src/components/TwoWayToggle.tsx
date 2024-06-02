@@ -1,12 +1,12 @@
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
 
 interface TwoWayToggleProps {
-  value: boolean;
-  setValue: (value: boolean) => void;
-  id: string;
-  falseLabel: string;
-  trueLabel: string;
+  value: boolean
+  setValue: (value: boolean) => void
+  id: string
+  falseLabel: string
+  trueLabel: string
 }
 
 export const TwoWayToggle = ({
@@ -27,5 +27,5 @@ export const TwoWayToggle = ({
       />
       <Label htmlFor={id}>{trueLabel}</Label>
     </div>
-  );
-};
+  )
+}

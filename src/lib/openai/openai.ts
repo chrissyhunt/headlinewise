@@ -1,4 +1,5 @@
 import OpenAI from 'openai'
+import { AnalysisResult } from '../shared.types'
 
 export const openai = new OpenAI({
   organization: process.env.OPENAI_ORG!,
@@ -31,16 +32,9 @@ export const getAnalysisFromOpenAI = async (headline: string) => {
   return response
 }
 
-interface OpenAIAnalysis {
-  language: string
-  political_bias: string
-  analysis: string
-  model: string
-}
-
 export const getBatchAnalysisFromOpenAI = async (
   headlineBatch: string[]
-): Promise<OpenAIAnalysis[]> => {
+): Promise<AnalysisResult[]> => {
   const completion = await openai.chat.completions.create({
     model,
     max_tokens: 2000,

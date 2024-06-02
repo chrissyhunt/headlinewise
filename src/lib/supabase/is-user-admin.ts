@@ -1,19 +1,19 @@
-"use server";
-import { createClient } from "@/lib/supabase/server";
+'use server'
+import { createClient } from '@/lib/supabase/server'
 
-export const isUserAdmin = async () => {
-  const supabase = createClient();
+export const isUserAdmin = async (): Promise<boolean> => {
+  const supabase = createClient()
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser()
 
-  if (!user) return false;
+  if (!user) return false
 
   const { data: userProfile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user?.id)
-    .maybeSingle();
+    .from('profiles')
+    .select('role')
+    .eq('id', user?.id)
+    .maybeSingle()
 
-  return userProfile?.role === "admin";
-};
+  return userProfile?.role === 'admin'
+}

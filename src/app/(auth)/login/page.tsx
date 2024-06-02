@@ -1,22 +1,22 @@
-import { login } from "@/app/(auth)/login/actions";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { login } from '@/app/(auth)/login/actions'
+import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Link from "next/link";
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import Link from 'next/link'
 
-export default function LoginPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  const error = searchParams?.error;
+interface LoginPageProps {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default function LoginPage({ searchParams }: LoginPageProps) {
+  const error = searchParams?.error
   return (
     <div className="flex justify-center">
       <form>
@@ -60,7 +60,7 @@ export default function LoginPage({
               </Button>
               <Link
                 href="/"
-                className={buttonVariants({ variant: "link", size: "lg" })}
+                className={buttonVariants({ variant: 'link', size: 'lg' })}
               >
                 &larr; Go Back
               </Link>
@@ -69,5 +69,5 @@ export default function LoginPage({
         </Card>
       </form>
     </div>
-  );
+  )
 }

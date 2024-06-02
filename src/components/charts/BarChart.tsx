@@ -41,19 +41,21 @@ export const CustomizedAxisTick = ({ x, y, payload }: CustomAxisTickProps) => {
   )
 }
 
+interface BarChartProps {
+  data: { name: string; [key: string]: string | number }[]
+  bars: string[]
+  yMax?: number
+  isStacked?: boolean
+  customCategoryLabel?: string
+}
+
 export const BarChart = ({
   data,
   bars,
   yMax,
   isStacked,
   customCategoryLabel,
-}: {
-  data: { name: string; [key: string]: string | number }[]
-  bars: string[]
-  yMax?: number | undefined
-  isStacked?: boolean
-  customCategoryLabel?: string
-}) => {
+}: BarChartProps) => {
   return (
     <ResponsiveContainer width="100%" minHeight={300}>
       <RechartsBarChart

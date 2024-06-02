@@ -6,7 +6,11 @@ import { ArticleApprovalStatus } from './ArticleApprovalStatus'
 import { isUserAdmin } from '@/lib/supabase/is-user-admin'
 import { ModelHoverCard } from '@/components/ModelHoverCard'
 
-export default async function ArticleDetails({ url }: { url: string }) {
+interface ArticleDetailsProps {
+  url: string
+}
+
+export default async function ArticleDetails({ url }: ArticleDetailsProps) {
   const isAdmin = await isUserAdmin()
   const article = await getArticleDetails(url)
 

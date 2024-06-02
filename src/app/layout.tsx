@@ -1,26 +1,26 @@
-import { Libre_Baskerville, Lato } from "next/font/google";
-import "./globals.css";
-import { AnalyticsScript } from "@/components/AnalyticsScript";
-import { defaultMetadata } from "@/lib/constants";
+import { Libre_Baskerville, Lato } from 'next/font/google'
+import './globals.css'
+import { AnalyticsScript } from '@/components/AnalyticsScript'
+import { defaultMetadata } from '@/lib/constants'
 
 const libreBaskerville = Libre_Baskerville({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-libre-baskerville",
-});
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-libre-baskerville',
+})
 
 const lato = Lato({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-lato",
-});
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-lato',
+})
 
-export const metadata = defaultMetadata;
+export const metadata = defaultMetadata
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -31,5 +31,5 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-  );
+  )
 }

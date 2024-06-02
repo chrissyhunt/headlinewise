@@ -1,9 +1,9 @@
-import { isUserAdmin } from "@/lib/supabase/is-user-admin";
+import { isUserAdmin } from '@/lib/supabase/is-user-admin'
 
 interface HeadlineCardProps {
-  title: string;
-  date: string;
-  needsReview: boolean;
+  title: string
+  date: string
+  needsReview: boolean
 }
 
 export default async function HeadlineCard({
@@ -11,7 +11,7 @@ export default async function HeadlineCard({
   date,
   needsReview,
 }: HeadlineCardProps) {
-  const isAdmin = await isUserAdmin();
+  const isAdmin = await isUserAdmin()
   return (
     <div className="h-full text-2xl text-left p-8 pb-16 border-b-4 border-b-transparent hover:bg-fuchsia-50 hover:border-b-4 hover:border-b-fuchsia-400 hover:shadow-sm">
       <span className="font-serif">{title}</span>
@@ -24,5 +24,5 @@ export default async function HeadlineCard({
         )}
       </div>
     </div>
-  );
+  )
 }
