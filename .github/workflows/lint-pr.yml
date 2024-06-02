@@ -1,0 +1,14 @@
+name: Lint PRs
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: lint
+        run: npm run lint
