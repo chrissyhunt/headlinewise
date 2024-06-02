@@ -1,4 +1,19 @@
-export const CustomToolTip = ({ active, payload, label, barLabel }: any) => {
+import { TooltipProps } from 'recharts'
+import {
+  ValueType,
+  NameType,
+} from 'recharts/types/component/DefaultTooltipContent'
+
+type CustomToolTipProps = TooltipProps<ValueType, NameType> & {
+  barLabel: string
+}
+
+export const CustomToolTip = ({
+  active,
+  payload,
+  label,
+  barLabel,
+}: CustomToolTipProps) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-fuchsia-50 p-4 rounded-md shadow-md">
@@ -10,14 +25,14 @@ export const CustomToolTip = ({ active, payload, label, barLabel }: any) => {
           <span className="text-lg font-bold">{label}</span>
         </p>
         <ul>
-          {payload.map((p: any, index: number) => (
+          {payload.map((p, index: number) => (
             <li key={index} className="text-sm">
-              {p.name.replace("_", " ")}:{" "}
+              {p.name?.toString().replace('_', ' ')}:{' '}
               <span className="font-semibold">{p.value}</span>
             </li>
           ))}
         </ul>
       </div>
-    );
+    )
   }
-};
+}

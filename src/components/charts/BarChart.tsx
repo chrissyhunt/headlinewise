@@ -1,4 +1,4 @@
-import colors from "tailwindcss/colors";
+import colors from 'tailwindcss/colors'
 import {
   BarChart as RechartsBarChart,
   Bar,
@@ -8,12 +8,19 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-} from "recharts";
-import { CustomToolTip } from "./CustomToolTip";
-import { chartColors, lineColor } from "./chart-colors";
+} from 'recharts'
+import { CustomToolTip } from './CustomToolTip'
+import { chartColors, lineColor } from './chart-colors'
 
-export const CustomizedAxisTick = ({ x, y, stroke, payload }: any) => {
-  const words = payload.value.split(" ");
+interface CustomAxisTickProps {
+  x: number
+  y: number
+  stroke: string
+  payload: { value: string }
+}
+
+export const CustomizedAxisTick = ({ x, y, payload }: CustomAxisTickProps) => {
+  const words = payload.value.split(' ')
   return (
     <g transform={`translate(${x},${y})`}>
       <text
@@ -21,7 +28,7 @@ export const CustomizedAxisTick = ({ x, y, stroke, payload }: any) => {
         y={0}
         dy={0}
         textAnchor="middle"
-        fill={colors["black"]}
+        fill={colors['black']}
         fontSize="0.8em"
       >
         {words.map((word: string, i: number) => (
@@ -31,8 +38,8 @@ export const CustomizedAxisTick = ({ x, y, stroke, payload }: any) => {
         ))}
       </text>
     </g>
-  );
-};
+  )
+}
 
 export const BarChart = ({
   data,
@@ -41,11 +48,11 @@ export const BarChart = ({
   isStacked,
   customCategoryLabel,
 }: {
-  data: { name: string; [key: string]: string | number }[];
-  bars: string[];
-  yMax?: number | undefined;
-  isStacked?: boolean;
-  customCategoryLabel?: string;
+  data: { name: string; [key: string]: string | number }[]
+  bars: string[]
+  yMax?: number | undefined
+  isStacked?: boolean
+  customCategoryLabel?: string
 }) => {
   return (
     <ResponsiveContainer width="100%" minHeight={300}>
@@ -59,15 +66,15 @@ export const BarChart = ({
           axisLine={{ stroke: lineColor }}
           tickLine={false}
           height={80}
-          tick={<CustomizedAxisTick />}
+          tick={({ ...props }) => <CustomizedAxisTick {...props} />}
           interval={0}
         />
         <YAxis
           axisLine={{ stroke: lineColor }}
           tickLine={false}
           tick={{
-            fill: colors["black"],
-            fontSize: "1rem",
+            fill: colors['black'],
+            fontSize: '1rem',
           }}
           domain={yMax ? [0, yMax] : undefined}
           interval="preserveEnd"
@@ -75,15 +82,18 @@ export const BarChart = ({
         />
         <CartesianGrid strokeDasharray="4 4" stroke={lineColor} />
         <Tooltip
-          cursor={{ fill: colors["fuchsia"]["100"], opacity: "80%" }}
-          content={
-            <CustomToolTip barLabel={customCategoryLabel ?? "Category"} />
-          }
+          cursor={{ fill: colors['fuchsia']['100'], opacity: '80%' }}
+          content={({ ...props }) => (
+            <CustomToolTip
+              {...props}
+              barLabel={customCategoryLabel ?? 'Category'}
+            />
+          )}
         />
         <Legend
           formatter={(value: string) => (
             <span className="text-black ml-1 mr-4">
-              {value.replace("_", " ")}
+              {value.replace('_', ' ')}
             </span>
           )}
         />
@@ -91,11 +101,11 @@ export const BarChart = ({
           <Bar
             key={b}
             dataKey={b}
-            stackId={isStacked ? "a" : undefined}
+            stackId={isStacked ? 'a' : undefined}
             fill={chartColors[i]}
           />
         ))}
       </RechartsBarChart>
     </ResponsiveContainer>
-  );
-};
+  )
+}

@@ -1,19 +1,19 @@
-import Badge from "@/components/Badge";
-import DisplayLabel from "@/components/DisplayLabel";
-import Source from "@/components/Source";
-import { getArticleDetails } from "@/lib/supabase/get-article-details";
-import { ArticleApprovalStatus } from "./ArticleApprovalStatus";
-import { isUserAdmin } from "@/lib/supabase/is-user-admin";
-import { ModelHoverCard } from "@/components/ModelHoverCard";
+import Badge from '@/components/Badge'
+import DisplayLabel from '@/components/DisplayLabel'
+import Source from '@/components/Source'
+import { getArticleDetails } from '@/lib/supabase/get-article-details'
+import { ArticleApprovalStatus } from './ArticleApprovalStatus'
+import { isUserAdmin } from '@/lib/supabase/is-user-admin'
+import { ModelHoverCard } from '@/components/ModelHoverCard'
 
 export default async function ArticleDetails({ url }: { url: string }) {
-  const isAdmin = await isUserAdmin();
-  const article = await getArticleDetails(url);
+  const isAdmin = await isUserAdmin()
+  const article = await getArticleDetails(url)
 
-  if (!article) return null;
+  if (!article) return null
 
-  const analysis = article.analysis[0];
-  const language = analysis?.language?.split(",");
+  const analysis = article.analysis[0]
+  const language = analysis?.language?.split(',')
 
   return (
     <div className="mx-2 sm:mx-10 my-4 sm:my-14 text-black">
@@ -50,7 +50,7 @@ export default async function ArticleDetails({ url }: { url: string }) {
       <div className="mt-4 mb-8 text-xs space-x-2 italic">
         <span>
           Analysis by&nbsp;
-          <ModelHoverCard model={analysis?.model!} />
+          <ModelHoverCard model={analysis?.model || ''} />
         </span>
         <span>&middot;</span>
         <ArticleApprovalStatus
@@ -62,8 +62,8 @@ export default async function ArticleDetails({ url }: { url: string }) {
 
       {/* TODO: remove when supabase fixes complex query type generation */}
       {/* https://github.com/supabase/postgrest-js/issues/303 */}
-      {/* @ts-ignore */}
+      {/* @ts-expect-error due to supabase type gen issue */}
       <Source url={article.url!} name={article.source.name} />
     </div>
-  );
+  )
 }
