@@ -1,17 +1,19 @@
-import chunk from "lodash.chunk";
+import chunk from 'lodash.chunk'
 
-const MAX_PROMPTS_PER_REQUEST = 20;
+const MAX_PROMPTS_PER_REQUEST = 20
 
 interface Article {
-  url: string;
-  title: string | null;
-  description: string | null;
+  url: string
+  title: string | null
+  description: string | null
 }
 
-export const makePromptBatches = (articles: Article[]) => {
+export const makePromptBatches = (
+  articles: Article[]
+): { url: string; prompt: string }[][] => {
   const prompts = articles.map((article) => ({
     url: article.url!,
     prompt: `${article.title!}. ${article.description!}`,
-  }));
-  return chunk(prompts, MAX_PROMPTS_PER_REQUEST);
-};
+  }))
+  return chunk(prompts, MAX_PROMPTS_PER_REQUEST)
+}
