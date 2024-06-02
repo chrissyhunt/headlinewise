@@ -31,7 +31,16 @@ export const getAnalysisFromOpenAI = async (headline: string) => {
   return response
 }
 
-export const getBatchAnalysisFromOpenAI = async (headlineBatch: string[]) => {
+interface OpenAIAnalysis {
+  language: string
+  political_bias: string
+  analysis: string
+  model: string
+}
+
+export const getBatchAnalysisFromOpenAI = async (
+  headlineBatch: string[]
+): Promise<OpenAIAnalysis[]> => {
   const completion = await openai.chat.completions.create({
     model,
     max_tokens: 2000,

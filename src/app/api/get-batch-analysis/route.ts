@@ -31,7 +31,7 @@ export async function GET(request: Request) {
           responses = await getBatchAnalysisFromOpenAI(batchText)
         }
 
-        return responses.map((response: unknown, index: number) => ({
+        return responses.map((response, index: number) => ({
           language: Array.isArray(response.language)
             ? response.language?.join(',')
             : response.language.toString(),
