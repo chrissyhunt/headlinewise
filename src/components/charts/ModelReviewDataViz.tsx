@@ -1,9 +1,9 @@
 'use client'
 import { useState } from 'react'
-import { TwoWayToggle } from './TwoWayToggle'
-import { DataTable } from './charts/DataTable'
+import { TwoWayToggle } from '../TwoWayToggle'
+import { DataTable } from './DataTable'
 import { ModelApprovalStatusCounts } from '@/utils/report-data'
-import { BarChart } from './charts/BarChart'
+import { BarChart } from './BarChart'
 
 interface ModelReviewDataVizProps {
   models: string[]
@@ -30,6 +30,7 @@ export const ModelReviewDataViz = ({
           id="table-chart-toggle"
           falseLabel="View Table"
           trueLabel="View Chart"
+          ariaLabel="Toggle between table and chart view"
         />
       </div>
       {showChart ? (

@@ -7,7 +7,9 @@ const anthropic = new Anthropic({
 
 const model = 'claude-3-opus-20240229'
 
-export const getAnalysisFromAnthropic = async (headline: string) => {
+export const getAnalysisFromAnthropic = async (
+  headline: string
+): Promise<AnalysisResult> => {
   const msg = await anthropic.messages.create({
     model,
     max_tokens: 1000,

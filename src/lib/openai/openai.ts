@@ -9,7 +9,9 @@ export const openai = new OpenAI({
 
 const model = 'gpt-4-turbo'
 
-export const getAnalysisFromOpenAI = async (headline: string) => {
+export const getAnalysisFromOpenAI = async (
+  headline: string
+): Promise<AnalysisResult> => {
   const completion = await openai.chat.completions.create({
     model,
     messages: [
