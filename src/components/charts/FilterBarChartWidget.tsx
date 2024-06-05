@@ -2,9 +2,9 @@
 import { useState } from 'react'
 import { SourceModelAttributes } from '@/utils/report-data'
 import { DataSelect } from '@/components/DataSelect'
-import { DataTable } from './charts/DataTable'
-import { BarChart } from './charts/BarChart'
-import { TwoWayToggle } from './TwoWayToggle'
+import { DataTable } from './DataTable'
+import { BarChart } from './BarChart'
+import { TwoWayToggle } from '../TwoWayToggle'
 
 interface FilterBarChartWidgetProps {
   data: SourceModelAttributes
@@ -43,6 +43,7 @@ export const FilterBarChartWidget = ({
       <div className="mb-8 flex flex-col items-center sm:flex-row sm:justify-between sm:space-x-4">
         <div className="flex-0 mb-6 sm:mb-0">
           <DataSelect
+            label="News Source:"
             value={selectedSource}
             setValue={(value) => setSelectedSource(value)}
             options={sources.map((source) => ({
@@ -58,6 +59,7 @@ export const FilterBarChartWidget = ({
           id="table-chart-toggle"
           falseLabel="View Table"
           trueLabel="View Chart"
+          ariaLabel="Toggle between table and chart view"
         />
       </div>
       {showChart ? (

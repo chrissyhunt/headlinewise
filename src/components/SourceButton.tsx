@@ -8,7 +8,7 @@ interface SourceProps {
   name: string
 }
 
-export default function Source({ url, name }: SourceProps) {
+export default function SourceButton({ url, name }: SourceProps) {
   const [showSource, setShowSource] = useState(false)
 
   if (!showSource) {

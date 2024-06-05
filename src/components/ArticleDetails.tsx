@@ -1,6 +1,6 @@
 import Badge from '@/components/Badge'
 import DisplayLabel from '@/components/DisplayLabel'
-import Source from '@/components/Source'
+import SourceButton from '@/components/SourceButton'
 import { getArticleDetails } from '@/lib/supabase/get-article-details'
 import { ArticleApprovalStatus } from './ArticleApprovalStatus'
 import { isUserAdmin } from '@/lib/supabase/is-user-admin'
@@ -67,7 +67,7 @@ export default async function ArticleDetails({ url }: ArticleDetailsProps) {
       {/* TODO: remove when supabase fixes complex query type generation */}
       {/* https://github.com/supabase/postgrest-js/issues/303 */}
       {/* @ts-expect-error due to supabase type gen issue */}
-      <Source url={article.url!} name={article.source.name} />
+      <SourceButton url={article.url!} name={article.source.name} />
     </div>
   )
 }

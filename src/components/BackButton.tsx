@@ -2,10 +2,11 @@ import { buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
 
 interface BackButtonProps {
+  text?: string
   className?: string
 }
 
-export default function BackButton({ className }: BackButtonProps) {
+export default function BackButton({ text, className }: BackButtonProps) {
   return (
     <Link
       href={'/'}
@@ -13,7 +14,7 @@ export default function BackButton({ className }: BackButtonProps) {
         variant: 'link',
       })} ${className}`}
     >
-      &larr; All Topics
+      &larr; {text ? text : 'All Topics'}
     </Link>
   )
 }
