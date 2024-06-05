@@ -8,7 +8,7 @@ import {
   SourceModelAttributes,
 } from '@/utils/report-data'
 import { FilterBarChartWidget } from '@/components/charts/FilterBarChartWidget'
-import { ModelReviewDataViz } from '@/components/ModelReviewDataViz'
+import { ModelReviewDataViz } from '@/components/charts/ModelReviewDataViz'
 
 interface SectionProps {
   children: React.ReactNode
