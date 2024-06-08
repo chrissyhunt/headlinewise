@@ -22,6 +22,7 @@ export default async function Home() {
                   variant: 'default',
                   size: 'lg',
                 })}
+                data-test="topic"
               >
                 {t.query}
               </Link>

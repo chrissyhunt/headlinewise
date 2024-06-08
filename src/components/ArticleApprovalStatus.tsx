@@ -15,9 +15,9 @@ export const ArticleApprovalStatus = ({
 }: ArticleApprovalStatusProps) => {
   const pathName = usePathname()
   if (approved === true) {
-    return <span>Approved</span>
+    return <span data-test="review-status">Approved</span>
   } else if (approved === false) {
-    return <span>Rejected</span>
+    return <span data-test="review-status">Rejected</span>
   } else if (isAdmin) {
     return (
       <>
@@ -43,5 +43,5 @@ export const ArticleApprovalStatus = ({
       </>
     )
   }
-  return <span>Needs Review</span>
+  return <span data-test="review-status">Needs Review</span>
 }
