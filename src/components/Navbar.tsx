@@ -53,6 +53,7 @@ export default function Navbar() {
                 href={link.href}
                 className={buttonVariants({ variant: 'link' })}
                 target={link.newTab ? '_blank' : undefined}
+                data-test="nav-link"
               >
                 {link.label}
               </Link>
@@ -62,7 +63,7 @@ export default function Navbar() {
       </nav>
       <div className="flex sm:hidden">
         <Sheet>
-          <SheetTrigger>
+          <SheetTrigger data-test="hamburger-trigger">
             <span className="relative top-[-2px] text-2xl">☰</span>
             <span className="sr-only">Menu</span>
           </SheetTrigger>
@@ -78,6 +79,7 @@ export default function Navbar() {
                           variant: 'link',
                         })} text-xl`}
                         target={link.newTab ? '_blank' : undefined}
+                        data-test="mobile-nav-link"
                       >
                         {link.label}
                       </Link>

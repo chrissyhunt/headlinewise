@@ -17,6 +17,7 @@ export default async function Footer() {
           href="https://chrissyhunt.com"
           target="_blank"
           className={buttonVariants({ variant: 'link' })}
+          data-test="author-link"
         >
           Chrissy Hunt
         </Link>
@@ -44,6 +45,7 @@ export default async function Footer() {
               <Link
                 href="/login"
                 className={buttonVariants({ variant: 'link' })}
+                data-test="login-link"
               >
                 Admin Login
               </Link>
@@ -55,6 +57,7 @@ export default async function Footer() {
                 href={link.href}
                 className={buttonVariants({ variant: 'link' })}
                 target={link.newTab ? '_blank' : undefined}
+                data-test="footer-nav-link"
               >
                 {link.label}
               </Link>
