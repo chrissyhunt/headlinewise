@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "cypress:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:ci": "cypress run"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.20.7",
