@@ -7,8 +7,8 @@ import {
   ModelApprovalStatusCounts,
   SourceModelAttributes,
 } from '@/utils/report-data'
-import { FilterBarChartWidget } from './FilterBarChartWidget'
-import { ModelReviewDataViz } from './ModelReviewDataViz'
+import { FilterBarChartWidget } from '@/components/charts/FilterBarChartWidget'
+import { ModelReviewDataViz } from '@/components/charts/ModelReviewDataViz'
 
 interface SectionProps {
   children: React.ReactNode

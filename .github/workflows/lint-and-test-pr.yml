@@ -1,0 +1,41 @@
+name: Lint and Test PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install
+      - name: Lint code
+        run: npm run lint
+
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm run start
+          browser: chrome
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_SYSTEM_PROMPT: ${{ secrets.ANTHROPIC_SYSTEM_PROMPT }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          OPENAI_ORG: ${{ secrets.OPENAI_ORG }}
+          OPEANAI_PROJECT: ${{ secrets.OPEANAI_PROJECT }}
+          DISABLE_ANALYTICS: true
+          BATCH_SYSTEM_PROMPT: ${{ secrets.BATCH_SYSTEM_PROMPT }}

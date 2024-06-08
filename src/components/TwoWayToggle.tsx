@@ -7,6 +7,7 @@ interface TwoWayToggleProps {
   id: string
   falseLabel: string
   trueLabel: string
+  ariaLabel: string
 }
 
 export const TwoWayToggle = ({
@@ -15,6 +16,7 @@ export const TwoWayToggle = ({
   id,
   falseLabel,
   trueLabel,
+  ariaLabel,
 }: TwoWayToggleProps) => {
   return (
     <div className="!mt-0 flex items-center space-x-2">
@@ -23,7 +25,7 @@ export const TwoWayToggle = ({
         id={id}
         checked={value}
         onCheckedChange={(value) => setValue(value)}
-        aria-label="Toggle between table and chart view"
+        aria-label={ariaLabel}
       />
       <Label htmlFor={id}>{trueLabel}</Label>
     </div>

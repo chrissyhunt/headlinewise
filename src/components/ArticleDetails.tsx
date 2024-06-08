@@ -1,6 +1,6 @@
 import Badge from '@/components/Badge'
 import DisplayLabel from '@/components/DisplayLabel'
-import Source from '@/components/Source'
+import SourceButton from '@/components/SourceButton'
 import { getArticleDetails } from '@/lib/supabase/get-article-details'
 import { ArticleApprovalStatus } from './ArticleApprovalStatus'
 import { isUserAdmin } from '@/lib/supabase/is-user-admin'
@@ -20,7 +20,10 @@ export default async function ArticleDetails({ url }: ArticleDetailsProps) {
   const language = analysis?.language?.split(',')
 
   return (
-    <div className="mx-2 my-4 text-black sm:mx-10 sm:my-14">
+    <div
+      className="mx-2 my-4 text-black sm:mx-10 sm:my-14"
+      data-test="article-details"
+    >
       <DisplayLabel>The Headline</DisplayLabel>
       <h1 className="mb-4 max-w-prose font-serif text-3xl md:text-6xl">
         {article.title}
@@ -67,7 +70,7 @@ export default async function ArticleDetails({ url }: ArticleDetailsProps) {
       {/* TODO: remove when supabase fixes complex query type generation */}
       {/* https://github.com/supabase/postgrest-js/issues/303 */}
       {/* @ts-expect-error due to supabase type gen issue */}
-      <Source url={article.url!} name={article.source.name} />
+      <SourceButton url={article.url!} name={article.source.name} />
     </div>
   )
 }

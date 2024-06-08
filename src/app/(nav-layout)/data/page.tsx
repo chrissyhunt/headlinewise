@@ -4,7 +4,7 @@ import {
   attributesPerSourceModel,
   uniqueLanguageKeys,
 } from '@/utils/report-data'
-import { DataContent } from '../../../components/DataContent'
+import { DataContent } from './DataContent'
 import { getSources } from '@/lib/supabase/get-sources'
 
 export const revalidate = 86400
