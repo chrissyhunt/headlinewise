@@ -3,6 +3,8 @@
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:storybook/recommended",
     "plugin:cypress/recommended",
     "prettier"
   ],
