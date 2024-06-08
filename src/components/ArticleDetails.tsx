@@ -20,7 +20,10 @@ export default async function ArticleDetails({ url }: ArticleDetailsProps) {
   const language = analysis?.language?.split(',')
 
   return (
-    <div className="mx-2 my-4 text-black sm:mx-10 sm:my-14">
+    <div
+      className="mx-2 my-4 text-black sm:mx-10 sm:my-14"
+      data-test="article-details"
+    >
       <DisplayLabel>The Headline</DisplayLabel>
       <h1 className="mb-4 max-w-prose font-serif text-3xl md:text-6xl">
         {article.title}
